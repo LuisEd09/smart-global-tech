@@ -217,10 +217,48 @@ h3 {
 
 /* Grid layout for icons and content */
 .grid-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2.5rem;
   margin-top: 2rem;
+}
+
+.grid-3 > div, 
+.service-card {
+  flex: 1 1 300px;
+  max-width: 350px;
+  min-width: 280px;
+}
+
+/* AJUSTES ESPECÍFICOS */
+#about .grid-3 > div {
+  /* Para la sección About con 3 elementos */
+  flex: 1 1 calc(33.333% - 2.5rem);
+  max-width: calc(33.333% - 2.5rem);
+}
+
+#services .grid-3 > div {
+  /* Para la sección Services con 5 elementos */
+  flex: 1 1 calc(33.333% - 2.5rem);
+  max-width: calc(33.333% - 2.5rem);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1199px) {
+  #about .grid-3 > div,
+  #services .grid-3 > div {
+    flex: 1 1 calc(50% - 2.5rem);
+    max-width: calc(50% - 2.5rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-3 > div,
+  .service-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 .icon-container {
