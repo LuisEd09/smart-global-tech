@@ -1,0 +1,509 @@
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Definición de Variables CSS */
+:root {
+  /* Colores para el modo CLARO (default) */
+  --color-bg: #F6F5F4; /* Fondo de la página en modo claro */
+  --color-primary: #1087c9; /* Color principal (azul) */
+  --color-accent: #1B221F; /* Color de acento (oscuro) */
+  --color-text: #1B221F; /* Color del texto principal en modo claro */
+  --color-text-muted: rgba(27, 34, 31, 0.7); /* Texto atenuado en modo claro */
+  --color-secondary-bg: #E0E0E0; /* Fondo secundario para secciones/tarjetas en modo claro */
+  --shadow-color: rgba(16, 135, 201, 0.2); /* Sombra base para elementos */
+  --card-bg: #ffffff; /* Fondo de tarjetas en modo claro */
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Duración y función de transición */
+}
+
+/* Modificación de Variables CSS para el modo OSCURO */
+body.dark-mode {
+  --color-bg: #1B221F; /* Fondo de la página en modo oscuro */
+  --color-primary: #1087c9;
+  --color-accent: #F6F5F4; /* Color de acento (claro) */
+  --color-text: #F6F5F4; /* Color del texto principal en modo oscuro */
+  --color-text-muted: rgba(246, 245, 244, 0.75); /* Texto atenuado en modo oscuro */
+  --color-secondary-bg: #232c29; /* Fondo secundario para secciones/tarjetas en modo oscuro */
+  --shadow-color: rgba(16, 135, 201, 0.25); /* Sombra más visible en oscuro */
+  --card-bg: #16201c; /* Fondo de tarjetas en modo oscuro */
+}
+
+/* Transiciones globales para suavizar cambios de tema y estado */
+* {
+  box-sizing: border-box;
+  transition: background-color var(--transition), color var(--transition),
+              border-color var(--transition), box-shadow var(--transition),
+              transform var(--transition); /* Asegura transición en transform */
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Transición en body para cambios de fondo y color de texto */
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px var(--shadow-color);
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  user-select: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a,
+nav ul li button {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+nav ul li a:hover,
+nav ul li a:focus,
+nav ul li a.active,
+nav ul li button:hover,
+nav ul li button:focus {
+  color: var(--color-primary);
+  outline: none;
+  text-shadow: 0 0 6px var(--color-primary);
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+  text-align: center;
+  padding: 0 1rem;
+  background: linear-gradient(135deg, #1087c9 0%, #1b221f 100%);
+  color: var(--color-accent);
+  box-shadow: inset 0 0 60px #1087c9cc;
+  position: relative; /* FUNDAMENTAL para el parallax */
+  overflow: hidden; /* Evita que el contenido se desborde durante la transformación */
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1; /* Mantiene el contenido por encima del fondo parallax */
+}
+
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px #1087c9bb;
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  color: var(--color-accent);
+  text-shadow: 0 0 5px #1087c9bb;
+}
+
+.cta {
+  padding: 1rem 3rem;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 700;
+  font-size: 1.15rem;
+  border-radius: 30px;
+  box-shadow: 0 8px 15px var(--shadow-color);
+  text-decoration: none;
+  transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
+}
+
+.cta:hover,
+.cta:focus {
+  background-color: #0b5a83; /* Un tono más oscuro de azul para hover */
+  box-shadow: 0 12px 25px rgba(11, 90, 131, 0.8);
+  transform: scale(1.05);
+  outline: none;
+  color: var(--color-accent); /* Asegura que el texto cambie en hover si es necesario */
+}
+
+/* Sections */
+.section {
+  padding: 6rem 0 4rem 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  scroll-margin-top: 100px;
+}
+
+/* Claves para la animación de las secciones: Fade-in y Slide-up */
+.section.hidden-slide {
+  opacity: 0;
+  transform: translateY(50px); /* Comienza 50px más abajo */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Transición suave */
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.section.light {
+  background-color: var(--color-secondary-bg); /* Usa la variable para el fondo secundario */
+  border-radius: 20px;
+  padding: 4rem 2rem 3rem 2rem;
+  box-shadow: 0 4px 24px var(--shadow-color);
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 6px var(--color-primary);
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--color-primary);
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+
+/* Grid layout for icons and content */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  stroke: var(--color-primary);
+  fill: none;
+  margin-bottom: 1rem;
+  transition: stroke var(--transition);
+}
+
+.icon-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tarjetas de Servicio y contenido general en grid-3 */
+.grid-3 > div,
+.service-card { /* Asegura que ambos selectores compartan estilos base */
+  background: var(--card-bg); /* Usa la variable para el fondo de las tarjetas */
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  /* Transición base para las tarjetas, JS la modificará en hover */
+  transition: box-shadow var(--transition), transform var(--transition), background-color var(--transition);
+  cursor: default;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  outline-offset: 4px; /* Para accesibilidad con el teclado */
+}
+
+.service-card:focus-within,
+.service-card:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 6px;
+}
+
+
+.service-card h3 {
+  color: var(--color-primary);
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.service-card p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin: 1rem 0 1.5rem 0;
+  flex-grow: 1;
+}
+
+/* Botones "Learn More" */
+.btn-link {
+  align-self: flex-start;
+  padding: 0.65rem 1.5rem;
+  border-radius: 30px;
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 18px var(--shadow-color);
+  transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  background-color: #0b5a83; /* Un tono más oscuro de azul para hover */
+  box-shadow: 0 10px 30px rgba(11, 90, 131, 0.8);
+  transform: scale(1.05);
+  outline: none;
+  color: var(--color-accent);
+}
+
+/* Service Detail section */
+.service-detail {
+  background: var(--color-secondary-bg); /* Usa la variable para el fondo secundario */
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 24px var(--shadow-color);
+  color: var(--color-text-muted);
+  scroll-margin-top: 100px; /* para que al hacer scroll no quede debajo del header */
+  transition: background-color var(--transition), box-shadow var(--transition), color var(--transition);
+}
+
+.service-detail h3 {
+  color: var(--color-primary);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.service-detail p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: var(--color-text); /* El texto del párrafo es el color principal del texto */
+}
+
+.service-detail ul {
+  list-style: inside disc;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  color: var(--color-text-muted); /* Las listas usan el color de texto atenuado */
+  font-weight: 600;
+}
+
+.service-detail ul li {
+  margin-bottom: 0.6rem;
+}
+
+/* Párrafos fuera de .service-detail */
+p {
+  color: var(--color-text-muted); /* Por defecto, los párrafos fuera de secciones con fondo específico usan el muted */
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Lists for bullet points */
+.bullet-list {
+  list-style: none;
+  max-width: 650px;
+  margin: 1rem auto 0 auto;
+  padding-left: 0;
+  color: var(--color-text-muted);
+}
+
+.bullet-list li {
+  margin-bottom: 1rem;
+  padding-left: 2.5rem;
+  position: relative;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-text); /* Texto de la lista principal */
+}
+
+.bullet-list li .icon-container-inline {
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  stroke: var(--color-primary);
+  fill: none;
+  width: 20px;
+  height: 20px;
+  transition: stroke var(--transition);
+}
+
+/* Team list */
+.team-list {
+  list-style: none;
+  max-width: 400px;
+  margin: 0 auto;
+  padding-left: 0;
+  color: var(--color-text); /* El texto de la lista del equipo es el color principal */
+  font-size: 1.1rem;
+  line-height: 2;
+  font-weight: 600;
+  text-align: center;
+}
+
+.team-list li strong {
+  color: var(--color-primary);
+}
+
+/* Contact form */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+form label {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+form input,
+form textarea {
+  background-color: var(--card-bg); /* Usa el color de fondo de tarjeta */
+  border: 2px solid var(--color-primary);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: border-color var(--transition), background-color var(--transition), color var(--transition);
+  resize: vertical;
+  font-family: 'Open Sans', sans-serif;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background-color: var(--color-secondary-bg); /* Un tono ligeramente diferente en focus */
+  box-shadow: 0 0 8px var(--color-primary);
+}
+
+form button {
+  background-color: var(--color-primary);
+  border: none;
+  padding: 1.1rem 2.5rem;
+  border-radius: 30px;
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px var(--shadow-color);
+  transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
+}
+
+form button:hover,
+form button:focus {
+  background-color: #0b5a83;
+  box-shadow: 0 10px 30px rgba(11, 90, 131, 0.8);
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-primary);
+  user-select: none;
+  background-color: var(--color-bg);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* Quitar subrayado de links tel/email y cambiar color para que no se pierdan */
+a[href^="tel:"],
+a[href^="mailto:"] {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+
+a[href^="tel:"]:hover,
+a[href^="mailto:"]:hover,
+a[href^="tel:"]:focus,
+a[href^="mailto:"]:focus {
+  color: #0b5a83;
+  outline: none;
+  text-decoration: underline;
+}
+
+/* Responsive ajustes */
+@media (max-width: 768px) {
+  nav ul {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 3rem 0 2rem 0;
+  }
+
+  .section.light {
+    padding: 3rem 1.5rem;
+  }
+
+  .service-detail {
+    padding: 1.8rem 1.5rem;
+  }
+
+  .grid-3[style] { /* Para la sección de contacto */
+    grid-template-columns: 1fr !important;
+  }
+}
