@@ -1,47 +1,40 @@
-/* Fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
 
-/* Definición de Variables CSS */
-/* :root contiene los colores para el MODO CLARO global de la página */
 :root {
-  --color-bg: #F6F5F4; /* Fondo de la página en modo claro */
-  --color-primary: #1087c9; /* Color principal (azul) */
-  --color-accent: #F6F5F4; /* Color de acento (CLARO/BLANCO) - USADO EN GRADIENTE DE HERO EN MODO CLARO */
-  --color-text: #1B221F; /* Color del texto principal en modo claro */
-  --color-text-muted: rgba(27, 34, 31, 0.7); /* Texto atenuado en modo claro */
-  --color-secondary-bg: #E0E0E0; /* Fondo secundario para secciones/tarjetas en modo claro */
-  --card-bg: #ffffff; /* Fondo de tarjetas en modo claro */
+  --color-bg: #F6F5F4;
+  --color-primary: #1087c9;
+  --color-accent: #F6F5F4;
+  --color-text: #1B221F;
+  --color-text-muted: rgba(27, 34, 31, 0.7);
+  --color-secondary-bg: #E0E0E0;
+  --card-bg: #ffffff;
 
-  /* Nuevas variables de sombra para mayor consistencia */
-  --shadow-base: rgba(0, 0, 0, 0.08); /* Sombra base muy sutil y neutra */
-  --shadow-accent: rgba(16, 135, 201, 0.2); /* Sombra con el color primario */
-  --shadow-focus-hover: rgba(16, 135, 201, 0.4); /* Sombra para estados interactivos y destacados */
+  --shadow-base: rgba(0, 0, 0, 0.08);
+  --shadow-accent: rgba(16, 135, 201, 0.2);
+  --shadow-focus-hover: rgba(16, 135, 201, 0.4);
 
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Duración y función de transición */
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Modificación de Variables CSS para el MODO OSCURO global de la página */
 body.dark-mode {
-  --color-bg: #1B221F; /* Fondo de la página en modo oscuro */
+  --color-bg: #1B221F;
   --color-primary: #1087c9;
-  --color-accent: #1B221F; /* Color de acento (OSCURO/NEGRO) - USADO EN GRADIENTE DE HERO EN MODO OSCURO */
-  --color-text: #F6F5F4; /* Color del texto principal en modo oscuro */
-  --color-text-muted: rgba(246, 245, 244, 0.75); /* Texto atenuado en modo oscuro */
-  --color-secondary-bg: #232c29; /* Fondo secundario para secciones/tarjetas en modo oscuro */
-  --card-bg: #16201c; /* Fondo de tarjetas en modo oscuro */
+  --color-accent: #1B221F;
+  --color-text: #F6F5F4;
+  --color-text-muted: rgba(246, 245, 244, 0.75);
+  --color-secondary-bg: #232c29;
+  --card-bg: #16201c;
 
-  /* Sombras en modo oscuro */
-  --shadow-base: rgba(0, 0, 0, 0.3); /* Sombra base más oscura */
+  --shadow-base: rgba(0, 0, 0, 0.3);
   --shadow-accent: rgba(16, 135, 201, 0.35);
   --shadow-focus-hover: rgba(16, 135, 201, 0.7);
 }
 
-/* Transiciones globales para suavizar cambios de tema y estado */
 * {
   box-sizing: border-box;
   transition: background-color var(--transition), color var(--transition),
               border-color var(--transition), box-shadow var(--transition),
-              transform var(--transition); /* Asegura transición en transform */
+              transform var(--transition);
 }
 
 body {
@@ -49,10 +42,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.7; /* Mejorado para legibilidad */
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Transición en body para cambios de fondo y color de texto */
   transition: background-color var(--transition), color var(--transition);
 }
 
@@ -62,19 +54,15 @@ body {
   padding: 0 2rem;
 }
 
-/* Header */
 header {
   position: sticky;
   top: 0;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-primary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
   z-index: 100;
-  box-shadow: 0 2px 12px var(--shadow-base); /* Usando nueva variable de sombra */
+  box-shadow: 0 2px 12px var(--shadow-base);
   transition: background-color var(--transition), box-shadow var(--transition);
+  padding: 1rem 0;
 }
 
 .logo {
@@ -119,7 +107,6 @@ nav ul li button:focus {
   text-shadow: 0 0 6px var(--color-primary);
 }
 
-/* Hero Section */
 .hero {
   display: flex;
   align-items: center;
@@ -127,17 +114,15 @@ nav ul li button:focus {
   min-height: 85vh;
   text-align: center;
   padding: 0 1rem;
-  /* El degradado usa las variables --color-primary y --color-accent,
-     que ahora he configurado para que cambien para el hero */
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  box-shadow: inset 0 0 60px var(--shadow-accent); /* Usa la variable de sombra */
+  box-shadow: inset 0 0 60px var(--shadow-accent);
   position: relative;
   overflow: hidden;
 }
 
 .hero .container {
   position: relative;
-  z-index: 1; /* Mantiene el contenido por encima del fondo */
+  z-index: 1;
 }
 
 .hero h1 {
@@ -145,7 +130,7 @@ nav ul li button:focus {
   font-weight: 800;
   font-size: 3.5rem;
   margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra de texto para mejorar legibilidad */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   line-height: 1.1;
 }
 
@@ -153,13 +138,9 @@ nav ul li button:focus {
   font-size: 1.25rem;
   max-width: 700px;
   margin: 0 auto 2rem auto;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.4); /* Sombra de texto para mejorar legibilidad */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
 
-/* === AJUSTES DE COLORES ESPECÍFICOS PARA EL TEXTO DEL HERO === */
-
-/* Colores para la sección Hero en MODO CLARO (gradiante de azul a blanco) */
-/* El texto es OSCURO para contrastar con el fondo claro del degradado */
 .hero h1 {
   color: #1B221F;
 }
@@ -168,41 +149,36 @@ nav ul li button:focus {
   color: rgba(27, 34, 31, 0.7);
 }
 
-/* Colores para la sección Hero en MODO OSCURO (gradiante de azul a negro) */
-/* El texto es BLANCO para contrastar con el fondo oscuro del degradado */
 body.dark-mode .hero h1 {
-  color: #F6F5F4; /* Color claro/blanco */
+  color: #F6F5F4;
 }
 
 body.dark-mode .hero p {
-  color: rgba(246, 245, 244, 0.9); /* Texto atenuado claro/blanco */
+  color: rgba(246, 245, 244, 0.9);
 }
-
-/* === FIN AJUSTES DE COLORES ESPECÍFICOS PARA EL TEXTO DEL HERO === */
 
 
 .cta {
   padding: 1rem 3rem;
-  background-color: var(--color-primary); /* CTA usa el color primario */
-  color: var(--color-accent); /* El texto del CTA se adapta al color de acento del modo */
+  background-color: var(--color-primary);
+  color: var(--color-accent);
   font-weight: 700;
   font-size: 1.15rem;
   border-radius: 30px;
-  box-shadow: 0 8px 15px var(--shadow-accent); /* Usando nueva variable de sombra */
+  box-shadow: 0 8px 15px var(--shadow-accent);
   text-decoration: none;
   transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
 }
 
 .cta:hover,
 .cta:focus {
-  background-color: #0b5a83; /* Un tono más oscuro de azul para hover */
-  box-shadow: 0 12px 25px var(--shadow-focus-hover); /* Usando nueva variable de sombra */
+  background-color: #0b5a83;
+  box-shadow: 0 12px 25px var(--shadow-focus-hover);
   transform: scale(1.05);
   outline: none;
-  color: var(--color-accent); /* Asegura que el texto cambie en hover si es necesario */
+  color: var(--color-accent);
 }
 
-/* Sections */
 .section {
   padding: 6rem 0 4rem 0;
   max-width: 1000px;
@@ -210,11 +186,10 @@ body.dark-mode .hero p {
   scroll-margin-top: 100px;
 }
 
-/* Claves para la animación de las secciones: Fade-in y Slide-up */
 .section.hidden-slide {
   opacity: 0;
-  transform: translateY(50px); /* Comienza 50px más abajo */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Transición suave */
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .section.visible {
@@ -224,10 +199,10 @@ body.dark-mode .hero p {
 
 
 .section.light {
-  background-color: var(--color-secondary-bg); /* Usa la variable para el fondo secundario */
+  background-color: var(--color-secondary-bg);
   border-radius: 20px;
   padding: 4rem 2rem 3rem 2rem;
-  box-shadow: 0 4px 24px var(--shadow-base); /* Usando nueva variable de sombra */
+  box-shadow: 0 4px 24px var(--shadow-base);
   transition: background-color var(--transition), box-shadow var(--transition);
 }
 
@@ -248,13 +223,13 @@ h3 {
   font-weight: 700;
 }
 
-/* Grid layout for icons and content */
 .grid-3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2.5rem;
   margin-top: 2rem;
+  align-items: stretch;
 }
 
 .grid-3 > div,
@@ -264,20 +239,16 @@ h3 {
   min-width: 280px;
 }
 
-/* AJUSTES ESPECÍFICOS */
 #about .grid-3 > div {
-  /* Para la sección About con 3 elementos */
   flex: 1 1 calc(33.333% - 2.5rem);
   max-width: calc(33.333% - 2.5rem);
 }
 
 #services .grid-3 > div {
-  /* Para la sección Services con 5 elementos */
   flex: 1 1 calc(33.333% - 2.5rem);
   max-width: calc(33.333% - 2.5rem);
 }
 
-/* RESPONSIVE */
 @media (max-width: 1199px) {
   #about .grid-3 > div,
   #services .grid-3 > div {
@@ -294,52 +265,48 @@ h3 {
   }
 }
 
-/* Estilos para contenedores de iconos */
 .icon-container {
-  display: inline-flex; /* O flex si es un bloque */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px; /* Tamaño del círculo/cuadrado del icono */
+  width: 60px;
   height: 60px;
-  border-radius: 50%; /* O 8px para un cuadrado redondeado */
-  background-color: var(--color-primary); /* Color de fondo del icono */
-  color: #fff; /* Color del icono SVG */
-  box-shadow: 0 4px 12px var(--shadow-accent); /* Usando nueva variable de sombra */
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 12px var(--shadow-accent);
   margin-bottom: 1rem;
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .icon-container svg {
-  width: 32px; /* Tamaño del icono SVG */
+  width: 32px;
   height: 32px;
-  stroke: currentColor; /* Usa el color del texto para el SVG */
+  stroke: currentColor;
 }
 
 .icon-container:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 6px 18px var(--shadow-focus-hover); /* Sombra más fuerte en hover */
+    box-shadow: 0 6px 18px var(--shadow-focus-hover);
 }
 
 
-/* Tarjetas de Servicio y contenido general en grid-3 */
 .grid-3 > div,
-.service-card { /* Asegura que ambos selectores compartan estilos base */
-  background: var(--card-bg); /* Usa la variable para el fondo de las tarjetas */
+.service-card {
+  background: var(--card-bg);
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 5px 15px var(--shadow-base); /* Usando nueva variable de sombra */
-  /* Transición base para las tarjetas, JS la modificará en hover */
+  box-shadow: 0 5px 15px var(--shadow-base);
   transition: box-shadow var(--transition), transform var(--transition), background-color var(--transition);
   cursor: default;
 }
 
-/* Estilos específicos para el icono/imagen en la tarjeta de servicio */
 .service-icon-wrapper {
   margin-bottom: 1rem;
   text-align: center;
   background-color: var(--color-primary);
   border-radius: 50%;
-  width: 80px; /* Tamaño del círculo */
+  width: 80px;
   height: 80px;
   display: flex;
   align-items: center;
@@ -350,18 +317,18 @@ h3 {
 }
 
 .service-icon {
-  max-width: 60px; /* Tamaño máximo de la imagen dentro del círculo */
+  max-width: 60px;
   height: auto;
-  filter: brightness(0) invert(1); /* Opcional: para hacer la imagen blanca si el fondo es oscuro */
+  filter: brightness(0) invert(1);
 }
 
 .service-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* Centrar elementos verticalmente en la tarjeta */
-  text-align: center; /* Centrar el texto en la tarjeta */
-  outline-offset: 4px; /* Para accesibilidad con el teclado */
+  align-items: center;
+  text-align: center;
+  outline-offset: 4px;
 }
 
 .service-card:focus-within,
@@ -384,9 +351,8 @@ h3 {
   flex-grow: 1;
 }
 
-/* Botones "Learn More" */
 .btn-link {
-  align-self: center; /* Centrado en la tarjeta */
+  align-self: center;
   padding: 0.65rem 1.5rem;
   border-radius: 30px;
   background-color: var(--color-primary);
@@ -394,28 +360,27 @@ h3 {
   font-weight: 600;
   font-size: 1.1rem;
   text-decoration: none;
-  box-shadow: 0 6px 18px var(--shadow-accent); /* Usando nueva variable de sombra */
+  box-shadow: 0 6px 18px var(--shadow-accent);
   transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
 }
 
 .btn-link:hover,
 .btn-link:focus {
-  background-color: #0b5a83; /* Un tono más oscuro de azul para hover */
-  box-shadow: 0 10px 30px var(--shadow-focus-hover); /* Usando nueva variable de sombra */
+  background-color: #0b5a83;
+  box-shadow: 0 10px 30px var(--shadow-focus-hover);
   transform: scale(1.05);
   outline: none;
   color: var(--color-accent);
 }
 
-/* Service Detail section */
 .service-detail {
-  background: var(--color-secondary-bg); /* Usa la variable para el fondo secundario */
+  background: var(--color-secondary-bg);
   border-radius: 20px;
   padding: 2.5rem 3rem;
   margin-bottom: 3rem;
-  box-shadow: 0 4px 24px var(--shadow-base); /* Usando nueva variable de sombra */
+  box-shadow: 0 4px 24px var(--shadow-base);
   color: var(--color-text-muted);
-  scroll-margin-top: 100px; /* para que al hacer scroll no quede debajo del header */
+  scroll-margin-top: 100px;
   transition: background-color var(--transition), box-shadow var(--transition), color var(--transition);
 }
 
@@ -428,15 +393,15 @@ h3 {
 .service-detail p {
   font-size: 1.1rem;
   line-height: 1.7;
-  margin-bottom: 1em; /* Unidades relativas para mantener proporción */
-  color: var(--color-text); /* El texto del párrafo es el color principal del texto */
+  margin-bottom: 1em;
+  color: var(--color-text);
 }
 
 .service-detail ul {
   list-style: inside disc;
   padding-left: 1rem;
   margin-top: 1rem;
-  color: var(--color-text-muted); /* Las listas usan el color de texto atenuado */
+  color: var(--color-text-muted);
   font-weight: 600;
 }
 
@@ -444,19 +409,17 @@ h3 {
   margin-bottom: 0.6rem;
 }
 
-/* Párrafos fuera de .service-detail */
 p {
-  color: var(--color-text-muted); /* Por defecto, los párrafos fuera de secciones con fondo específico usan el muted */
+  color: var(--color-text-muted);
   font-size: 1rem;
-  line-height: 1.7; /* Consistencia en line-height */
-  margin-bottom: 1em; /* Asegura un margen inferior para separar párrafos */
+  line-height: 1.7;
+  margin-bottom: 1em;
 }
 
-/* Lists for bullet points */
 .bullet-list {
   list-style: none;
   max-width: 650px;
-  margin: 1rem auto 0 auto;
+  margin: 1rem auto ;
   padding-left: 0;
   color: var(--color-text-muted);
 }
@@ -467,7 +430,7 @@ p {
   position: relative;
   font-weight: 600;
   font-size: 1.1rem;
-  color: var(--color-text); /* Texto de la lista principal */
+  color: var(--color-text);
 }
 
 .bullet-list li .icon-container-inline {
@@ -481,13 +444,12 @@ p {
   transition: stroke var(--transition);
 }
 
-/* Team list */
 .team-list {
   list-style: none;
   max-width: 400px;
   margin: 0 auto;
   padding-left: 0;
-  color: var(--color-text); /* El texto de la lista del equipo es el color principal */
+  color: var(--color-text);
   font-size: 1.1rem;
   line-height: 2;
   font-weight: 600;
@@ -498,7 +460,6 @@ p {
   color: var(--color-primary);
 }
 
-/* Contact form */
 form {
   max-width: 600px;
   margin: 0 auto;
@@ -514,7 +475,7 @@ form label {
 
 form input,
 form textarea {
-  background-color: var(--card-bg); /* Usa el color de fondo de tarjeta */
+  background-color: var(--card-bg);
   border: 2px solid var(--color-primary);
   border-radius: 14px;
   padding: 1rem 1.25rem;
@@ -529,7 +490,7 @@ form input:focus,
 form textarea:focus {
   outline: none;
   border-color: var(--color-accent);
-  background-color: var(--color-secondary-bg); /* Un tono ligeramente diferente en focus */
+  background-color: var(--color-secondary-bg);
   box-shadow: 0 0 8px var(--color-primary);
 }
 
@@ -542,19 +503,18 @@ form button {
   font-weight: 700;
   font-size: 1.2rem;
   cursor: pointer;
-  box-shadow: 0 6px 18px var(--shadow-accent); /* Usando nueva variable de sombra */
+  box-shadow: 0 6px 18px var(--shadow-accent);
   transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
 }
 
 form button:hover,
 form button:focus {
   background-color: #0b5a83;
-  box-shadow: 0 10px 30px var(--shadow-focus-hover); /* Usando nueva variable de sombra */
+  box-shadow: 0 10px 30px var(--shadow-focus-hover);
   transform: scale(1.05);
   outline: none;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 2rem 1rem;
@@ -566,7 +526,6 @@ footer {
   transition: background-color var(--transition), color var(--transition);
 }
 
-/* Quitar subrayado de links tel/email y cambiar color para que no se pierdan */
 a[href^="tel:"],
 a[href^="mailto:"] {
   color: var(--color-primary);
@@ -577,14 +536,13 @@ a[href^="mailto:"] {
 
 a[href^="tel:"]:hover,
 a[href^="mailto:"]:hover,
-a[href^="tel:"]:focus,
-a[href^="mailto:"]:focus {
+a[href^="mailto:"]:focus,
+a[href^="tel:"]:focus {
   color: #0b5a83;
   outline: none;
   text-decoration: underline;
 }
 
-/* Responsive ajustes */
 @media (max-width: 768px) {
   nav ul {
     flex-wrap: wrap;
@@ -597,8 +555,9 @@ a[href^="mailto:"]:focus {
   }
 
   .grid-3 {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
+
 
   .section {
     padding: 3rem 0 2rem 0;
@@ -612,97 +571,185 @@ a[href^="mailto:"]:focus {
     padding: 1.8rem 1.5rem;
   }
 
-  .grid-3[style] { /* Para la sección de contacto */
+  .grid-3[style] {
     grid-template-columns: 1fr !important;
   }
 }
 
-/* Estilo para el logo */
 .logo img {
-  height: 50px; /* Puedes ajustar este valor a lo que consideres adecuado, por ejemplo, 40px, 60px, etc. */
-  width: auto; /* Mantiene la proporción de aspecto de la imagen */
-  display: block; /* Asegura que no haya espacios extra debajo */
+  height: 50px;
+  width: auto;
+  display: block;
 }
 
-/* Si tu encabezado tiene un padding vertical, asegúrate de que el logo quepa */
 header .container {
-    padding: 1rem 0; /* Ejemplo, ajusta si es necesario */
+    max-width: 100%;
+    padding: 1rem 2rem;
     display: flex;
-    align-items: center; /* Centra el logo y la navegación verticalmente */
-    justify-content: space-between; /* Distribuye el logo a la izquierda y la navegación a la derecha */
+    align-items: center;
+    justify-content: space-between;
 }
 
 header .logo {
-    display: flex; /* Asegura que el logo (la imagen) esté bien alineado si es un flex item */
+    display: flex;
     align-items: center;
 }
 
-/* Layout para la sección About con imagen */
 .about-layout {
   display: flex;
-  flex-wrap: wrap; /* Permite que las columnas se apilen en pantallas pequeñas */
-  align-items: center; /* Alinea los elementos verticalmente al centro */
-  gap: 2.5rem; /* Espacio entre las columnas */
-  margin-bottom: 3rem; /* Espacio entre este layout y el grid-3 inferior */
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .about-content {
-  flex: 2; /* El contenido ocupará más espacio */
-  min-width: 300px; /* Ancho mínimo para el texto */
-  padding-right: 1rem; /* Pequeño padding si el texto queda muy pegado a la imagen */
+  flex: 2;
+  min-width: 300px;
+  padding-right: 1rem;
 }
 
 .about-image {
-  flex: 1; /* La imagen ocupará menos espacio */
-  min-width: 250px; /* Ancho mínimo para la imagen */
-  text-align: center; /* Centra la imagen si hay espacio extra */
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
 }
 
 .responsive-image {
-  max-width: 100%; /* Asegura que la imagen no se desborde */
-  height: auto; /* Mantiene la proporción de aspecto */
-  border-radius: 16px; /* Bordes redondeados */
-  box-shadow: 0 8px 20px var(--shadow-base); /* Sombra para la imagen */
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px var(--shadow-base);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .responsive-image:hover {
-  transform: scale(1.02); /* Pequeño efecto de zoom al pasar el ratón */
+  transform: scale(1.02);
   box-shadow: 0 12px 30px var(--shadow-focus-hover);
 }
 
-/* Ajustes de responsividad para la sección About */
-@media (max-width: 992px) { /* Ajusta este breakpoint si es necesario */
+@media (max-width: 992px) {
   .about-layout {
-    flex-direction: column; /* Apila las columnas en pantallas más pequeñas */
+    flex-direction: column;
     text-align: center;
   }
   .about-content {
-    order: 2; /* El contenido de texto debajo de la imagen en móvil */
+    order: 2;
     padding-right: 0;
   }
   .about-image {
-    order: 1; /* La imagen arriba en móvil */
-    margin-bottom: 1.5rem; /* Espacio entre la imagen y el texto en móvil */
+    order: 1;
+    margin-bottom: 1.5rem;
   }
 }
 
-/* Wrapper para la imagen del equipo */
 .team-image-wrapper {
-  text-align: center; /* Centra la imagen */
-  margin: 2.5rem auto; /* Espacio arriba/abajo y centra el contenedor */
-  max-width: 700px; /* Ancho máximo para la imagen */
+  text-align: center;
+  margin: 2.5rem auto;
+  max-width: 700px;
 }
 
 .team-hero-image {
-  width: 100%; /* La imagen ocupa todo el ancho de su contenedor */
-  height: auto; /* Mantiene la proporción de aspecto */
-  border-radius: 16px; /* Bordes redondeados */
-  box-shadow: 0 10px 30px var(--shadow-base); /* Sombra para la imagen */
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px var(--shadow-base);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .team-hero-image:hover {
-  transform: translateY(-5px); /* Efecto de "levantamiento" al pasar el ratón */
+  transform: translateY(-5px);
   box-shadow: 0 15px 45px var(--shadow-focus-hover);
+}
+
+.blog-post-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px var(--shadow-base);
+  transition: transform var(--transition), box-shadow var(--transition);
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px var(--shadow-focus-hover);
+}
+
+.blog-post-card h3 {
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.blog-post-card .post-meta {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.blog-post-card p {
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-card .btn-link {
+  display: inline-block;
+  padding: 0.5rem 0;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition);
+  margin-top: auto;
+  background: none;
+  box-shadow: none;
+}
+
+.blog-post-card .btn-link:hover {
+  color: #0b5a83;
+  text-decoration: underline;
+}
+
+.section#contact h3 span {
+  margin-right: 0.5rem;
+}
+
+/* Estilos para el botón "Volver arriba" */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--color-primary); /* Color principal de tu tema */
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--shadow-base);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--color-accent); /* Color de acento para hover */
+    box-shadow: 0 6px 12px var(--shadow-focus-hover);
 }

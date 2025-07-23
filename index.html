@@ -17,15 +17,16 @@
 <body>
   <header>
     <div class="container">
-      <a href="#" class="logo"><img src="images/logo.jpeg" alt="Logo de Smart Global Tech"></a>
+      <a href="#" class="logo" aria-label="Smart Global Tech Home"><img src="images/logo.jpeg" alt="Logo de Smart Global Tech"></a>
       <nav aria-label="Primary navigation">
         <ul>
           <li><a href="#about" aria-label="About us section">About</a></li>
           <li><a href="#mission" aria-label="Mission, Vision and Values section">Mission</a></li>
           <li><a href="#services" aria-label="Our Services section">Services</a></li>
           <li><a href="#services-detail" aria-label="Detailed Service Offerings section">Services Detail</a></li>
-          <li><a href="#why" aria-label="Why Choose Us section">Why Us</a></li>
+          <li><a href="#testimonials" aria-label="Client Testimonials section">Testimonials</a></li> <li><a href="#blog" aria-label="Blog and News section">Blog</a></li> <li><a href="#why" aria-label="Why Choose Us section">Why Us</a></li>
           <li><a href="#team" aria-label="Our Team section">Team</a></li>
+          <li><a href="#locations" aria-label="Our Locations section">Locations</a></li>
           <li><a href="#contact" aria-label="Contact section">Contact</a></li>
           <li><button id="toggle-dark" aria-label="Toggle dark mode">🌙</button></li>
         </ul>
@@ -268,6 +269,55 @@
       </div>
     </section>
 
+    <section id="testimonials" class="section light">
+      <div class="container">
+        <h2>What Our Clients Say</h2>
+        <div class="grid-2">
+          <div class="testimonial-card">
+            <blockquote>
+              <p>"Smart Global Tech transformed our recruitment process. We're now hiring faster and with much better quality candidates. Their expertise is unmatched!"</p>
+              <footer>— Maria Sanchez, HR Director at Innovate Corp</footer>
+            </blockquote>
+          </div>
+          <div class="testimonial-card">
+            <blockquote>
+              <p>"The employee retention strategies implemented by Smart Global Tech have drastically reduced our turnover. Our team is happier and more productive."</p>
+              <footer>— John Doe, CEO of Future Solutions</footer>
+            </blockquote>
+          </div>
+          </div>
+      </div>
+    </section>
+
+    <section id="blog" class="section">
+      <div class="container">
+        <h2>Latest Insights & News</h2>
+        <div class="grid-3">
+          <article class="blog-post-card">
+            <h3>The Future of AI in HR</h3>
+            <p class="post-meta">July 15, 2025 | By Smart Global Tech Team</p>
+            <p>Explore how artificial intelligence is revolutionizing human resources, from intelligent recruitment to predictive analytics for retention.</p>
+            <a href="#" class="btn-link">Read More</a>
+          </article>
+          <article class="blog-post-card">
+            <h3>Optimizing Operational Efficiency Through Technology</h3>
+            <p class="post-meta">July 10, 2025 | By Eduardo Argente</p>
+            <p>Learn best practices for integrating technology to streamline your company's daily operations and boost productivity.</p>
+            <a href="#" class="btn-link">Read More</a>
+          </article>
+          <article class="blog-post-card">
+            <h3>Why Employee Experience Matters More Than Ever</h3>
+            <p class="post-meta">July 1, 2025 | By Antonio Garcia</p>
+            <p>Discover the impact of a positive employee experience on engagement, retention, and overall business success.</p>
+            <a href="#" class="btn-link">Read More</a>
+          </article>
+          </div>
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="#" class="cta">View All Articles</a>
+        </div>
+      </div>
+    </section>
+
     <section id="why" class="section light">
       <div class="container">
         <h2>Why Choose Smart Global Tech?</h2>
@@ -317,25 +367,37 @@
       </div>
     </section>
 
-    <section id="contact" class="section light">
+    <section id="locations" class="section light">
+      <div class="container">
+        <h2>Our Locations</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 2.5rem auto; color: var(--color-text);">Find us at our offices in Canada and Mexico.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+          <div>
+            <h3><span style="margin-right: 0.5rem;">🇨🇦</span> Canada Office</h3>
+            <address>
+              <p>123 Innovation Drive, Suite 100, Toronto, ON M1M 1M1, Canada</p>
+              <p>Phone: <a href="tel:+14165551234">+1 (416) 555 1234</a></p>
+              <p>Email: <a href="mailto:contact@smartglobaltech.ca">contact@smartglobaltech.ca</a></p>
+            </address>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.6874490333796!2d-79.38705648464355!3d43.6532267791244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb73f2c5e533%3A0x6a1c5d0b9e8d4a6!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sca!4v1678912345678!5m2!1sen!2sca" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div>
+            <h3><span style="margin-right: 0.5rem;">🇲🇽</span> Mexico Office</h3>
+            <address>
+              <p>WTC, Paseo de la República km 13020, CP. 76230, Juriquilla, Querétaro, México</p>
+              <p>Phone: <a href="tel:+524426903125">+52 (442) 690 3125</a></p>
+              <p>Email: <a href="mailto:contact@smartglobaltech.mx">contact@smartglobaltech.mx</a></p>
+            </address>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.33127814406!2d-100.4497640849925!3d20.70613278637956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d3596a2f7f9b81%3A0x1d3a51f0c2e6f4a!2sWTC%20Queretaro!5e0!3m2!1sen!2smx!4v1678912345678!5m2!1sen!2smx" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
       <div class="container">
         <h2>Contact Us</h2>
         <p style="text-align: center; max-width: 600px; margin: 0 auto 2.5rem auto; color: var(--color-text);">We are eager to discuss your human capital technology needs. Reach out to us for a consultation or any inquiries.</p>
-        <div class="grid-3" style="grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
-          <address>
-            <h3>Canada Office</h3>
-            <p>123 Innovation Drive, Suite 100, Toronto, ON M1M 1M1, Canada</p>
-            <p>Phone: <a href="tel:+14165551234">+1 (416) 555 1234</a></p>
-            <p>Email: <a href="mailto:contact@smartglobaltech.ca">contact@smartglobaltech.ca</a></p>
-          </address>
-          <address>
-            <h3>Mexico Office</h3>
-            <p>WTC, Paseo de la República km 13020, CP. 76230, Juriquilla, Querétaro, México</p>
-            <p>Phone: <a href="tel:+524426903125">+52 (442) 690 3125</a></p>
-            <p>Email: <a href="mailto:contact@smartglobaltech.mx">contact@smartglobaltech.mx</a></p>
-          </address>
-        </div>
-
         <form action="#" method="POST" aria-label="Contact form">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required />
@@ -354,7 +416,7 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 Smart Global Tech. All rights reserved.</p>
+      <p>© 2025 Smart Global Tech. All rights reserved.</p>
     </div>
   </footer>
 

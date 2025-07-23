@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionAnimations();
   // initHeroParallax(); // Esta línea sigue comentada para no activar el parallax
   initServiceCardHoverEffects();
+  initDynamicCopyrightYear(); // Nuevo: Inicializa el año del copyright
+  initBackToTopButton(); // Nuevo: Inicializa el botón "Volver arriba"
 });
 
 function initDarkMode() {
@@ -110,6 +112,41 @@ function initServiceCardHoverEffects() {
     card.addEventListener('focusout', () => {
       card.style.transform = 'translateY(0) scale(1)';
       card.style.boxShadow = `0 5px 15px ${shadowBase}`;
+    });
+  });
+}
+
+// NUEVA FUNCIÓN: Actualiza dinámicamente el año del copyright en el pie de página
+function initDynamicCopyrightYear() {
+  const yearSpan = document.querySelector('footer p'); // Asume que el año está dentro de una etiqueta <p> en el footer
+  if (yearSpan) {
+    const currentYear = new Date().getFullYear();
+    yearSpan.textContent = `© ${currentYear} Smart Global Tech. All rights reserved.`;
+  }
+}
+
+// NUEVA FUNCIÓN: Botón "Volver arriba"
+function initBackToTopButton() {
+  const backToTopButton = document.createElement('button');
+  backToTopButton.textContent = '⬆️'; // Puedes usar un SVG o un ícono de fuente aquí
+  backToTopButton.classList.add('back-to-top'); // Añade una clase para estilos CSS
+  backToTopButton.setAttribute('aria-label', 'Volver arriba');
+  document.body.appendChild(backToTopButton);
+
+  // Muestra u oculta el botón basado en el scroll
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) { // Muestra el botón después de 300px de scroll
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  });
+
+  // Smooth scroll al hacer clic en el botón
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
   });
 }
