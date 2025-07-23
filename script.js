@@ -76,31 +76,40 @@ function initHeroParallax() {
   });
 }
 
-// New: Service Card Hover Effects using JavaScript (para mayor control)
+// New: Service Card Hover Effects using JavaScript (para mayor control y consistencia con CSS variables)
 function initServiceCardHoverEffects() {
   const serviceCards = document.querySelectorAll('.service-card');
 
+  // Obtener los valores de las variables CSS
+  // Asegúrate de que estos nombres de variables coincidan con tu style.css
+  const shadowBase = getComputedStyle(document.documentElement).getPropertyValue('--shadow-base').trim();
+  const shadowFocusHover = getComputedStyle(document.documentElement).getPropertyValue('--shadow-focus-hover').trim();
+  const cardTransition = getComputedStyle(document.documentElement).getPropertyValue('--transition').trim();
+
   serviceCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
-      card.style.transition = 'transform 0.3s ease-out, box-shadow 0.3s ease-out';
+      // Usamos el valor de la variable CSS para la sombra en hover
+      card.style.transition = `transform ${cardTransition}, box-shadow ${cardTransition}`;
       card.style.transform = 'translateY(-10px) scale(1.02)';
-      card.style.boxShadow = '0 20px 40px rgba(16, 135, 201, 0.6)'; // Sombra más pronunciada
+      card.style.boxShadow = `0 20px 40px ${shadowFocusHover}`; // Sombra más pronunciada
     });
 
     card.addEventListener('mouseleave', () => {
+      // Usamos el valor de la variable CSS para la sombra original/base
       card.style.transform = 'translateY(0) scale(1)';
-      card.style.boxShadow = '0 5px 15px #1087c933'; // Sombra original
+      card.style.boxShadow = `0 5px 15px ${shadowBase}`; // Sombra original
     });
+    
     // Añadir focus para accesibilidad de navegación por teclado
     card.addEventListener('focusin', () => {
-      card.style.transition = 'transform 0.3s ease-out, box-shadow 0.3s ease-out';
+      card.style.transition = `transform ${cardTransition}, box-shadow ${cardTransition}`;
       card.style.transform = 'translateY(-10px) scale(1.02)';
-      card.style.boxShadow = '0 20px 40px rgba(16, 135, 201, 0.6)';
+      card.style.boxShadow = `0 20px 40px ${shadowFocusHover}`;
     });
 
     card.addEventListener('focusout', () => {
       card.style.transform = 'translateY(0) scale(1)';
-      card.style.boxShadow = '0 5px 15px #1087c933';
+      card.style.boxShadow = `0 5px 15px ${shadowBase}`;
     });
   });
 }

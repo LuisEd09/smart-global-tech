@@ -2,30 +2,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
 
 /* Definición de Variables CSS */
+/* :root contiene los colores para el MODO CLARO global de la página */
 :root {
-  /* Colores para el modo CLARO (default) */
   --color-bg: #F6F5F4; /* Fondo de la página en modo claro */
   --color-primary: #1087c9; /* Color principal (azul) */
-  --color-accent: #1B221F; /* Color de acento (oscuro) */
+  --color-accent: #F6F5F4; /* Color de acento (CLARO/BLANCO) - USADO EN GRADIENTE DE HERO EN MODO CLARO */
   --color-text: #1B221F; /* Color del texto principal en modo claro */
   --color-text-muted: rgba(27, 34, 31, 0.7); /* Texto atenuado en modo claro */
   --color-secondary-bg: #E0E0E0; /* Fondo secundario para secciones/tarjetas en modo claro */
-  --shadow-color: rgba(16, 135, 201, 0.2); /* Sombra base para elementos */
   --card-bg: #ffffff; /* Fondo de tarjetas en modo claro */
+
+  /* Nuevas variables de sombra para mayor consistencia */
+  --shadow-base: rgba(0, 0, 0, 0.08); /* Sombra base muy sutil y neutra */
+  --shadow-accent: rgba(16, 135, 201, 0.2); /* Sombra con el color primario */
+  --shadow-focus-hover: rgba(16, 135, 201, 0.4); /* Sombra para estados interactivos y destacados */
 
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Duración y función de transición */
 }
 
-/* Modificación de Variables CSS para el modo OSCURO */
+/* Modificación de Variables CSS para el MODO OSCURO global de la página */
 body.dark-mode {
   --color-bg: #1B221F; /* Fondo de la página en modo oscuro */
   --color-primary: #1087c9;
-  --color-accent: #F6F5F4; /* Color de acento (claro) */
+  --color-accent: #1B221F; /* Color de acento (OSCURO/NEGRO) - USADO EN GRADIENTE DE HERO EN MODO OSCURO */
   --color-text: #F6F5F4; /* Color del texto principal en modo oscuro */
   --color-text-muted: rgba(246, 245, 244, 0.75); /* Texto atenuado en modo oscuro */
   --color-secondary-bg: #232c29; /* Fondo secundario para secciones/tarjetas en modo oscuro */
-  --shadow-color: rgba(16, 135, 201, 0.25); /* Sombra más visible en oscuro */
   --card-bg: #16201c; /* Fondo de tarjetas en modo oscuro */
+
+  /* Sombras en modo oscuro */
+  --shadow-base: rgba(0, 0, 0, 0.3); /* Sombra base más oscura */
+  --shadow-accent: rgba(16, 135, 201, 0.35);
+  --shadow-focus-hover: rgba(16, 135, 201, 0.7);
 }
 
 /* Transiciones globales para suavizar cambios de tema y estado */
@@ -41,7 +49,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.7; /* Mejorado para legibilidad */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Transición en body para cambios de fondo y color de texto */
@@ -65,7 +73,7 @@ header {
   align-items: center;
   padding: 1rem 0;
   z-index: 100;
-  box-shadow: 0 2px 12px var(--shadow-color);
+  box-shadow: 0 2px 12px var(--shadow-base); /* Usando nueva variable de sombra */
   transition: background-color var(--transition), box-shadow var(--transition);
 }
 
@@ -119,16 +127,17 @@ nav ul li button:focus {
   min-height: 85vh;
   text-align: center;
   padding: 0 1rem;
-  background: linear-gradient(135deg, #1087c9 0%, #1b221f 100%);
-  color: var(--color-accent);
-  box-shadow: inset 0 0 60px #1087c9cc;
-  position: relative; /* FUNDAMENTAL para el parallax */
-  overflow: hidden; /* Evita que el contenido se desborde durante la transformación */
+  /* El degradado usa las variables --color-primary y --color-accent,
+     que ahora he configurado para que cambien para el hero */
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  box-shadow: inset 0 0 60px var(--shadow-accent); /* Usa la variable de sombra */
+  position: relative;
+  overflow: hidden;
 }
 
 .hero .container {
   position: relative;
-  z-index: 1; /* Mantiene el contenido por encima del fondo parallax */
+  z-index: 1; /* Mantiene el contenido por encima del fondo */
 }
 
 .hero h1 {
@@ -136,7 +145,7 @@ nav ul li button:focus {
   font-weight: 800;
   font-size: 3.5rem;
   margin-bottom: 1rem;
-  text-shadow: 0 0 12px #1087c9bb;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra de texto para mejorar legibilidad */
   line-height: 1.1;
 }
 
@@ -144,18 +153,42 @@ nav ul li button:focus {
   font-size: 1.25rem;
   max-width: 700px;
   margin: 0 auto 2rem auto;
-  color: var(--color-accent);
-  text-shadow: 0 0 5px #1087c9bb;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4); /* Sombra de texto para mejorar legibilidad */
 }
+
+/* === AJUSTES DE COLORES ESPECÍFICOS PARA EL TEXTO DEL HERO === */
+
+/* Colores para la sección Hero en MODO CLARO (gradiante de azul a blanco) */
+/* El texto es OSCURO para contrastar con el fondo claro del degradado */
+.hero h1 {
+  color: #1B221F;
+}
+
+.hero p {
+  color: rgba(27, 34, 31, 0.7);
+}
+
+/* Colores para la sección Hero en MODO OSCURO (gradiante de azul a negro) */
+/* El texto es BLANCO para contrastar con el fondo oscuro del degradado */
+body.dark-mode .hero h1 {
+  color: #F6F5F4; /* Color claro/blanco */
+}
+
+body.dark-mode .hero p {
+  color: rgba(246, 245, 244, 0.9); /* Texto atenuado claro/blanco */
+}
+
+/* === FIN AJUSTES DE COLORES ESPECÍFICOS PARA EL TEXTO DEL HERO === */
+
 
 .cta {
   padding: 1rem 3rem;
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+  background-color: var(--color-primary); /* CTA usa el color primario */
+  color: var(--color-accent); /* El texto del CTA se adapta al color de acento del modo */
   font-weight: 700;
   font-size: 1.15rem;
   border-radius: 30px;
-  box-shadow: 0 8px 15px var(--shadow-color);
+  box-shadow: 0 8px 15px var(--shadow-accent); /* Usando nueva variable de sombra */
   text-decoration: none;
   transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
 }
@@ -163,7 +196,7 @@ nav ul li button:focus {
 .cta:hover,
 .cta:focus {
   background-color: #0b5a83; /* Un tono más oscuro de azul para hover */
-  box-shadow: 0 12px 25px rgba(11, 90, 131, 0.8);
+  box-shadow: 0 12px 25px var(--shadow-focus-hover); /* Usando nueva variable de sombra */
   transform: scale(1.05);
   outline: none;
   color: var(--color-accent); /* Asegura que el texto cambie en hover si es necesario */
@@ -194,7 +227,7 @@ nav ul li button:focus {
   background-color: var(--color-secondary-bg); /* Usa la variable para el fondo secundario */
   border-radius: 20px;
   padding: 4rem 2rem 3rem 2rem;
-  box-shadow: 0 4px 24px var(--shadow-color);
+  box-shadow: 0 4px 24px var(--shadow-base); /* Usando nueva variable de sombra */
   transition: background-color var(--transition), box-shadow var(--transition);
 }
 
@@ -224,7 +257,7 @@ h3 {
   margin-top: 2rem;
 }
 
-.grid-3 > div, 
+.grid-3 > div,
 .service-card {
   flex: 1 1 300px;
   max-width: 350px;
@@ -261,19 +294,32 @@ h3 {
   }
 }
 
+/* Estilos para contenedores de iconos */
 .icon-container {
-  width: 48px;
-  height: 48px;
-  stroke: var(--color-primary);
-  fill: none;
+  display: inline-flex; /* O flex si es un bloque */
+  align-items: center;
+  justify-content: center;
+  width: 60px; /* Tamaño del círculo/cuadrado del icono */
+  height: 60px;
+  border-radius: 50%; /* O 8px para un cuadrado redondeado */
+  background-color: var(--color-primary); /* Color de fondo del icono */
+  color: #fff; /* Color del icono SVG */
+  box-shadow: 0 4px 12px var(--shadow-accent); /* Usando nueva variable de sombra */
   margin-bottom: 1rem;
-  transition: stroke var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .icon-container svg {
-  width: 100%;
-  height: 100%;
+  width: 32px; /* Tamaño del icono SVG */
+  height: 32px;
+  stroke: currentColor; /* Usa el color del texto para el SVG */
 }
+
+.icon-container:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 18px var(--shadow-focus-hover); /* Sombra más fuerte en hover */
+}
+
 
 /* Tarjetas de Servicio y contenido general en grid-3 */
 .grid-3 > div,
@@ -281,16 +327,40 @@ h3 {
   background: var(--card-bg); /* Usa la variable para el fondo de las tarjetas */
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: 0 5px 15px var(--shadow-base); /* Usando nueva variable de sombra */
   /* Transición base para las tarjetas, JS la modificará en hover */
   transition: box-shadow var(--transition), transform var(--transition), background-color var(--transition);
   cursor: default;
+}
+
+/* Estilos específicos para el icono/imagen en la tarjeta de servicio */
+.service-icon-wrapper {
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  width: 80px; /* Tamaño del círculo */
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 10px var(--shadow-accent);
+}
+
+.service-icon {
+  max-width: 60px; /* Tamaño máximo de la imagen dentro del círculo */
+  height: auto;
+  filter: brightness(0) invert(1); /* Opcional: para hacer la imagen blanca si el fondo es oscuro */
 }
 
 .service-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center; /* Centrar elementos verticalmente en la tarjeta */
+  text-align: center; /* Centrar el texto en la tarjeta */
   outline-offset: 4px; /* Para accesibilidad con el teclado */
 }
 
@@ -316,22 +386,22 @@ h3 {
 
 /* Botones "Learn More" */
 .btn-link {
-  align-self: flex-start;
+  align-self: center; /* Centrado en la tarjeta */
   padding: 0.65rem 1.5rem;
   border-radius: 30px;
   background-color: var(--color-primary);
   color: var(--color-accent);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-decoration: none;
-  box-shadow: 0 6px 18px var(--shadow-color);
+  box-shadow: 0 6px 18px var(--shadow-accent); /* Usando nueva variable de sombra */
   transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
 }
 
 .btn-link:hover,
 .btn-link:focus {
   background-color: #0b5a83; /* Un tono más oscuro de azul para hover */
-  box-shadow: 0 10px 30px rgba(11, 90, 131, 0.8);
+  box-shadow: 0 10px 30px var(--shadow-focus-hover); /* Usando nueva variable de sombra */
   transform: scale(1.05);
   outline: none;
   color: var(--color-accent);
@@ -343,7 +413,7 @@ h3 {
   border-radius: 20px;
   padding: 2.5rem 3rem;
   margin-bottom: 3rem;
-  box-shadow: 0 4px 24px var(--shadow-color);
+  box-shadow: 0 4px 24px var(--shadow-base); /* Usando nueva variable de sombra */
   color: var(--color-text-muted);
   scroll-margin-top: 100px; /* para que al hacer scroll no quede debajo del header */
   transition: background-color var(--transition), box-shadow var(--transition), color var(--transition);
@@ -358,7 +428,7 @@ h3 {
 .service-detail p {
   font-size: 1.1rem;
   line-height: 1.7;
-  margin-bottom: 1rem;
+  margin-bottom: 1em; /* Unidades relativas para mantener proporción */
   color: var(--color-text); /* El texto del párrafo es el color principal del texto */
 }
 
@@ -378,7 +448,8 @@ h3 {
 p {
   color: var(--color-text-muted); /* Por defecto, los párrafos fuera de secciones con fondo específico usan el muted */
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.7; /* Consistencia en line-height */
+  margin-bottom: 1em; /* Asegura un margen inferior para separar párrafos */
 }
 
 /* Lists for bullet points */
@@ -471,14 +542,14 @@ form button {
   font-weight: 700;
   font-size: 1.2rem;
   cursor: pointer;
-  box-shadow: 0 6px 18px var(--shadow-color);
+  box-shadow: 0 6px 18px var(--shadow-accent); /* Usando nueva variable de sombra */
   transition: background-color var(--transition), box-shadow var(--transition), transform var(--transition), color var(--transition);
 }
 
 form button:hover,
 form button:focus {
   background-color: #0b5a83;
-  box-shadow: 0 10px 30px rgba(11, 90, 131, 0.8);
+  box-shadow: 0 10px 30px var(--shadow-focus-hover); /* Usando nueva variable de sombra */
   transform: scale(1.05);
   outline: none;
 }
@@ -546,3 +617,92 @@ a[href^="mailto:"]:focus {
   }
 }
 
+/* Estilo para el logo */
+.logo img {
+  height: 50px; /* Puedes ajustar este valor a lo que consideres adecuado, por ejemplo, 40px, 60px, etc. */
+  width: auto; /* Mantiene la proporción de aspecto de la imagen */
+  display: block; /* Asegura que no haya espacios extra debajo */
+}
+
+/* Si tu encabezado tiene un padding vertical, asegúrate de que el logo quepa */
+header .container {
+    padding: 1rem 0; /* Ejemplo, ajusta si es necesario */
+    display: flex;
+    align-items: center; /* Centra el logo y la navegación verticalmente */
+    justify-content: space-between; /* Distribuye el logo a la izquierda y la navegación a la derecha */
+}
+
+header .logo {
+    display: flex; /* Asegura que el logo (la imagen) esté bien alineado si es un flex item */
+    align-items: center;
+}
+
+/* Layout para la sección About con imagen */
+.about-layout {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las columnas se apilen en pantallas pequeñas */
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 2.5rem; /* Espacio entre las columnas */
+  margin-bottom: 3rem; /* Espacio entre este layout y el grid-3 inferior */
+}
+
+.about-content {
+  flex: 2; /* El contenido ocupará más espacio */
+  min-width: 300px; /* Ancho mínimo para el texto */
+  padding-right: 1rem; /* Pequeño padding si el texto queda muy pegado a la imagen */
+}
+
+.about-image {
+  flex: 1; /* La imagen ocupará menos espacio */
+  min-width: 250px; /* Ancho mínimo para la imagen */
+  text-align: center; /* Centra la imagen si hay espacio extra */
+}
+
+.responsive-image {
+  max-width: 100%; /* Asegura que la imagen no se desborde */
+  height: auto; /* Mantiene la proporción de aspecto */
+  border-radius: 16px; /* Bordes redondeados */
+  box-shadow: 0 8px 20px var(--shadow-base); /* Sombra para la imagen */
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.responsive-image:hover {
+  transform: scale(1.02); /* Pequeño efecto de zoom al pasar el ratón */
+  box-shadow: 0 12px 30px var(--shadow-focus-hover);
+}
+
+/* Ajustes de responsividad para la sección About */
+@media (max-width: 992px) { /* Ajusta este breakpoint si es necesario */
+  .about-layout {
+    flex-direction: column; /* Apila las columnas en pantallas más pequeñas */
+    text-align: center;
+  }
+  .about-content {
+    order: 2; /* El contenido de texto debajo de la imagen en móvil */
+    padding-right: 0;
+  }
+  .about-image {
+    order: 1; /* La imagen arriba en móvil */
+    margin-bottom: 1.5rem; /* Espacio entre la imagen y el texto en móvil */
+  }
+}
+
+/* Wrapper para la imagen del equipo */
+.team-image-wrapper {
+  text-align: center; /* Centra la imagen */
+  margin: 2.5rem auto; /* Espacio arriba/abajo y centra el contenedor */
+  max-width: 700px; /* Ancho máximo para la imagen */
+}
+
+.team-hero-image {
+  width: 100%; /* La imagen ocupa todo el ancho de su contenedor */
+  height: auto; /* Mantiene la proporción de aspecto */
+  border-radius: 16px; /* Bordes redondeados */
+  box-shadow: 0 10px 30px var(--shadow-base); /* Sombra para la imagen */
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.team-hero-image:hover {
+  transform: translateY(-5px); /* Efecto de "levantamiento" al pasar el ratón */
+  box-shadow: 0 15px 45px var(--shadow-focus-hover);
+}
