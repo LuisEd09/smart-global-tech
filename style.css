@@ -721,35 +721,323 @@ header .logo {
   margin-right: 0.5rem;
 }
 
-/* Estilos para el botón "Volver arriba" */
-.back-to-top {
+/* Estilos para el botón del Chatbot */
+.chatbot-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px; /* Un poco más arriba para que destaque */
+    right: 30px; /* Un poco más a la derecha */
     background-color: var(--color-primary); /* Color principal de tu tema */
-    color: #fff;
+    color: var(--color-bg); /* Color de texto que contraste */
     border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+    border-radius: 50%; /* Redondo */
+    width: 60px; /* Un poco más grande para un mejor impacto visual */
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 8px var(--shadow-base);
+    box-shadow: 0 6px 12px var(--shadow-accent); /* Sombra más pronunciada */
+    transition: all var(--transition); /* Transición suave para todos los cambios */
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+    /* Estilos para el icono dentro del botón, si es una imagen o SVG */
+    padding: 0; /* Eliminar padding por defecto del botón */
+    overflow: hidden; /* Asegura que la imagen no se salga si es un poco grande */
+}
+
+.chatbot-button img {
+    display: block; /* Para controlar mejor el tamaño de la imagen */
+    width: 32px; /* Tamaño del icono */
+    height: 32px; /* Tamaño del icono */
+    object-fit: contain; /* Asegura que la imagen se ajuste bien */
+}
+
+/* Efectos al pasar el mouse/foco */
+.chatbot-button:hover,
+.chatbot-button:focus {
+    transform: translateY(-5px) scale(1.05); /* Ligeramente más grande y elevado */
+    box-shadow: 0 10px 20px var(--shadow-focus-hover); /* Sombra más grande al pasar el mouse */
+    outline: none; /* Eliminar el contorno por defecto del foco si no se desea */
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .chatbot-button {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+  .chatbot-button img {
+      width: 28px;
+      height: 28px;
+  }
+}
+
+/* --- Estilos para el Botón del Chatbot y su Interfaz (Widget/Modal) --- */
+
+/* Estilos para el botón del Chatbot */
+.chatbot-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 12px var(--shadow-accent);
+    transition: all var(--transition);
+    z-index: 1000;
+    padding: 0;
+    overflow: hidden;
+}
+
+.chatbot-button img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.chatbot-button:hover,
+.chatbot-button:focus {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 20px var(--shadow-focus-hover);
+    outline: none;
+}
+
+/* Estilos para la interfaz del Chatbot (EL WIDGET/MODAL FLOTANTE) */
+.chatbot-interface {
+    position: fixed;
+    bottom: 100px; /* Posición encima del botón */
+    right: 30px;
+    width: 350px; /* Ancho del chat */
+    height: 500px; /* Alto del chat */
+    background-color: var(--card-bg); /* Fondo del chat, se adapta al tema */
+    border-radius: 15px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999; /* Por debajo del botón del chat, pero por encima de otros elementos */
+
+    /* Estado inicial (oculto) */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    z-index: 1000;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
 }
 
-.back-to-top.show {
+.chatbot-interface.show {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
-.back-to-top:hover {
-    background-color: var(--color-accent); /* Color de acento para hover */
-    box-shadow: 0 6px 12px var(--shadow-focus-hover);
+/* Header del Chatbot */
+.chatbot-header {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: inherit; /* Hereda el color del padre (color-bg) */
+}
+
+.chatbot-close-btn {
+    background: none;
+    border: none;
+    color: var(--color-bg);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform var(--transition);
+    width: 30px; /* Tamaño fijo para el botón de cerrar */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Redondo */
+}
+
+.chatbot-close-btn:hover {
+    transform: rotate(90deg) scale(1.1);
+    background-color: rgba(255,255,255,0.1); /* Ligero fondo al pasar el mouse */
+}
+
+/* Body del Chat (donde se muestran los mensajes) */
+.chatbot-body {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--color-secondary-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: var(--color-primary) var(--color-secondary-bg); /* Para Firefox */
+}
+
+/* Estilo para Webkit (Chrome, Safari) scrollbar */
+.chatbot-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chatbot-body::-webkit-scrollbar-track {
+  background: var(--color-secondary-bg);
+  border-radius: 10px;
+}
+
+.chatbot-body::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  border: 2px solid var(--color-secondary-bg);
+}
+
+
+/* Estilos para los mensajes */
+.user-message, .bot-message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 85%; /* Ligeramente más grande */
+    word-wrap: break-word;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    position: relative; /* Para la "colita" de la burbuja (si se añade) */
+}
+
+.user-message {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    margin-left: auto; /* Empuja el mensaje a la derecha */
+}
+
+.bot-message {
+    background-color: var(--card-bg);
+    color: var(--color-text);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-base);
+    margin-right: auto; /* Empuja el mensaje a la izquierda */
+}
+
+
+/* Footer del Chat (Input y Botón de Enviar) */
+.chatbot-footer {
+    display: flex;
+    padding: 15px 20px;
+    border-top: 1px solid var(--color-secondary-bg); /* Separador sutil */
+    background-color: var(--card-bg);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+.chatbot-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--color-secondary-bg); /* Borde sutil */
+    border-radius: 25px;
+    margin-right: 10px;
+    font-size: 1rem;
+    background-color: var(--color-bg); /* Se adapta al tema */
+    color: var(--color-text);
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition), color var(--transition);
+}
+
+.chatbot-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(16, 135, 201, 0.2);
+}
+
+.chatbot-input:disabled {
+    background-color: var(--color-secondary-bg);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.chatbot-send-btn {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition), color var(--transition);
+}
+
+.chatbot-send-btn:hover:not(:disabled) {
+    background-color: #0b5a83;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.chatbot-send-btn:disabled {
+    background-color: var(--color-text-muted);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* --- Media Queries para Responsive Design del Chatbot --- */
+
+@media (max-width: 768px) {
+  .chatbot-button {
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+  }
+  .chatbot-button img {
+      width: 28px;
+      height: 28px;
+  }
+
+  .chatbot-interface {
+    width: calc(100% - 40px); /* Ocupa casi todo el ancho */
+    height: 80vh; /* Ocupa 80% del alto del viewport */
+    bottom: 20px;
+    right: 20px;
+    left: 20px; /* Centra el modal */
+    transform: translateY(20px) scale(0.98);
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-interface {
+    width: calc(100% - 30px);
+    right: 15px;
+    left: 15px;
+    bottom: 15px;
+    height: 75vh;
+  }
+
+  .chatbot-header h3 {
+      font-size: 1.1rem;
+  }
+
+  .chatbot-input, .chatbot-send-btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+  }
 }
