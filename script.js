@@ -1,117 +1,117 @@
 document.addEventListener('DOMContentLoaded', () => {
-  initDarkMode();
-  initSmoothScroll();
-  initSectionAnimations();
-  // initHeroParallax(); // Mantener si la función existe pero está en desuso temporalmente
-  initServiceCardHoverEffects();
-  initDynamicCopyrightYear();
-  initChatbotButton(); // Aquí se inicializa toda la lógica del chatbot
-  initBackToTopButton(); // Asegúrate de que esta función también sea llamada
+    initDarkMode();
+    initSmoothScroll();
+    initSectionAnimations();
+    // initHeroParallax(); // Mantener si la función existe pero está en desuso temporalmente
+    initServiceCardHoverEffects();
+    initDynamicCopyrightYear();
+    initChatbotButton(); // Aquí se inicializa toda la lógica del chatbot
+    initBackToTopButton(); // Asegúrate de que esta función también sea llamada
 });
 
 function initDarkMode() {
-  const toggle = document.getElementById('toggle-dark');
-  const prefersDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const toggle = document.getElementById('toggle-dark');
+    const prefersDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-  if (prefersDark) {
-    document.body.classList.add('dark-mode');
-    if (toggle) toggle.textContent = '☀️'; // Asegurarse de que el toggle existe
-  } else {
-    document.body.classList.remove('dark-mode');
-    if (toggle) toggle.textContent = '🌙'; // Asegurarse de que el toggle existe
-  }
+    if (prefersDark) {
+        document.body.classList.add('dark-mode');
+        if (toggle) toggle.textContent = '☀️'; // Asegurarse de que el toggle existe
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (toggle) toggle.textContent = '🌙'; // Asegurarse de que el toggle existe
+    }
 
-  if (toggle) { // Solo añadir el listener si el toggle existe
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      toggle.textContent = isDark ? '☀️' : '🌙';
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-  }
+    if (toggle) { // Solo añadir el listener si el toggle existe
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            toggle.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
 }
 
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId && targetId !== '#') {
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
     });
-  });
 }
 
 function initSectionAnimations() {
-  const sections = document.querySelectorAll('.section');
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
+    const sections = document.querySelectorAll('.section');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        entry.target.classList.remove('hidden-slide');
-        observer.unobserve(entry.target);
-      }
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                entry.target.classList.remove('hidden-slide');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        section.classList.add('hidden-slide');
+        observer.observe(section);
     });
-  }, observerOptions);
-
-  sections.forEach(section => {
-    section.classList.add('hidden-slide');
-    observer.observe(section);
-  });
 }
 
 function initServiceCardHoverEffects() {
-  const serviceCards = document.querySelectorAll('.service-card');
-  const rootStyles = getComputedStyle(document.documentElement);
-  // Usar valores predeterminados o una verificación si las variables CSS no existen
-  const shadowBase = rootStyles.getPropertyValue('--shadow-base').trim() || 'rgba(0, 0, 0, 0.08)';
-  const shadowAccent = rootStyles.getPropertyValue('--shadow-accent').trim() || 'rgba(16, 135, 201, 0.2)';
-  const shadowFocusHover = rootStyles.getPropertyValue('--shadow-focus-hover').trim() || 'rgba(16, 135, 201, 0.4)';
-  const transition = rootStyles.getPropertyValue('--transition').trim() || '0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    const serviceCards = document.querySelectorAll('.service-card');
+    const rootStyles = getComputedStyle(document.documentElement);
+    // Usar valores predeterminados o una verificación si las variables CSS no existen
+    const shadowBase = rootStyles.getPropertyValue('--shadow-base').trim() || 'rgba(0, 0, 0, 0.08)';
+    const shadowAccent = rootStyles.getPropertyValue('--shadow-accent').trim() || 'rgba(16, 135, 201, 0.2)';
+    const shadowFocusHover = rootStyles.getPropertyValue('--shadow-focus-hover').trim() || 'rgba(16, 135, 201, 0.4)';
+    const transition = rootStyles.getPropertyValue('--transition').trim() || '0.3s cubic-bezier(0.4, 0, 0.2, 1)';
 
-  serviceCards.forEach(card => {
-    card.style.transition = `transform ${transition}, box-shadow ${transition}`;
+    serviceCards.forEach(card => {
+        card.style.transition = `transform ${transition}, box-shadow ${transition}`;
 
-    card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-5px) scale(1.02)';
-      card.style.boxShadow = `0 10px 20px ${shadowAccent}`;
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px) scale(1.02)';
+            card.style.boxShadow = `0 10px 20px ${shadowAccent}`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            if (!card.matches(':focus-within')) {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = `0 5px 15px ${shadowBase}`;
+            }
+        });
+
+        card.addEventListener('focusin', () => {
+            card.style.transform = 'translateY(-5px) scale(1.02)';
+            card.style.boxShadow = `0 12px 25px ${shadowFocusHover}`;
+        });
+
+        card.addEventListener('focusout', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+            card.style.boxShadow = `0 5px 15px ${shadowBase}`;
+        });
     });
-
-    card.addEventListener('mouseleave', () => {
-      if (!card.matches(':focus-within')) {
-        card.style.transform = 'translateY(0) scale(1)';
-        card.style.boxShadow = `0 5px 15px ${shadowBase}`;
-      }
-    });
-
-    card.addEventListener('focusin', () => {
-      card.style.transform = 'translateY(-5px) scale(1.02)';
-      card.style.boxShadow = `0 12px 25px ${shadowFocusHover}`;
-    });
-
-    card.addEventListener('focusout', () => {
-      card.style.transform = 'translateY(0) scale(1)';
-      card.style.boxShadow = `0 5px 15px ${shadowBase}`;
-    });
-  });
 }
 
 function initDynamicCopyrightYear() {
-  const yearSpan = document.querySelector('footer p');
-  if (yearSpan) {
-    const currentYear = new Date().getFullYear();
-    yearSpan.textContent = `© ${currentYear} Smart Global Tech. All rights reserved.`;
-  }
+    const yearSpan = document.querySelector('footer p');
+    if (yearSpan) {
+        const currentYear = new Date().getFullYear();
+        yearSpan.textContent = `© ${currentYear} Smart Global Tech. All rights reserved.`;
+    }
 }
 
 // NUEVA FUNCIÓN: Botón "Volver arriba" (ya estaba, pero aseguramos su existencia)
@@ -171,8 +171,8 @@ function initChatbotButton() {
     }
 
     // Manejar el envío de mensajes
-    const sendMessage = () => {
-        if (!chatInterface) return; // Asegurarse de que la interfaz existe
+    const sendMessage = async () => { // Hacemos la función asíncrona para usar await
+        if (!chatInterface) return;
         const chatbotInput = chatInterface.querySelector('.chatbot-input');
         const chatbotSendBtn = chatInterface.querySelector('.chatbot-send-btn');
 
@@ -181,18 +181,49 @@ function initChatbotButton() {
             addMessage('user', message); // Añadir mensaje del usuario
             chatbotInput.value = ''; // Limpiar input
 
-            // Deshabilitar input y botón mientras el bot "piensa"
+            // Deshabilitar input y botón mientras se envía/espera respuesta
             chatbotInput.disabled = true;
             chatbotSendBtn.disabled = true;
 
-            // Simular una respuesta del bot (esto será reemplazado por la conexión a n8n)
-            setTimeout(() => {
-                addMessage('bot', '¡Gracias por tu mensaje! Estoy procesándolo. Pronto te conectaremos con una solución real.');
-                // Habilitar input y botón de nuevo
+            // ***** INICIO: CAMBIOS PARA LA CONEXIÓN CON N8N *****
+            // ¡IMPORTANTE! Asegúrate de que esta URL es la correcta y que tu webhook de n8n está en modo escucha.
+            const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5';
+
+            try {
+                const response = await fetch(n8nWebhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: message }), // Enviamos el mensaje del usuario en un objeto JSON
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // ***** MODIFICACIÓN CRÍTICA AQUÍ *****
+                // Acceder a 'data.botResponse' para obtener el texto del mensaje
+                if (data && data.botResponse) {
+                    addMessage('bot', data.botResponse); // Mostrar la respuesta real de n8n
+                } else {
+                    // Manejo si la respuesta no tiene la estructura esperada
+                    addMessage('bot', 'Gracias por tu mensaje. El asistente no proporcionó una respuesta específica o hubo un problema al procesarla.');
+                    console.error('Bot response structure invalid or empty:', data);
+                }
+
+            } catch (error) {
+                addMessage('bot', 'No se pudo conectar con el servidor del asistente. Revisa tu conexión.');
+                console.error('Error de red al enviar mensaje:', error);
+            } finally {
+                // Habilitar input y botón de nuevo, sin importar el resultado
                 chatbotInput.disabled = false;
                 chatbotSendBtn.disabled = false;
                 chatbotInput.focus(); // Volver a enfocar el input
-            }, 1500); // Pequeña pausa para simular procesamiento
+            }
+            // ***** FIN: CAMBIOS PARA LA CONEXIÓN CON N8N *****
         }
     };
 
@@ -238,7 +269,8 @@ function initChatbotButton() {
             });
 
             // Mensaje de bienvenida inicial del bot
-            addMessage('bot', '¡Bienvenido! Soy tu asistente virtual de Smart Global Tech. ¿Cómo puedo ayudarte hoy?');
+            addMessage('bot', '¡Hola! 👋 Soy Inspector IA, tu asistente virtual aquí en Smart Global Tech. Estoy aquí para ayudarte a conocer nuestros servicios, resolver dudas y guiarte. ¿En qué puedo ayudarte hoy?');
+
 
             // Asegurarse de que el input y el botón de enviar están habilitados al inicio
             chatbotInput.disabled = false;
