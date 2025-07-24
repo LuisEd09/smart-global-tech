@@ -149,20 +149,18 @@ function initChatbotButton() {
     const chatbotButton = document.createElement('button');
     chatbotButton.innerHTML = '<img src="images/chatbot_image.png" alt="Chatbot Icon" style="width: 32px; height: 32px;">';
     chatbotButton.classList.add('chatbot-button');
-    chatbotButton.setAttribute('aria-label', 'Abrir chatbot de asistencia');
+    chatbotButton.setAttribute('aria-label', 'Open assistance chatbot');
     document.body.appendChild(chatbotButton);
 
     let chatInterface = null;
 
-    // Función para formatear respuesta del bot con saltos de línea y listas
+    // Format bot response: replace \n with line breaks and format numbered bold lists
     function formatBotResponse(text) {
-        // Reemplaza \n o \\n por saltos de línea reales (<br>)
         let formatted = text.replace(/\\n/g, '\n').replace(/\n/g, '<br>');
 
-        // Convierte números de lista simples con **negrita** en <li>
+        // Format numbered bold list items: "1. **Title**" → <li><strong>1. Title</strong></li>
         formatted = formatted.replace(/(\d+)\.\s\*\*(.+?)\*\*/g, '<li><strong>$1. $2</strong></li>');
 
-        // Si contiene <li>, envuelve todo en <ul>
         if (formatted.includes('<li>')) {
             formatted = '<ul>' + formatted + '</ul>';
         }
@@ -170,7 +168,7 @@ function initChatbotButton() {
         return formatted;
     }
 
-    // Función para añadir mensajes al chat
+    // Add message to chat (can be HTML for bot)
     function addMessage(sender, message, isHtml = false) {
         if (!chatInterface) return;
         const chatbotBody = chatInterface.querySelector('.chatbot-body');
@@ -180,9 +178,9 @@ function initChatbotButton() {
         messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
 
         if (isHtml) {
-            messageElement.innerHTML = message; // Inserta HTML formateado
+            messageElement.innerHTML = message;
         } else {
-            messageElement.textContent = message; // Texto plano para usuario
+            messageElement.textContent = message;
         }
 
         chatbotBody.appendChild(messageElement);
@@ -205,14 +203,14 @@ function initChatbotButton() {
             const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5';
 
             try {
-                console.log('Intentando enviar mensaje a n8n...');
+                console.log('Sending message to n8n...');
                 const response = await fetch(n8nWebhookUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: message }),
                 });
 
-                console.log('Respuesta de fetch recibida. Status:', response.status);
+                console.log('Fetch response status:', response.status);
 
                 if (!response.ok) {
                     const errorText = await response.text();
@@ -220,28 +218,28 @@ function initChatbotButton() {
                 }
 
                 const rawResponseText = await response.text();
-                console.log('Respuesta cruda de n8n:', rawResponseText);
+                console.log('Raw response from n8n:', rawResponseText);
 
                 let data;
                 try {
                     data = JSON.parse(rawResponseText);
-                    console.log('JSON parseado exitosamente:', data);
+                    console.log('Parsed JSON:', data);
                 } catch (jsonError) {
-                    console.error('Error al parsear JSON de la respuesta:', jsonError);
-                    throw new Error('Error al procesar la respuesta del bot (JSON inválido).');
+                    console.error('JSON parse error:', jsonError);
+                    throw new Error('Invalid JSON response from bot.');
                 }
 
                 if (data && data.botResponse) {
                     const formattedMessage = formatBotResponse(data.botResponse);
                     addMessage('bot', formattedMessage, true);
                 } else {
-                    addMessage('bot', 'Gracias por tu mensaje. El asistente no proporcionó una respuesta específica o hubo un problema al procesarla.');
-                    console.error('Bot response structure invalid or empty:', data);
+                    addMessage('bot', 'Thanks for your message. The assistant did not provide a specific answer or there was an issue processing it.');
+                    console.error('Invalid or empty bot response:', data);
                 }
 
             } catch (error) {
-                addMessage('bot', 'No se pudo conectar con el servidor del asistente. Revisa tu conexión o inténtalo de nuevo más tarde.');
-                console.error('Error detallado al enviar mensaje a bot:', error);
+                addMessage('bot', 'Unable to connect to the assistant server. Please check your connection and try again later.');
+                console.error('Error sending message to bot:', error);
             } finally {
                 chatbotInput.disabled = false;
                 chatbotSendBtn.disabled = false;
@@ -259,13 +257,13 @@ function initChatbotButton() {
 
             chatInterface.innerHTML = `
                 <div class="chatbot-header">
-                    <h3>Asistente Smart Global Tech</h3>
-                    <button class="chatbot-close-btn" aria-label="Cerrar chat">X</button>
+                    <h3>Smartin - Smart Global Tech Assistant</h3>
+                    <button class="chatbot-close-btn" aria-label="Close chat">X</button>
                 </div>
                 <div class="chatbot-body"></div>
                 <div class="chatbot-footer">
-                    <input type="text" placeholder="Escribe tu mensaje..." class="chatbot-input">
-                    <button class="chatbot-send-btn">Enviar</button>
+                    <input type="text" placeholder="Type your message..." class="chatbot-input" autocomplete="off">
+                    <button class="chatbot-send-btn">Send</button>
                 </div>
             `;
             document.body.appendChild(chatInterface);
@@ -285,7 +283,7 @@ function initChatbotButton() {
                 if (e.key === 'Enter') sendMessage();
             });
 
-            addMessage('bot', 'Hello! 👋 Im Smartin!, your virtual assistant here at Smart Global Tech. Im here to help you learn about our services, answer your questions, and guide you. You can also talk to me in Spanish or French if you prefer. How can I assist you today?', false);
+            addMessage('bot', 'Hello! 👋 I\'m Smartin, your virtual assistant here at Smart Global Tech. I\'m here to help you learn about our services, answer your questions, and guide you. You can also chat with me in Spanish or French if you prefer. How can I assist you today?', false);
 
             chatbotInput.disabled = false;
             chatbotSendBtn.disabled = false;
@@ -310,9 +308,15 @@ function initChatbotButton() {
     });
 
     document.addEventListener('click', (e) => {
-        if (chatInterface && chatInterface.classList.contains('show') && !chatbotButton.contains(e.target) && !chatInterface.contains(e.target)) {
+        if (
+            chatInterface &&
+            chatInterface.classList.contains('show') &&
+            !chatbotButton.contains(e.target) &&
+            !chatInterface.contains(e.target)
+        ) {
             chatInterface.classList.remove('show');
             document.body.classList.remove('chatbot-open');
         }
     });
 }
+
