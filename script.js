@@ -147,108 +147,111 @@ function initBackToTopButton() {
 // Lógica para la interfaz del Chatbot (completamente refactorizada e integrada)
 function initChatbotButton() {
     const chatbotButton = document.createElement('button');
-    // Asegúrate que la imagen tiene fondo transparente para que se vea bien
     chatbotButton.innerHTML = '<img src="images/chatbot_image.png" alt="Chatbot Icon" style="width: 32px; height: 32px;">';
     chatbotButton.classList.add('chatbot-button');
     chatbotButton.setAttribute('aria-label', 'Abrir chatbot de asistencia');
     document.body.appendChild(chatbotButton);
 
-    let chatInterface = null; // Variable para almacenar la interfaz del chat
+    let chatInterface = null;
+
+    // Función para formatear respuesta del bot con saltos de línea y listas
+    function formatBotResponse(text) {
+        // Reemplaza \n o \\n por saltos de línea reales (<br>)
+        let formatted = text.replace(/\\n/g, '\n').replace(/\n/g, '<br>');
+
+        // Convierte números de lista simples con **negrita** en <li>
+        formatted = formatted.replace(/(\d+)\.\s\*\*(.+?)\*\*/g, '<li><strong>$1. $2</strong></li>');
+
+        // Si contiene <li>, envuelve todo en <ul>
+        if (formatted.includes('<li>')) {
+            formatted = '<ul>' + formatted + '</ul>';
+        }
+
+        return formatted;
+    }
 
     // Función para añadir mensajes al chat
-    function addMessage(sender, message) {
-        // Asegurarse de que chatInterface y chatbotBody existen antes de añadir mensajes
+    function addMessage(sender, message, isHtml = false) {
         if (!chatInterface) return;
         const chatbotBody = chatInterface.querySelector('.chatbot-body');
         if (!chatbotBody) return;
 
         const messageElement = document.createElement('div');
         messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-        messageElement.textContent = message; // Usar textContent para evitar inyección de HTML y manejar texto plano
+
+        if (isHtml) {
+            messageElement.innerHTML = message; // Inserta HTML formateado
+        } else {
+            messageElement.textContent = message; // Texto plano para usuario
+        }
+
         chatbotBody.appendChild(messageElement);
-        // Scroll automático al último mensaje
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
     }
 
-    // Manejar el envío de mensajes
-    const sendMessage = async () => { // Hacemos la función asíncrona para usar await
+    const sendMessage = async () => {
         if (!chatInterface) return;
         const chatbotInput = chatInterface.querySelector('.chatbot-input');
         const chatbotSendBtn = chatInterface.querySelector('.chatbot-send-btn');
 
         const message = chatbotInput.value.trim();
         if (message) {
-            addMessage('user', message); // Añadir mensaje del usuario
-            chatbotInput.value = ''; // Limpiar input
+            addMessage('user', message);
+            chatbotInput.value = '';
 
-            // Deshabilitar input y botón mientras se envía/espera respuesta
             chatbotInput.disabled = true;
             chatbotSendBtn.disabled = true;
 
-            // ***** INICIO: CAMBIOS PARA LA CONEXIÓN CON N8N *****
-            // ¡IMPORTANTE! Asegúrate de que esta URL es la correcta y que tu webhook de n8n está en modo escucha.
-            // Esta es la URL de PRODUCCIÓN de tu webhook de n8n
             const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5';
 
             try {
                 console.log('Intentando enviar mensaje a n8n...');
                 const response = await fetch(n8nWebhookUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message: message }), // Enviamos el mensaje del usuario en un objeto JSON
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message }),
                 });
 
                 console.log('Respuesta de fetch recibida. Status:', response.status);
 
                 if (!response.ok) {
-                    // Si la respuesta HTTP no es 2xx, leemos el cuerpo como texto y lanzamos un error
                     const errorText = await response.text();
                     throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
                 }
 
-                // ***** CAMBIO IMPORTANTE AQUÍ: Leer el cuerpo como texto primero *****
                 const rawResponseText = await response.text();
                 console.log('Respuesta cruda de n8n:', rawResponseText);
 
                 let data;
                 try {
-                    // Intentar parsear el texto crudo como JSON
                     data = JSON.parse(rawResponseText);
                     console.log('JSON parseado exitosamente:', data);
                 } catch (jsonError) {
                     console.error('Error al parsear JSON de la respuesta:', jsonError);
-                    // rawResponseText ya está disponible en la consola para depuración
                     throw new Error('Error al procesar la respuesta del bot (JSON inválido).');
                 }
 
-                // Acceder a 'data.botResponse' para obtener el texto del mensaje
                 if (data && data.botResponse) {
-                    addMessage('bot', data.botResponse); // Mostrar la respuesta real de n8n
+                    const formattedMessage = formatBotResponse(data.botResponse);
+                    addMessage('bot', formattedMessage, true);
                 } else {
-                    // Manejo si la respuesta no tiene la estructura esperada
                     addMessage('bot', 'Gracias por tu mensaje. El asistente no proporcionó una respuesta específica o hubo un problema al procesarla.');
                     console.error('Bot response structure invalid or empty:', data);
                 }
 
             } catch (error) {
-                // Este bloque captura cualquier error de red, HTTP o de parseo de JSON
                 addMessage('bot', 'No se pudo conectar con el servidor del asistente. Revisa tu conexión o inténtalo de nuevo más tarde.');
                 console.error('Error detallado al enviar mensaje a bot:', error);
             } finally {
-                // Habilitar input y botón de nuevo, sin importar el resultado
                 chatbotInput.disabled = false;
                 chatbotSendBtn.disabled = false;
-                chatbotInput.focus(); // Volver a enfocar el input
+                chatbotInput.focus();
             }
-            // ***** FIN: CAMBIOS PARA la CONEXIÓN CON N8N *****
         }
     };
 
     chatbotButton.addEventListener('click', () => {
         if (!chatInterface) {
-            // Si la interfaz no existe, la creamos la primera vez que se hace clic
             chatInterface = document.createElement('div');
             chatInterface.classList.add('chatbot-interface');
             chatInterface.setAttribute('aria-modal', 'true');
@@ -259,8 +262,7 @@ function initChatbotButton() {
                     <h3>Asistente Smart Global Tech</h3>
                     <button class="chatbot-close-btn" aria-label="Cerrar chat">X</button>
                 </div>
-                <div class="chatbot-body">
-                    </div>
+                <div class="chatbot-body"></div>
                 <div class="chatbot-footer">
                     <input type="text" placeholder="Escribe tu mensaje..." class="chatbot-input">
                     <button class="chatbot-send-btn">Enviar</button>
@@ -268,50 +270,38 @@ function initChatbotButton() {
             `;
             document.body.appendChild(chatInterface);
 
-            // Obtener referencias a los elementos dentro de la interfaz recién creada
             const chatbotCloseBtn = chatInterface.querySelector('.chatbot-close-btn');
             const chatbotInput = chatInterface.querySelector('.chatbot-input');
             const chatbotSendBtn = chatInterface.querySelector('.chatbot-send-btn');
 
-            // Añadir los Event Listeners a los elementos dentro de la interfaz
             chatbotCloseBtn.addEventListener('click', () => {
                 chatInterface.classList.remove('show');
-                document.body.classList.remove('chatbot-open'); // Quita la clase del body al cerrar
+                document.body.classList.remove('chatbot-open');
             });
 
             chatbotSendBtn.addEventListener('click', sendMessage);
 
             chatbotInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
+                if (e.key === 'Enter') sendMessage();
             });
 
-            // Mensaje de bienvenida inicial del bot
-            addMessage('bot', '¡Hola! 👋 Soy Inspector IA, tu asistente virtual aquí en Smart Global Tech. Estoy aquí para ayudarte a conocer nuestros servicios, resolver dudas y guiarte. ¿En qué puedo ayudarte hoy?');
+            addMessage('bot', '¡Hola! 👋 Soy Inspector IA, tu asistente virtual aquí en Smart Global Tech. Estoy aquí para ayudarte a conocer nuestros servicios, resolver dudas y guiarte. ¿En qué puedo ayudarte hoy?', false);
 
-
-            // Asegurarse de que el input y el botón de enviar están habilitados al inicio
             chatbotInput.disabled = false;
             chatbotSendBtn.disabled = false;
         }
 
-        // Toggle (mostrar/ocultar) la interfaz
         chatInterface.classList.toggle('show');
         document.body.classList.toggle('chatbot-open', chatInterface.classList.contains('show'));
 
-        // Si la interfaz se muestra, enfoca el campo de entrada y desplázate al final
         if (chatInterface.classList.contains('show')) {
             const inputField = chatInterface.querySelector('.chatbot-input');
             inputField.focus();
             const chatbotBody = chatInterface.querySelector('.chatbot-body');
-            if (chatbotBody) {
-                chatbotBody.scrollTop = chatbotBody.scrollHeight;
-            }
+            if (chatbotBody) chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
     });
 
-    // Event listeners globales para cerrar con Escape y clics fuera de la interfaz
     document.addEventListener('keydown', (e) => {
         if (chatInterface && e.key === 'Escape' && chatInterface.classList.contains('show')) {
             chatInterface.classList.remove('show');
