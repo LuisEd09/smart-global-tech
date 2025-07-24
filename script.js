@@ -285,7 +285,7 @@ function initChatbotButton() {
                 if (e.key === 'Enter') sendMessage();
             });
 
-            addMessage('bot', '¡Hola! 👋 Soy Inspector IA, tu asistente virtual aquí en Smart Global Tech. Estoy aquí para ayudarte a conocer nuestros servicios, resolver dudas y guiarte. ¿En qué puedo ayudarte hoy?', false);
+            addMessage('bot', 'Hello! 👋 Im Smartin!, your virtual assistant here at Smart Global Tech. Im here to help you learn about our services, answer your questions, and guide you. You can also talk to me in Spanish or French if you prefer. How can I assist you today?', false);
 
             chatbotInput.disabled = false;
             chatbotSendBtn.disabled = false;
