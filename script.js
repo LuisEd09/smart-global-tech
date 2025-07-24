@@ -164,7 +164,7 @@ function initChatbotButton() {
 
         const messageElement = document.createElement('div');
         messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-        messageElement.textContent = message;
+        messageElement.textContent = message; // Usar textContent para evitar inyección de HTML y manejar texto plano
         chatbotBody.appendChild(messageElement);
         // Scroll automático al último mensaje
         chatbotBody.scrollTop = chatbotBody.scrollHeight;
@@ -187,9 +187,11 @@ function initChatbotButton() {
 
             // ***** INICIO: CAMBIOS PARA LA CONEXIÓN CON N8N *****
             // ¡IMPORTANTE! Asegúrate de que esta URL es la correcta y que tu webhook de n8n está en modo escucha.
+            // Esta es la URL de PRODUCCIÓN de tu webhook de n8n
             const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5';
 
             try {
+                console.log('Intentando enviar mensaje a n8n...');
                 const response = await fetch(n8nWebhookUrl, {
                     method: 'POST',
                     headers: {
@@ -198,13 +200,26 @@ function initChatbotButton() {
                     body: JSON.stringify({ message: message }), // Enviamos el mensaje del usuario en un objeto JSON
                 });
 
+                console.log('Respuesta de fetch recibida. Status:', response.status);
+
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    // Si la respuesta HTTP no es 2xx, lanzamos un error
+                    const errorText = await response.text(); // Intentamos leer el cuerpo del error
+                    throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
                 }
 
-                const data = await response.json();
+                // Intentamos parsear la respuesta JSON
+                let data;
+                try {
+                    data = await response.json();
+                    console.log('JSON parseado exitosamente:', data);
+                } catch (jsonError) {
+                    console.error('Error al parsear JSON de la respuesta:', jsonError);
+                    const rawResponseText = await response.text(); // Obtener el texto crudo para depuración
+                    console.error('Respuesta cruda que intentó parsear como JSON:', rawResponseText);
+                    throw new Error('Error al procesar la respuesta del bot (JSON inválido).');
+                }
 
-                // ***** MODIFICACIÓN CRÍTICA AQUÍ *****
                 // Acceder a 'data.botResponse' para obtener el texto del mensaje
                 if (data && data.botResponse) {
                     addMessage('bot', data.botResponse); // Mostrar la respuesta real de n8n
@@ -215,15 +230,16 @@ function initChatbotButton() {
                 }
 
             } catch (error) {
-                addMessage('bot', 'No se pudo conectar con el servidor del asistente. Revisa tu conexión.');
-                console.error('Error de red al enviar mensaje:', error);
+                // Este bloque captura cualquier error de red, HTTP o de parseo de JSON
+                addMessage('bot', 'No se pudo conectar con el servidor del asistente. Revisa tu conexión o inténtalo de nuevo más tarde.');
+                console.error('Error detallado al enviar mensaje a bot:', error);
             } finally {
                 // Habilitar input y botón de nuevo, sin importar el resultado
                 chatbotInput.disabled = false;
                 chatbotSendBtn.disabled = false;
                 chatbotInput.focus(); // Volver a enfocar el input
             }
-            // ***** FIN: CAMBIOS PARA LA CONEXIÓN CON N8N *****
+            // ***** FIN: CAMBIOS PARA la CONEXIÓN CON N8N *****
         }
     };
 
