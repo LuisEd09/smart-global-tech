@@ -203,20 +203,23 @@ function initChatbotButton() {
                 console.log('Respuesta de fetch recibida. Status:', response.status);
 
                 if (!response.ok) {
-                    // Si la respuesta HTTP no es 2xx, lanzamos un error
-                    const errorText = await response.text(); // Intentamos leer el cuerpo del error
+                    // Si la respuesta HTTP no es 2xx, leemos el cuerpo como texto y lanzamos un error
+                    const errorText = await response.text();
                     throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
                 }
 
-                // Intentamos parsear la respuesta JSON
+                // ***** CAMBIO IMPORTANTE AQUÍ: Leer el cuerpo como texto primero *****
+                const rawResponseText = await response.text();
+                console.log('Respuesta cruda de n8n:', rawResponseText);
+
                 let data;
                 try {
-                    data = await response.json();
+                    // Intentar parsear el texto crudo como JSON
+                    data = JSON.parse(rawResponseText);
                     console.log('JSON parseado exitosamente:', data);
                 } catch (jsonError) {
                     console.error('Error al parsear JSON de la respuesta:', jsonError);
-                    const rawResponseText = await response.text(); // Obtener el texto crudo para depuración
-                    console.error('Respuesta cruda que intentó parsear como JSON:', rawResponseText);
+                    // rawResponseText ya está disponible en la consola para depuración
                     throw new Error('Error al procesar la respuesta del bot (JSON inválido).');
                 }
 
