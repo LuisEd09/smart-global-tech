@@ -25,8 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Crear el contenedor y el widget
         const wrapper = document.createElement('div');
-        wrapper.className = 'elevenlabs-widget-container'; // Nueva clase para el contenedor
-        // Puedes agregar estilos iniciales aquí o en style.css para .elevenlabs-widget-container
+        wrapper.className = 'elevenlabs-widget-wrapper'; // Clase para posibles estilos adicionales
         wrapper.style.position = 'fixed';
         wrapper.style.bottom = '20px'; // Ajusta la posición si es necesario
         wrapper.style.right = '20px'; // Ajusta la posición si es necesario
@@ -35,13 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const widget = document.createElement('elevenlabs-convai');
         widget.id = `elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`;
         widget.setAttribute('agent-id', ELEVENLABS_AGENT_ID);
-        // Ahora siempre será "expandable" para el comportamiento de toggle
-        widget.setAttribute('variant', 'expandable');
+        // La variante ('full' o 'expandable') se establecerá dinámicamente
+        // Los colores se establecerán dinámicamente
 
-        // Setear colores iniciales basado en el tema actual
+        // Setear colores iniciales y variante basado en el tema actual y dispositivo
         updateWidgetColors(widget);
+        updateWidgetVariant(widget);
 
-        // Observar cambios de tema (dark-mode)
+        // Observar cambios de tema (dark-mode) y eventos de redimensionamiento
         const observer = new MutationObserver(() => {
             updateWidgetColors(widget);
         });
@@ -51,14 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
             attributeFilter: ['class'],
         });
 
-        // La función updateWidgetVariant ya no es necesaria si siempre es 'expandable'
-        // pero la mantengo si decides necesitarla para otra lógica futura.
-        function updateWidgetVariant(w) {
-            // Ya no es necesario cambiar la variante dinámicamente si siempre quieres 'expandable'.
-            // Sin embargo, si en el futuro quieres otra lógica, la puedes reintroducir aquí.
-            w.setAttribute('variant', 'expandable'); // Siempre 'expandable'
-        }
+        window.addEventListener('resize', () => {
+            updateWidgetVariant(widget);
+        });
 
+        function updateWidgetVariant(w) {
+            const isMobile = window.innerWidth <= 768; // Ajusta este breakpoint si es necesario
+            if (isMobile) {
+                w.setAttribute('variant', 'expandable'); // Botón flotante y se expande
+            } else {
+                w.setAttribute('variant', 'full'); // Ventana de chat completa
+            }
+        }
 
         function updateWidgetColors(w) {
             // Adaptar estos colores a las variables CSS de tu `style.css`
@@ -118,8 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Añadir el wrapper con el widget al DOM
+        wrapper.appendChild(widget);
         document.body.appendChild(wrapper);
-        wrapper.appendChild(widget); // Asegura que el widget esté dentro del wrapper
     }
 
     // Llama a la función de inyección del widget cuando el DOM esté listo
