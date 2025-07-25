@@ -5,8 +5,126 @@ document.addEventListener('DOMContentLoaded', () => {
     // initHeroParallax(); // Mantener si la función existe pero está en desuso temporalmente
     initServiceCardHoverEffects();
     initDynamicCopyrightYear();
-    initChatbotButton(); // Aquí se inicializa toda la lógica del chatbot
+    // initChatbotButton(); // COMENTADA/ELIMINADA: La llamada al chatbot anterior
     initBackToTopButton(); // Asegúrate de que esta función también sea llamada
+
+    // Lógica para inyectar y configurar el widget de ElevenLabs Convai
+    const ELEVENLABS_AGENT_ID = 'agent_3001k116cv39fpev8b49k14064ak'; // Tu ID de agente real
+
+    function injectElevenLabsWidget() {
+        // Verifica si el widget ya está cargado para evitar duplicados
+        if (document.getElementById(`elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`)) {
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+        script.async = true;
+        script.type = 'text/javascript';
+        document.head.appendChild(script);
+
+        // Crear el contenedor y el widget
+        const wrapper = document.createElement('div');
+        wrapper.className = 'elevenlabs-widget-container'; // Nueva clase para el contenedor
+        // Puedes agregar estilos iniciales aquí o en style.css para .elevenlabs-widget-container
+        wrapper.style.position = 'fixed';
+        wrapper.style.bottom = '20px'; // Ajusta la posición si es necesario
+        wrapper.style.right = '20px'; // Ajusta la posición si es necesario
+        wrapper.style.zIndex = '1000'; // Asegura que esté por encima de otros elementos
+
+        const widget = document.createElement('elevenlabs-convai');
+        widget.id = `elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`;
+        widget.setAttribute('agent-id', ELEVENLABS_AGENT_ID);
+        // Ahora siempre será "expandable" para el comportamiento de toggle
+        widget.setAttribute('variant', 'expandable');
+
+        // Setear colores iniciales basado en el tema actual
+        updateWidgetColors(widget);
+
+        // Observar cambios de tema (dark-mode)
+        const observer = new MutationObserver(() => {
+            updateWidgetColors(widget);
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        // La función updateWidgetVariant ya no es necesaria si siempre es 'expandable'
+        // pero la mantengo si decides necesitarla para otra lógica futura.
+        function updateWidgetVariant(w) {
+            // Ya no es necesario cambiar la variante dinámicamente si siempre quieres 'expandable'.
+            // Sin embargo, si en el futuro quieres otra lógica, la puedes reintroducir aquí.
+            w.setAttribute('variant', 'expandable'); // Siempre 'expandable'
+        }
+
+
+        function updateWidgetColors(w) {
+            // Adaptar estos colores a las variables CSS de tu `style.css`
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const rootStyles = getComputedStyle(document.documentElement);
+
+            // Colores basados en tu style.css
+            const primaryColor = rootStyles.getPropertyValue('--color-primary').trim(); // #1087c9
+            const textLightModeMuted = rootStyles.getPropertyValue('--color-text-muted').trim(); // rgba(27, 34, 31, 0.7)
+            const textDarkMode = rootStyles.getPropertyValue('--color-text').trim(); // #F6F5F4 en dark mode
+
+            w.setAttribute('avatar-orb-color-1', primaryColor); // Azul principal
+            if (isDarkMode) {
+                w.setAttribute('avatar-orb-color-2', textDarkMode); // Blanco/gris claro en dark mode
+            } else {
+                w.setAttribute('avatar-orb-color-2', textLightModeMuted); // Gris oscuro semi-transparente en light mode
+            }
+        }
+
+        // Escuchar el evento "call" del widget para inyectar herramientas del cliente
+        widget.addEventListener('elevenlabs-convai:call', (event) => {
+            event.detail.config.clientTools = {
+                // Aquí defines las funciones JavaScript que corresponden a tus "Tools" en ElevenLabs
+                redirectToServices: () => {
+                    window.location.href = '#services'; // Redirige a la sección de servicios
+                },
+                redirectToContactForm: () => {
+                    window.location.href = '#contact'; // Redirige al formulario de contacto
+                },
+                // Ejemplo de integración con tu n8n existente
+                // Asegúrate de que la URL y la autenticación sean correctas y seguras
+                askN8NForSpecificInfo: async ({ query }) => {
+                    console.log('Solicitando información a n8n para:', query);
+                    try {
+                        const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5'; // TU URL REAL DE N8N
+                        const response = await fetch(n8nWebhookUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                // 'Authorization': 'Bearer TU_API_KEY_N8N_O_OTRO_TOKEN_SECRETO' // Si tu n8n requiere autenticación
+                            },
+                            body: JSON.stringify({ userQuery: query })
+                        });
+                        const data = await response.json();
+                        console.log('Respuesta de n8n:', data);
+                        // Dependiendo de cómo quieres que el agente "use" la respuesta de n8n,
+                        // la lógica aquí podría necesitar más refinamiento en el lado de ElevenLabs.
+                        // Esto podría ser un retorno directo o simplemente una acción que no devuelve nada.
+                        return { message: data.botResponse || "No pude obtener una respuesta específica de n8n." };
+                    } catch (error) {
+                        console.error('Error al contactar n8n:', error);
+                        return { message: "Lo siento, hubo un problema al intentar obtener esa información en este momento." };
+                    }
+                },
+                // Añade aquí todas las demás herramientas que hayas definido en ElevenLabs
+            };
+        });
+
+        // Añadir el wrapper con el widget al DOM
+        document.body.appendChild(wrapper);
+        wrapper.appendChild(widget); // Asegura que el widget esté dentro del wrapper
+    }
+
+    // Llama a la función de inyección del widget cuando el DOM esté listo
+    injectElevenLabsWidget();
+
 });
 
 function initDarkMode() {
@@ -15,13 +133,13 @@ function initDarkMode() {
 
     if (prefersDark) {
         document.body.classList.add('dark-mode');
-        if (toggle) toggle.textContent = '☀️'; // Asegurarse de que el toggle existe
+        if (toggle) toggle.textContent = '☀️';
     } else {
         document.body.classList.remove('dark-mode');
-        if (toggle) toggle.textContent = '🌙'; // Asegurarse de que el toggle existe
+        if (toggle) toggle.textContent = '🌙';
     }
 
-    if (toggle) { // Solo añadir el listener si el toggle existe
+    if (toggle) {
         toggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -73,7 +191,6 @@ function initSectionAnimations() {
 function initServiceCardHoverEffects() {
     const serviceCards = document.querySelectorAll('.service-card');
     const rootStyles = getComputedStyle(document.documentElement);
-    // Usar valores predeterminados o una verificación si las variables CSS no existen
     const shadowBase = rootStyles.getPropertyValue('--shadow-base').trim() || 'rgba(0, 0, 0, 0.08)';
     const shadowAccent = rootStyles.getPropertyValue('--shadow-accent').trim() || 'rgba(16, 135, 201, 0.2)';
     const shadowFocusHover = rootStyles.getPropertyValue('--shadow-focus-hover').trim() || 'rgba(16, 135, 201, 0.4)';
@@ -114,20 +231,18 @@ function initDynamicCopyrightYear() {
     }
 }
 
-// NUEVA FUNCIÓN: Botón "Volver arriba" (ya estaba, pero aseguramos su existencia)
 function initBackToTopButton() {
     let backToTopButton = document.querySelector('.back-to-top');
-    if (!backToTopButton) { // Si el botón no existe, lo creamos
+    if (!backToTopButton) {
         backToTopButton = document.createElement('button');
-        backToTopButton.textContent = '⬆️'; // Puedes usar un SVG o un ícono de fuente aquí
-        backToTopButton.classList.add('back-to-top'); // Añade una clase para estilos CSS
+        backToTopButton.textContent = '⬆️';
+        backToTopButton.classList.add('back-to-top');
         backToTopButton.setAttribute('aria-label', 'Volver arriba');
         document.body.appendChild(backToTopButton);
     }
 
-    // Muestra u oculta el botón basado en el scroll
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) { // Mostrar el botón después de hacer scroll 300px
+        if (window.scrollY > 300) {
             backToTopButton.classList.add('show');
         } else {
             backToTopButton.classList.remove('show');
@@ -142,181 +257,3 @@ function initBackToTopButton() {
         });
     });
 }
-
-
-// Lógica para la interfaz del Chatbot (completamente refactorizada e integrada)
-function initChatbotButton() {
-    const chatbotButton = document.createElement('button');
-    chatbotButton.innerHTML = '<img src="images/chatbot_image.png" alt="Chatbot Icon" style="width: 32px; height: 32px;">';
-    chatbotButton.classList.add('chatbot-button');
-    chatbotButton.setAttribute('aria-label', 'Open assistance chatbot');
-    document.body.appendChild(chatbotButton);
-
-    let chatInterface = null;
-
-    // Format bot response: replace \n with line breaks and format numbered bold lists
-    function formatBotResponse(text) {
-        let formatted = text.replace(/\\n/g, '\n').replace(/\n/g, '<br>');
-
-        // Format numbered bold list items: "1. **Title**" → <li><strong>1. Title</strong></li>
-        formatted = formatted.replace(/(\d+)\.\s\*\*(.+?)\*\*/g, '<li><strong>$1. $2</strong></li>');
-
-        if (formatted.includes('<li>')) {
-            formatted = '<ul>' + formatted + '</ul>';
-        }
-
-        return formatted;
-    }
-
-    // Add message to chat (can be HTML for bot)
-    function addMessage(sender, message, isHtml = false) {
-        if (!chatInterface) return;
-        const chatbotBody = chatInterface.querySelector('.chatbot-body');
-        if (!chatbotBody) return;
-
-        const messageElement = document.createElement('div');
-        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-
-        if (isHtml) {
-            messageElement.innerHTML = message;
-        } else {
-            messageElement.textContent = message;
-        }
-
-        chatbotBody.appendChild(messageElement);
-        chatbotBody.scrollTop = chatbotBody.scrollHeight;
-    }
-
-    const sendMessage = async () => {
-        if (!chatInterface) return;
-        const chatbotInput = chatInterface.querySelector('.chatbot-input');
-        const chatbotSendBtn = chatInterface.querySelector('.chatbot-send-btn');
-
-        const message = chatbotInput.value.trim();
-        if (message) {
-            addMessage('user', message);
-            chatbotInput.value = '';
-
-            chatbotInput.disabled = true;
-            chatbotSendBtn.disabled = true;
-
-            const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5';
-
-            try {
-                console.log('Sending message to n8n...');
-                const response = await fetch(n8nWebhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message }),
-                });
-
-                console.log('Fetch response status:', response.status);
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
-                }
-
-                const rawResponseText = await response.text();
-                console.log('Raw response from n8n:', rawResponseText);
-
-                let data;
-                try {
-                    data = JSON.parse(rawResponseText);
-                    console.log('Parsed JSON:', data);
-                } catch (jsonError) {
-                    console.error('JSON parse error:', jsonError);
-                    throw new Error('Invalid JSON response from bot.');
-                }
-
-                if (data && data.botResponse) {
-                    const formattedMessage = formatBotResponse(data.botResponse);
-                    addMessage('bot', formattedMessage, true);
-                } else {
-                    addMessage('bot', 'Thanks for your message. The assistant did not provide a specific answer or there was an issue processing it.');
-                    console.error('Invalid or empty bot response:', data);
-                }
-
-            } catch (error) {
-                addMessage('bot', 'Unable to connect to the assistant server. Please check your connection and try again later.');
-                console.error('Error sending message to bot:', error);
-            } finally {
-                chatbotInput.disabled = false;
-                chatbotSendBtn.disabled = false;
-                chatbotInput.focus();
-            }
-        }
-    };
-
-    chatbotButton.addEventListener('click', () => {
-        if (!chatInterface) {
-            chatInterface = document.createElement('div');
-            chatInterface.classList.add('chatbot-interface');
-            chatInterface.setAttribute('aria-modal', 'true');
-            chatInterface.setAttribute('role', 'dialog');
-
-            chatInterface.innerHTML = `
-                <div class="chatbot-header">
-                    <h3>Smartin - Smart Global Tech Assistant</h3>
-                    <button class="chatbot-close-btn" aria-label="Close chat">X</button>
-                </div>
-                <div class="chatbot-body"></div>
-                <div class="chatbot-footer">
-                    <input type="text" placeholder="Type your message..." class="chatbot-input" autocomplete="off">
-                    <button class="chatbot-send-btn">Send</button>
-                </div>
-            `;
-            document.body.appendChild(chatInterface);
-
-            const chatbotCloseBtn = chatInterface.querySelector('.chatbot-close-btn');
-            const chatbotInput = chatInterface.querySelector('.chatbot-input');
-            const chatbotSendBtn = chatInterface.querySelector('.chatbot-send-btn');
-
-            chatbotCloseBtn.addEventListener('click', () => {
-                chatInterface.classList.remove('show');
-                document.body.classList.remove('chatbot-open');
-            });
-
-            chatbotSendBtn.addEventListener('click', sendMessage);
-
-            chatbotInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') sendMessage();
-            });
-
-            addMessage('bot', 'Hello! 👋 I\'m Smartin, your virtual assistant here at Smart Global Tech. I\'m here to help you learn about our services, answer your questions, and guide you. You can also chat with me in Spanish or French if you prefer. How can I assist you today?', false);
-
-            chatbotInput.disabled = false;
-            chatbotSendBtn.disabled = false;
-        }
-
-        chatInterface.classList.toggle('show');
-        document.body.classList.toggle('chatbot-open', chatInterface.classList.contains('show'));
-
-        if (chatInterface.classList.contains('show')) {
-            const inputField = chatInterface.querySelector('.chatbot-input');
-            inputField.focus();
-            const chatbotBody = chatInterface.querySelector('.chatbot-body');
-            if (chatbotBody) chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (chatInterface && e.key === 'Escape' && chatInterface.classList.contains('show')) {
-            chatInterface.classList.remove('show');
-            document.body.classList.remove('chatbot-open');
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (
-            chatInterface &&
-            chatInterface.classList.contains('show') &&
-            !chatbotButton.contains(e.target) &&
-            !chatInterface.contains(e.target)
-        ) {
-            chatInterface.classList.remove('show');
-            document.body.classList.remove('chatbot-open');
-        }
-    });
-}
-
