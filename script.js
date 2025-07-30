@@ -173,7 +173,7 @@ function injectElevenLabsWidget() {
     wrapper.style.position = 'fixed';
     wrapper.style.bottom = '20px';
     wrapper.style.right = '20px';
-    wrapper.style.zIndex = '1000';
+    wrapper.style.zIndex = '9000';
     const widget = document.createElement('elevenlabs-convai');
     widget.id = `elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`;
     widget.setAttribute('agent-id', ELEVENLABS_AGENT_ID);
