@@ -1,166 +1,140 @@
+/* Archivo script.js - Versión con resaltado de menú */
+
 document.addEventListener('DOMContentLoaded', () => {
+    if (typeof translations !== 'undefined') {
+        initLanguage();
+    } else {
+        console.error("El archivo translations.js no se cargó o está vacío.");
+    }
+    
     initDarkMode();
     initSmoothScroll();
-    initSectionAnimations();
-    // initHeroParallax(); // Mantener si la función existe pero está en desuso temporalmente
-    initServiceCardHoverEffects();
-    initDynamicCopyrightYear();
-    // initChatbotButton(); // COMENTADA/ELIMINADA: La llamada al chatbot anterior
-    initBackToTopButton(); // Asegúrate de que esta función también sea llamada
-
-    // Lógica para inyectar y configurar el widget de ElevenLabs Convai
-    const ELEVENLABS_AGENT_ID = 'agent_3001k116cv39fpev8b49k14064ak'; // Tu ID de agente real
-
-    function injectElevenLabsWidget() {
-        // Verifica si el widget ya está cargado para evitar duplicados
-        if (document.getElementById(`elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`)) {
-            return;
-        }
-
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
-        script.async = true;
-        script.type = 'text/javascript';
-        document.head.appendChild(script);
-
-        // Crear el contenedor y el widget
-        const wrapper = document.createElement('div');
-        wrapper.className = 'elevenlabs-widget-wrapper'; // Clase para posibles estilos adicionales
-        wrapper.style.position = 'fixed';
-        wrapper.style.bottom = '20px'; // Ajusta la posición si es necesario
-        wrapper.style.right = '20px'; // Ajusta la posición si es necesario
-        wrapper.style.zIndex = '1000'; // Asegura que esté por encima de otros elementos
-
-        const widget = document.createElement('elevenlabs-convai');
-        widget.id = `elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`;
-        widget.setAttribute('agent-id', ELEVENLABS_AGENT_ID);
-        // La variante ('full' o 'expandable') se establecerá dinámicamente
-        // Los colores se establecerán dinámicamente
-
-        // Setear colores iniciales y variante basado en el tema actual y dispositivo
-        updateWidgetColors(widget);
-        updateWidgetVariant(widget);
-
-        // Observar cambios de tema (dark-mode) y eventos de redimensionamiento
-        const observer = new MutationObserver(() => {
-            updateWidgetColors(widget);
-        });
-
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['class'],
-        });
-
-        window.addEventListener('resize', () => {
-            updateWidgetVariant(widget);
-        });
-
-        function updateWidgetVariant(w) {
-            const isMobile = window.innerWidth <= 768; // Ajusta este breakpoint si es necesario
-            if (isMobile) {
-                w.setAttribute('variant', 'expandable'); // Botón flotante y se expande
-            } else {
-                w.setAttribute('variant', 'full'); // Ventana de chat completa
-            }
-        }
-
-        function updateWidgetColors(w) {
-            // Adaptar estos colores a las variables CSS de tu `style.css`
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            const rootStyles = getComputedStyle(document.documentElement);
-
-            // Colores basados en tu style.css
-            const primaryColor = rootStyles.getPropertyValue('--color-primary').trim(); // #1087c9
-            const textLightModeMuted = rootStyles.getPropertyValue('--color-text-muted').trim(); // rgba(27, 34, 31, 0.7)
-            const textDarkMode = rootStyles.getPropertyValue('--color-text').trim(); // #F6F5F4 en dark mode
-
-            w.setAttribute('avatar-orb-color-1', primaryColor); // Azul principal
-            if (isDarkMode) {
-                w.setAttribute('avatar-orb-color-2', textDarkMode); // Blanco/gris claro en dark mode
-            } else {
-                w.setAttribute('avatar-orb-color-2', textLightModeMuted); // Gris oscuro semi-transparente en light mode
-            }
-        }
-
-        // Escuchar el evento "call" del widget para inyectar herramientas del cliente
-        widget.addEventListener('elevenlabs-convai:call', (event) => {
-            event.detail.config.clientTools = {
-                // Aquí defines las funciones JavaScript que corresponden a tus "Tools" en ElevenLabs
-                redirectToServices: () => {
-                    window.location.href = '#services'; // Redirige a la sección de servicios
-                },
-                redirectToContactForm: () => {
-                    window.location.href = '#contact'; // Redirige al formulario de contacto
-                },
-                // Ejemplo de integración con tu n8n existente
-                // Asegúrate de que la URL y la autenticación sean correctas y seguras
-                askN8NForSpecificInfo: async ({ query }) => {
-                    console.log('Solicitando información a n8n para:', query);
-                    try {
-                        const n8nWebhookUrl = 'https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5'; // TU URL REAL DE N8N
-                        const response = await fetch(n8nWebhookUrl, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                // 'Authorization': 'Bearer TU_API_KEY_N8N_O_OTRO_TOKEN_SECRETO' // Si tu n8n requiere autenticación
-                            },
-                            body: JSON.stringify({ userQuery: query })
-                        });
-                        const data = await response.json();
-                        console.log('Respuesta de n8n:', data);
-                        // Dependiendo de cómo quieres que el agente "use" la respuesta de n8n,
-                        // la lógica aquí podría necesitar más refinamiento en el lado de ElevenLabs.
-                        // Esto podría ser un retorno directo o simplemente una acción que no devuelve nada.
-                        return { message: data.botResponse || "No pude obtener una respuesta específica de n8n." };
-                    } catch (error) {
-                        console.error('Error al contactar n8n:', error);
-                        return { message: "Lo siento, hubo un problema al intentar obtener esa información en este momento." };
-                    }
-                },
-                // Añade aquí todas las demás herramientas que hayas definido en ElevenLabs
-            };
-        });
-
-        // Añadir el wrapper con el widget al DOM
-        wrapper.appendChild(widget);
-        document.body.appendChild(wrapper);
-    }
-
-    // Llama a la función de inyección del widget cuando el DOM esté listo
+    initServiceAccordion();
+    initBackToTopButton();
+    initNavHighlighting(); // <-- NUEVA FUNCIÓN AÑADIDA
+    
     injectElevenLabsWidget();
-
 });
+
+
+// --- LÓGICA DE INTERNACIONALIZACIÓN (i18n) ---
+function initLanguage() {
+    const languageSelector = document.getElementById('language-selector');
+    if (!languageSelector) return;
+
+    const setLanguage = (lang) => {
+        document.documentElement.lang = lang;
+        localStorage.setItem('language', lang);
+        languageSelector.value = lang;
+
+        document.querySelectorAll('[data-key]').forEach(element => {
+            const key = element.getAttribute('data-key');
+            if (translations[key] && translations[key][lang]) {
+                element.innerHTML = translations[key][lang];
+            }
+        });
+        initDynamicCopyrightYear(); // Actualizar año después de cambiar idioma
+    };
+
+    languageSelector.addEventListener('change', (e) => setLanguage(e.target.value));
+
+    const savedLang = localStorage.getItem('language');
+    const browserLang = navigator.language.substring(0, 2);
+
+    if (savedLang) {
+        setLanguage(savedLang);
+    } else if (['en', 'es', 'fr'].includes(browserLang)) {
+        setLanguage(browserLang);
+    } else {
+        setLanguage('en');
+    }
+}
+
+// --- NUEVA FUNCIÓN PARA RESALTAR EL MENÚ ---
+function initNavHighlighting() {
+    const sections = document.querySelectorAll('main > section[id]');
+    const navLinks = document.querySelectorAll('header nav a');
+
+    const observerOptions = {
+        root: null, // Relativo al viewport
+        rootMargin: '-50% 0px -50% 0px', // Se activa cuando la sección está en el centro vertical
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+
+// --- LÓGICA DE INTERACCIÓN DE LA PÁGINA (EXISTENTE) ---
+
+function initServiceAccordion() {
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    if (!accordionItems.length) return;
+
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        const content = item.querySelector('.accordion-content');
+        if (!header || !content) return;
+
+        header.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            } else {
+                item.classList.remove('active');
+                content.style.maxHeight = null;
+            }
+        });
+    });
+}
 
 function initDarkMode() {
     const toggle = document.getElementById('toggle-dark');
+    if (!toggle) return;
     const prefersDark = localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-    if (prefersDark) {
-        document.body.classList.add('dark-mode');
-        if (toggle) toggle.textContent = '☀️';
-    } else {
-        document.body.classList.remove('dark-mode');
-        if (toggle) toggle.textContent = '🌙';
+    
+    const applyTheme = (isDark) => {
+        if (isDark) {
+            document.body.classList.add('dark-mode');
+            toggle.textContent = '☀️';
+        } else {
+            document.body.classList.remove('dark-mode');
+            toggle.textContent = '🌙';
+        }
     }
-
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            toggle.textContent = isDark ? '☀️' : '🌙';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-    }
+    applyTheme(prefersDark);
+    toggle.addEventListener('click', () => {
+        const isDark = !document.body.classList.contains('dark-mode');
+        applyTheme(isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
 }
 
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+        anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             if (targetId && targetId !== '#') {
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    e.preventDefault();
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }
@@ -168,96 +142,73 @@ function initSmoothScroll() {
     });
 }
 
-function initSectionAnimations() {
-    const sections = document.querySelectorAll('.section');
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                entry.target.classList.remove('hidden-slide');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        section.classList.add('hidden-slide');
-        observer.observe(section);
+function initBackToTopButton() {
+    const backToTopButton = document.querySelector('.back-to-top');
+    if (!backToTopButton) return;
+    window.addEventListener('scroll', () => {
+        backToTopButton.classList.toggle('show', window.scrollY > 300);
     });
-}
-
-function initServiceCardHoverEffects() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    const rootStyles = getComputedStyle(document.documentElement);
-    const shadowBase = rootStyles.getPropertyValue('--shadow-base').trim() || 'rgba(0, 0, 0, 0.08)';
-    const shadowAccent = rootStyles.getPropertyValue('--shadow-accent').trim() || 'rgba(16, 135, 201, 0.2)';
-    const shadowFocusHover = rootStyles.getPropertyValue('--shadow-focus-hover').trim() || 'rgba(16, 135, 201, 0.4)';
-    const transition = rootStyles.getPropertyValue('--transition').trim() || '0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-
-    serviceCards.forEach(card => {
-        card.style.transition = `transform ${transition}, box-shadow ${transition}`;
-
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-5px) scale(1.02)';
-            card.style.boxShadow = `0 10px 20px ${shadowAccent}`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            if (!card.matches(':focus-within')) {
-                card.style.transform = 'translateY(0) scale(1)';
-                card.style.boxShadow = `0 5px 15px ${shadowBase}`;
-            }
-        });
-
-        card.addEventListener('focusin', () => {
-            card.style.transform = 'translateY(-5px) scale(1.02)';
-            card.style.boxShadow = `0 12px 25px ${shadowFocusHover}`;
-        });
-
-        card.addEventListener('focusout', () => {
-            card.style.transform = 'translateY(0) scale(1)';
-            card.style.boxShadow = `0 5px 15px ${shadowBase}`;
-        });
-    });
+    backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 function initDynamicCopyrightYear() {
-    const yearSpan = document.querySelector('footer p');
-    if (yearSpan) {
+    const yearElement = document.querySelector('[data-key="footer_copyright"]');
+    if (yearElement) {
         const currentYear = new Date().getFullYear();
-        yearSpan.textContent = `© ${currentYear} Smart Global Tech. All rights reserved.`;
+        yearElement.innerHTML = yearElement.innerHTML.replace('2025', currentYear);
     }
 }
 
-function initBackToTopButton() {
-    let backToTopButton = document.querySelector('.back-to-top');
-    if (!backToTopButton) {
-        backToTopButton = document.createElement('button');
-        backToTopButton.textContent = '⬆️';
-        backToTopButton.classList.add('back-to-top');
-        backToTopButton.setAttribute('aria-label', 'Volver arriba');
-        document.body.appendChild(backToTopButton);
+// --- LÓGICA DEL CHATBOT DE ELEVENLABS (SIN MODIFICAR) ---
+function injectElevenLabsWidget() {
+    const ELEVENLABS_AGENT_ID = 'agent_3001k116cv39fpev8b49k14064ak';
+    if (document.getElementById(`elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`)) return;
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+    script.async = true;
+    script.type = 'text/javascript';
+    document.head.appendChild(script);
+    const wrapper = document.createElement('div');
+    wrapper.className = 'elevenlabs-widget-wrapper';
+    wrapper.style.position = 'fixed';
+    wrapper.style.bottom = '20px';
+    wrapper.style.right = '20px';
+    wrapper.style.zIndex = '1000';
+    const widget = document.createElement('elevenlabs-convai');
+    widget.id = `elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`;
+    widget.setAttribute('agent-id', ELEVENLABS_AGENT_ID);
+    updateWidgetColors(widget);
+    updateWidgetVariant(widget);
+    const observer = new MutationObserver(() => updateWidgetColors(widget));
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', () => updateWidgetVariant(widget));
+    function updateWidgetVariant(w) { w.setAttribute('variant', window.innerWidth <= 768 ? 'expandable' : 'full'); }
+    function updateWidgetColors(w) {
+        const rootStyles = getComputedStyle(document.documentElement);
+        const primaryColor = rootStyles.getPropertyValue('--color-primary').trim();
+        const textColor = document.body.classList.contains('dark-mode') ? '#F6F5F4' : '#1B221F';
+        w.setAttribute('avatar-orb-color-1', primaryColor);
+        w.setAttribute('avatar-orb-color-2', textColor);
     }
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.add('show');
-        } else {
-            backToTopButton.classList.remove('show');
-        }
+    widget.addEventListener('elevenlabs-convai:call', (event) => {
+        event.detail.config.clientTools = {
+            redirectToServices: () => window.location.href = '#services',
+            redirectToContactForm: () => window.location.href = '#contact',
+            askN8NForSpecificInfo: async ({ query }) => {
+                try {
+                    const response = await fetch('https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ userQuery: query })
+                    });
+                    const data = await response.json();
+                    return { message: data.botResponse || "No pude obtener una respuesta específica." };
+                } catch (error) {
+                    return { message: "Lo siento, hubo un problema al obtener esa información." };
+                }
+            },
+        };
     });
-
-    backToTopButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
+    wrapper.appendChild(widget);
+    document.body.appendChild(wrapper);
 }

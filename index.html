@@ -1,425 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Smart Global Tech</title>
-  <meta name="description" content="Smart Global Tech: Innovative solutions designed to help your company manage and empower its human capital through advanced technology. Tech consulting based in Ontario, Canada, and Mexico." />
-  <meta name="keywords" content="Smart Global Tech, consultoría tecnológica, recursos humanos, gestión de talento, reclutamiento inteligente, retención de empleados, outsourcing tecnológico, capacitación empresarial, eficiencia operativa, Canadá, México, soluciones HR tech" />
-  
-  <link rel="stylesheet" href="style.css" />
-  
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" as="style" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" as="style" crossorigin>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Global Tech</title>
+    <meta name="description"
+        content="Smart Global Tech: Innovative solutions designed to help your company manage and empower its human capital through advanced technology." />
+    <meta name="keywords"
+        content="Smart Global Tech, tech consulting, human resources, talent management, Canada, Mexico, HR tech solutions" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/logo-sgt-plus.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-  <header>
-    <div class="container">
-      <a href="#" class="logo" aria-label="Smart Global Tech Home"><img src="images/logo.jpeg" alt="Logo de Smart Global Tech"></a>
-      <nav aria-label="Primary navigation">
-        <ul>
-          <li><a href="#about" aria-label="About us section">About</a></li>
-          <li><a href="#mission" aria-label="Mission, Vision and Values section">Mission</a></li>
-          <li><a href="#services" aria-label="Our Services section">Services</a></li>
-          <li><a href="#services-detail" aria-label="Detailed Service Offerings section">Services Detail</a></li>
-          <li><a href="#testimonials" aria-label="Client Testimonials section">Testimonials</a></li> <li><a href="#blog" aria-label="Blog and News section">Blog</a></li> <li><a href="#why" aria-label="Why Choose Us section">Why Us</a></li>
-          <li><a href="#team" aria-label="Our Team section">Team</a></li>
-          <li><a href="#locations" aria-label="Our Locations section">Locations</a></li>
-          <li><a href="#contact" aria-label="Contact section">Contact</a></li>
-          <li><button id="toggle-dark" aria-label="Toggle dark mode">🌙</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section id="hero" class="hero">
-      <div class="container">
-        <h1>Empowering Your Workforce with Smart, Tech-Driven Solutions.</h1>
-        <p>We optimize your talent processes and operations with innovative technological solutions, crafted to take your company to the next level.</p>
-        <a href="#contact" class="cta">Get in Touch</a>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About Smart Global Tech</h2>
-        <p>At Smart Global Tech, we are a strategic partner in technology consulting with headquarters in Ontario, Canada, and a presence in Mexico. We don't just implement technology; we design operational ecosystems that empower your most valuable resource: your people. Our mission is to help you make smarter decisions, build high-performing teams, and free your company from operational burdens so you can focus on what truly matters: innovation and growth.</p>
-        <div class="grid-3">
-          <div>
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-              </svg>
+    <header>
+        <div class="container">
+            <a href="#" class="logo" aria-label="Smart Global Tech Home">
+                <img src="images/logo.png" alt="Logo de Smart Global Tech">
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul>
+                    <li><a href="#about" data-key="nav_about">About</a></li>
+                    <li><a href="#services" data-key="nav_services">Services</a></li>
+                    <li><a href="#team" data-key="nav_team">Team</a></li>
+                    <li><a href="#contact" data-key="nav_contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <div class="language-select-wrapper">
+                    <select id="language-selector" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+                <button id="toggle-dark" aria-label="Toggle dark mode">🌙</button>
             </div>
-            <h3>Innovation</h3>
-            <p>We are constantly exploring new technologies to provide the best solutions.</p>
-          </div>
-          <div>
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                <path d="M8 21v-4a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v4"></path>
-                <path d="M12 9v-6"></path>
-                <path d="M6 6l-3 3"></path>
-                <path d="M18 6l3 3"></path>
-              </svg>
-            </div>
-            <h3>Expertise</h3>
-            <p>Our team comprises seasoned professionals with deep industry knowledge.</p>
-          </div>
-          <div>
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M12 18.5l-3 1.5l.75 -3.375l-2.75 -2.525l3.625 -.525l1.625 -3.25l1.625 3.25l3.625 .525l-2.75 2.525l.75 3.375z"></path>
-              </svg>
-            </div>
-            <h3>Client-Centric</h3>
-            <p>We prioritize your needs, delivering tailored solutions that drive success.</p>
-          </div>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <section id="mission" class="section light">
-      <div class="container">
-        <h2>Mission, Vision & Values</h2>
-        <ul class="bullet-list">
-          <li>
-            <div class="icon-container-inline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-target" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-                <path d="M12 12m-6 0a6 6 0 1 0 12 0a6 6 0 1 0 -12 0"></path>
-                <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-              </svg>
+    <main>
+        <section id="hero" class="hero hero-background">
+            <div class="container">
+                <h1 data-key="hero_title">Empowering Your Workforce with Smart, Tech-Driven Solutions.</h1>
+                <p data-key="hero_subtitle">We optimize your talent processes and operations with innovative
+                    technological solutions, crafted to take your company to the next level.</p>
+                <a href="#contact" class="cta" data-key="hero_cta">Get in Touch</a>
             </div>
-            <strong>Mission:</strong> To facilitate organizations in optimizing their human capital, applying cutting-edge technology to drive efficiency, innovation, and sustainable growth in an ever-evolving world.
-          </li>
-          <li>
-            <div class="icon-container-inline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path>
-              </svg>
-            </div>
-            <strong>Vision:</strong> To be a global benchmark in workforce innovation, transforming industries with ethical, scalable, and people-centric technology to create lasting impact.
-          </li>
-          <li>
-            <div class="icon-container-inline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-handshake" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-                <path d="M12 6l-3.25 3.25"></path>
-                <path d="M10.835 10.835l-1.335 1.335l2.67 2.67"></path>
-                <path d="M16 15l2 2"></path>
-              </svg>
-            </div>
-            <strong>Values:</strong> Innovation, Integrity, Excellence, Collaboration, and Responsibility.
-          </li>
-        </ul>
-      </div>
-    </section>
+        </section>
 
-    <section id="services" class="section">
-      <div class="container">
-        <h2>Our Core Services</h2>
-        <div class="grid-3">
-          <div class="service-card">
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"></path>
-                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                <path d="M17 10v-1a2 2 0 0 0 -2 -2h-2"></path>
-                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                <path d="M3 10v-1a2 2 0 0 1 2 -2h2"></path>
-              </svg>
+        <section id="about" class="section">
+            <div class="container about-layout">
+                <div class="about-content">
+                    <h2 data-key="about_title">About Smart Global Tech</h2>
+                    <p data-key="about_p1">At Smart Global Tech, we are a strategic partner in technology consulting
+                        with headquarters in Ontario, Canada, and a presence in Mexico. We don't just implement
+                        technology; we design operational ecosystems that empower your most valuable resource: your
+                        people. Our mission is to help you make smarter decisions, build high-performing teams, and free
+                        your company from operational burdens so you can focus on what truly matters: innovation and
+                        growth.</p>
+                </div>
+                <div class="about-gif">
+                    <img src="images/global_giff.gif" alt="Global Technology Animation">
+                </div>
             </div>
-            <h3>Intelligent Recruitment</h3>
-            <p>Tired of lengthy and imprecise hiring processes? With Talent Boost, we use advanced technology to quickly find and filter the best candidates. Accelerate your hiring, improve quality, and ensure the perfect fit for your team.</p>
-            <a href="#service-recruitment" class="btn-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-award" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M12 15l8.11 -4.28a1.5 1.5 0 0 0 -.072 -2.257l-1.32 -1.096a1.5 1.5 0 0 0 -2.483 -.03l-2.885 2.882l-2.885 -2.882a1.5 1.5 0 0 0 -2.483 .03l-1.32 1.096a1.5 1.5 0 0 0 -.072 2.257l8.11 4.28z"></path>
-                <path d="M12 15v6"></path>
-              </svg>
+        </section>
+
+        <section id="mission" class="section section-light">
+            <div class="container">
+                <h2 data-key="mission_title">Mission, Vision & Values</h2>
+                <ul class="bullet-list">
+                    <li data-key="mission_list_mission"><strong>Mission:</strong> To facilitate organizations in
+                        optimizing their human capital, applying cutting-edge technology to drive efficiency,
+                        innovation, and sustainable growth in an ever-evolving world.</li>
+                    <li data-key="mission_list_vision"><strong>Vision:</strong> To be a global benchmark in workforce
+                        innovation, transforming industries with ethical, scalable, and people-centric technology to
+                        create lasting impact.</li>
+                    <li data-key="mission_list_values"><strong>Values:</strong> Innovation, Integrity, Excellence,
+                        Collaboration, and Responsibility.</li>
+                </ul>
             </div>
-            <h3>Employee Retention</h3>
-            <p>Your team is your greatest asset. Our retention service uses data analytics to understand your employees' needs, anticipate turnover risks, and create a work environment where everyone feels motivated. Invest in your people and watch your productivity grow.</p>
-            <a href="#service-retention" class="btn-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c.996 .608 2.296 .13 2.572 -1.065z"></path>
-                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
-              </svg>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2 data-key="services_title">Our Core Services</h2>
+                <div class="service-accordion">
+                    <div class="accordion-item">
+                        <header class="accordion-header">
+                            <h3 data-key="service_1_title">Talent Boost</h3>
+                            <span class="accordion-icon">+</span>
+                        </header>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="service-image-container">
+                                    <img src="images/talentBoost.png" alt="Talent Boost">
+                                </div>
+                                <div class="service-text-container">
+                                    <p><strong data-key="service_1_detail_title">Hire Better, Faster, and with Greater
+                                            Certainty.</strong></p>
+                                    <p data-key="service_1_detail_p1">Traditional recruitment is slow, costly, and often
+                                        a gamble...</p>
+                                    <ul>
+                                        <li data-key="service_1_detail_li1">Reduce hiring time by up to 50%.</li>
+                                        <li data-key="service_1_detail_li2">Increase candidate quality...</li>
+                                        <li data-key="service_1_detail_li3">Improve the candidate experience...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <header class="accordion-header">
+                            <h3 data-key="service_2_title">Employee Engagement & Retention Solutions</h3>
+                            <span class="accordion-icon">+</span>
+                        </header>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="service-image-container">
+                                    <img src="images/retencion.png" alt="Employee Engagement & Retention">
+                                </div>
+                                <div class="service-text-container">
+                                    <p><strong data-key="service_2_detail_title">Convert Turnover into Loyalty and
+                                            Productivity.</strong></p>
+                                    <p data-key="service_2_detail_p1">High turnover is one of a company's biggest
+                                        "silent costs."...</p>
+                                    <ul>
+                                        <li data-key="service_2_detail_li1">Decrease voluntary turnover...</li>
+                                        <li data-key="service_2_detail_li2">Improve workplace climate...</li>
+                                        <li data-key="service_2_detail_li3">Enable proactive decision-making...</li>
+                                        <li data-key="service_2_detail_li4">Increase productivity...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <header class="accordion-header">
+                            <h3 data-key="service_3_title">Strategic Vision & Operations Advisory</h3>
+                            <span class="accordion-icon">+</span>
+                        </header>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="service-image-container">
+                                    <img src="images/strategicVision.png" alt="Strategic Vision & Operations">
+                                </div>
+                                <div class="service-text-container">
+                                    <p><strong data-key="service_3_detail_title">Clarity and Control for Impeccable
+                                            Operation.</strong></p>
+                                    <p data-key="service_3_detail_p1">Many companies operate with legacy processes...
+                                    </p>
+                                    <ul>
+                                        <li data-key="service_3_detail_li1">Data-driven decision making...</li>
+                                        <li data-key="service_3_detail_li2">Workflow optimization...</li>
+                                        <li data-key="service_3_detail_li3">Design of future personnel strategies...
+                                        </li>
+                                        <li data-key="service_3_detail_li4">Complete visibility of your key performance
+                                            indicators...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <header class="accordion-header">
+                            <h3 data-key="service_4_title">Tech-Enabled BPO</h3>
+                            <span class="accordion-icon">+</span>
+                        </header>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="service-image-container">
+                                    <img src="images/BPO.png" alt="Tech-Enabled BPO">
+                                </div>
+                                <div class="service-text-container">
+                                    <p><strong data-key="service_4_detail_title">Focus on Your Core Business. We'll
+                                            Handle the Rest.</strong></p>
+                                    <p data-key="service_4_detail_p1">Every minute your management team spends on
+                                        managing support operations...</p>
+                                    <ul>
+                                        <li data-key="service_4_detail_li1">Total focus on your "Core Business,"...</li>
+                                        <li data-key="service_4_detail_li2">Reduction of operating and administrative
+                                            costs...</li>
+                                        <li data-key="service_4_detail_li3">Transparency and total control...</li>
+                                        <li data-key="service_4_detail_li4">Guarantee of quality...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <header class="accordion-header">
+                            <h3 data-key="service_5_title">Skill-Up Academy</h3>
+                            <span class="accordion-icon">+</span>
+                        </header>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="service-image-container">
+                                    <img src="images/academy.png" alt="Skill-Up Academy">
+                                </div>
+                                <div class="service-text-container">
+                                    <p><strong data-key="service_5_detail_title">Empower Your Team's Skills with the
+                                            Right Technology.</strong></p>
+                                    <p data-key="service_5_detail_p1">True digital transformation doesn't come from
+                                        buying software...</p>
+                                    <ul>
+                                        <li data-key="service_5_detail_li1">Measurable increase in productivity...</li>
+                                        <li data-key="service_5_detail_li2">Maximize the ROI...</li>
+                                        <li data-key="service_5_detail_li3">Foster a culture of continuous
+                                            improvement...</li>
+                                        <li data-key="service_5_detail_li4">Develop your staff's autonomy...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h3>Technology Consulting</h3>
-            <p>Feel your operations could be more efficient but don't know where to start? We perform a deep diagnosis of your processes and design a tailored technology strategy. Gain the metrics and control you need to take your management to the next level.</p>
-            <a href="#service-consulting" class="btn-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hand-three-fingers" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5"></path>
-                <path d="M11 13v-7.5a1.5 1.5 0 0 1 3 0v7.5"></path>
-                <path d="M14 13v-7.5a1.5 1.5 0 0 1 3 0v8.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.5l-.196 -.34a1 1 0 0 0 -1.385 -1.43l-.507 -.338a1 1 0 0 0 -1.543 .523l-.086 .205a1 1 0 0 1 -1.453 .743l-1.523 -.762a1 1 0 0 1 -.543 -1.414l.438 -.71c.801 -1.3 .795 -2.716 .174 -4.015z"></path>
-              </svg>
+        </section>
+
+        <section id="team" class="section section-light">
+            <div class="container">
+                <h2 data-key="team_title">Our Core Team</h2>
+                <p class="section-subtitle" data-key="team_p1">Meet the dedicated professionals behind Smart Global
+                    Tech's success:</p>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="images/persona.png" alt="Foto de Antonio Garcia">
+                        <h3 data-key="team_member1_name">Antonio Garcia</h3>
+                        <p class="team-title" data-key="team_member1_role">CEO</p>
+                        <p class="team-desc" data-key="team_member1_desc">Visionary leader with a passion for
+                            transforming the world of work through technology.</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="images/persona.png" alt="Foto de Luis Flores">
+                        <h3 data-key="team_member2_name">Luis Flores</h3>
+                        <p class="team-title" data-key="team_member2_role">Lead Developer</p>
+                        <p class="team-desc" data-key="team_member2_desc">The architect behind our solutions, ensuring
+                            they are robust, scalable, and secure.</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="images/persona.png" alt="Foto de Carlos Mendientea">
+                        <h3 data-key="team_member3_name">Carlos Mendientea</h3>
+                        <p class="team-title" data-key="team_member3_role">Lead Developer</p>
+                        <p class="team-desc" data-key="team_member3_desc">Expert in creating intuitive interfaces that
+                            make complex technology easy to use.</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="images/persona.png" alt="Foto de Eduardo Argente">
+                        <h3 data-key="team_member4_name">Eduardo Argente</h3>
+                        <p class="team-title" data-key="team_member4_role">Solutions Specialist</p>
+                        <p class="team-desc" data-key="team_member4_desc">The bridge between your needs and our
+                            solutions, ensuring a real impact on your business.</p>
+                    </div>
+                </div>
             </div>
-            <h3>Technology Outsourcing</h3>
-            <p>Free your team from secondary tasks so they can focus on innovation. We handle the management and optimization of support areas like cleaning or maintenance, using technology to ensure maximum efficiency and reduce your operating costs.</p>
-            <a href="#service-outsourcing" class="btn-link">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bulb" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M3 12h1m8 -9v1m8 9h1m-9 8v1m-6.4 -15.4l-.7 .7m12.9 -1.4l.7 .7m-1.4 12.9l-.7 .7m-12.9 1.4l-.7 -.7"></path>
-                <path d="M9 16a3 3 0 0 1 6 0a3 3 0 0 0 6 0a3 3 0 0 1 6 0v7h-18v-7a3 3 0 0 1 6 0"></path>
-              </svg>
+        </section>
+
+        <section id="locations" class="section">
+            <div class="container">
+                <h2 data-key="locations_title">Our Locations</h2>
+                <p class="section-subtitle" data-key="locations_p1">Find us at our offices in Canada and Mexico.</p>
+                <div class="location-grid">
+                    <div class="location-card">
+                        <h3 data-key="locations_canada_office">Canada Office</h3>
+                        <address>
+                            123 Innovation Drive, Suite 100<br>
+                            Toronto, ON M1M 1M1, Canada<br>
+                            <span data-key="locations_phone">Phone</span>: <a href="tel:+14165551234">+1 (416) 555
+                                1234</a><br>
+                            <span data-key="locations_email">Email</span>: <a
+                                href="mailto:contact@smartglobaltech.ca">contact@smartglobaltech.ca</a>
+                        </address>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d368611.8797863297!2d-79.7927733221946!3d43.71837095804728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb90d7c63ba5%3A0x323555502ab4c477!2sToronto%2C%20ON%2C%20Canad%C3%A1!5e0!3m2!1ses-419!2smx!4v1690744483533!5m2!1ses-419!2smx"
+                            width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="location-card">
+                        <h3 data-key="locations_mexico_office">Mexico Office</h3>
+                        <address>
+                            WTC, Monte Camargo 10000, Juriquilla<br>
+                            CP. 76230, Querétaro, Qro., México<br>
+                            <span data-key="locations_phone">Phone</span>: <a href="tel:+524426903125">+52 (442) 690
+                                3125</a><br>
+                            <span data-key="locations_email">Email</span>: <a
+                                href="mailto:contact@smartglobaltech.mx">contact@smartglobaltech.mx</a>
+                        </address>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.543475949319!2d-100.45019042395988!3d20.72895249767987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d35a3a3d022b7b%3A0x1b9263383a54a85a!2sWTC%20Momentum!5e0!3m2!1ses-419!2smx!4v1690744572242!5m2!1ses-419!2smx"
+                            width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
             </div>
-            <h3>Training & Operational Efficiency</h3>
-            <p>Prepare your team for the future of work. Our practical courses teach your staff to master the technological tools that boost their productivity. A trained team is your best investment to ensure agility and competitiveness.</p>
-            <a href="#service-training" class="btn-link">Learn More</a>
-          </div>
+        </section>
+
+        <section id="contact" class="section section-light">
+            <div class="container">
+                <h2 data-key="contact_title">Contact Us</h2>
+                <p class="section-subtitle" data-key="contact_p1">We are eager to discuss your human capital technology
+                    needs. Reach out to our AI assistant for an instant connection or send us a message.</p>
+                <div class="contact-layout">
+                    <div class="contact-form-wrapper">
+                        <form action="#" method="POST" aria-label="Contact form">
+                            <label for="name" data-key="contact_form_name">Name</label>
+                            <input type="text" id="name" name="name" required />
+
+                            <label for="email" data-key="contact_form_email">Email</label>
+                            <input type="email" id="email" name="email" required />
+
+                            <label for="message" data-key="contact_form_message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+
+                            <button type="submit" data-key="contact_form_send">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="contact-ai-wrapper">
+                        <div class="ai-prompt-box">
+                            <h3 data-key="contact_ai_prompt">Or talk to our AI Assistant right now!</h3>
+                            <p data-key="contact_ai_desc">Our AI is available 24/7 to answer your questions. Look for
+                                the chat icon in the corner!</p>
+                            <div class="ai-icon">💬</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-key="footer_copyright">© 2025 Smart Global Tech. All rights reserved.</p>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <section id="services-detail" class="section">
-      <div class="container">
-        <h2>Detailed Service Offerings</h2>
-        <div id="service-recruitment" class="service-detail">
-          <h3>Intelligent Recruitment</h3>
-          <p><strong>Hire Better, Faster, and with Greater Certainty.</strong></p>
-          <p>Traditional recruitment is slow, costly, and often a gamble. Every bad hire impacts not only your budget but also the morale and productivity of the entire team. At Smart Global Tech, we transform this process. We use cutting-edge technology to automate repetitive tasks and analyze data on a scale that the human eye cannot, allowing your recruiters to focus on what matters most: human connection with the best candidates.</p>
-          <ul>
-            <li>Reduce hiring time by up to 50%.</li>
-            <li>Increase candidate quality by identifying skills and cultural compatibility.</li>
-            <li>Improve the candidate experience with a modern, fast, and transparent process.</li>
-          </ul>
-          <p><strong>Our Approach:</strong> Our structured process ranges from automated talent scouting across multiple sources to background checks, ensuring that every step is efficient and data-backed to maximize the probability of success.</p>
-        </div>
+    <!-- <button class="back-to-top" aria-label="Volver arriba">↑</button> -->
 
-        <div id="service-retention" class="service-detail">
-          <h3>Employee Retention</h3>
-          <p><strong>Convert Turnover into Loyalty and Productivity.</strong></p>
-          <p>High turnover is one of a company's biggest "silent costs." Losing talent not only incurs recruitment expenses but also the loss of knowledge and a drop in productivity. Our approach is proactive, not reactive. Instead of waiting for annual surveys, we implement a continuous monitoring system that measures the pulse of your organization in real-time.</p>
-          <ul>
-            <li>Decrease voluntary turnover by detecting and addressing issues before they become critical.</li>
-            <li>Improve workplace climate by giving employees a voice and showing you care.</li>
-            <li>Enable proactive decision-making with data-driven alerts and recommendations.</li>
-            <li>Increase productivity of motivated and committed teams.</li>
-          </ul>
-          <p><strong>Our Approach:</strong> Through continuous feedback cycles and predictive analytics, we provide the insights needed to build a workplace where top talent chooses to stay and grow.</p>
-        </div>
-
-        <div id="service-consulting" class="service-detail">
-          <h3>Technology Consulting</h3>
-          <p><strong>Clarity and Control for Impeccable Operation.</strong></p>
-          <p>Many companies operate with legacy processes and hidden inefficiencies that hinder their potential. How can you optimize what you can't measure? Our consulting service is the first step towards transformation. We act as your strategic partners, conducting a comprehensive diagnosis of your human capital operations to create a clear and achievable technological roadmap.</p>
-          <ul>
-            <li>Data-driven decision making, not intuition.</li>
-            <li>Workflow optimization to eliminate bottlenecks and manual tasks.</li>
-            <li>Design of future personnel strategies, including training plans to ensure operational continuity.</li>
-            <li>Complete visibility of your key performance indicators (KPIs) through customized dashboards.</li>
-          </ul>
-          <p><strong>Our Approach:</strong> Our consultative approach combines deep data analysis with your business knowledge. The result is a 100% customized strategy that aligns your people, processes, and technology with your business objectives.</p>
-        </div>
-
-        <div id="service-outsourcing" class="service-detail">
-          <h3>Technology Outsourcing</h3>
-          <p><strong>Focus on Your Core Business. We'll Handle the Rest.</strong></p>
-          <p>Every minute your management team spends on managing support operations like cleaning, maintenance, or minor logistics, is a minute not dedicated to innovating, serving clients, or growing your business. Our Technology Outsourcing service gives you back that time. We assume full ownership of these areas, managing them with technology to ensure optimal performance and controlled costs.</p>
-          <ul>
-            <li>Total focus on your "Core Business," delegating secondary operations to experts.</li>
-            <li>Reduction of operating and administrative costs by optimizing processes and personnel.</li>
-            <li>Transparency and total control through customized reports and metrics on service performance.</li>
-            <li>Guarantee of quality and adherence to agreed standards.</li>
-          </ul>
-          <p><strong>Our Approach:</strong> You don't just delegate a task; you gain a partner who integrates into your operation. We use technology to monitor, manage, and report, ensuring these areas function flawlessly and efficiently, freeing you to concentrate on what you do best.</p>
-        </div>
-
-        <div id="service-training" class="service-detail">
-          <h3>Training & Operational Efficiency</h3>
-          <p><strong>Empower Your Team's Skills with the Right Technology.</strong></p>
-          <p>True digital transformation doesn't come from buying software, but from ensuring your team knows how to use it to be more productive. Often, companies invest in powerful tools that are underutilized. Our training service is designed to close that gap and unlock your staff's true potential.</p>
-          <ul>
-            <li>Measurable increase in productivity by automating tasks and optimizing workflows.</li>
-            <li>Maximize the ROI of your existing and future technology.</li>
-            <li>Foster a culture of continuous improvement and adaptability within your teams.</li>
-            <li>Develop your staff's autonomy to solve problems with technological tools.</li>
-          </ul>
-          <p><strong>Our Approach:</strong> Our process goes beyond a simple course. We analyze your team's specific needs, select and teach them about the most suitable tools —whether it's management software, automation, or AI— and offer ongoing support to ensure that learning translates into real, lasting results.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="testimonials" class="section light">
-      <div class="container">
-        <h2>What Our Clients Say</h2>
-        <div class="grid-2">
-          <div class="testimonial-card">
-            <blockquote>
-              <p>"Smart Global Tech transformed our recruitment process. We're now hiring faster and with much better quality candidates. Their expertise is unmatched!"</p>
-              <footer>— Maria Sanchez, HR Director at Innovate Corp</footer>
-            </blockquote>
-          </div>
-          <div class="testimonial-card">
-            <blockquote>
-              <p>"The employee retention strategies implemented by Smart Global Tech have drastically reduced our turnover. Our team is happier and more productive."</p>
-              <footer>— John Doe, CEO of Future Solutions</footer>
-            </blockquote>
-          </div>
-          </div>
-      </div>
-    </section>
-
-    <section id="blog" class="section">
-      <div class="container">
-        <h2>Latest Insights & News</h2>
-        <div class="grid-3">
-          <article class="blog-post-card">
-            <h3>The Future of AI in HR</h3>
-            <p class="post-meta">July 15, 2025 | By Smart Global Tech Team</p>
-            <p>Explore how artificial intelligence is revolutionizing human resources, from intelligent recruitment to predictive analytics for retention.</p>
-            <a href="#" class="btn-link">Read More</a>
-          </article>
-          <article class="blog-post-card">
-            <h3>Optimizing Operational Efficiency Through Technology</h3>
-            <p class="post-meta">July 10, 2025 | By Eduardo Argente</p>
-            <p>Learn best practices for integrating technology to streamline your company's daily operations and boost productivity.</p>
-            <a href="#" class="btn-link">Read More</a>
-          </article>
-          <article class="blog-post-card">
-            <h3>Why Employee Experience Matters More Than Ever</h3>
-            <p class="post-meta">July 1, 2025 | By Antonio Garcia</p>
-            <p>Discover the impact of a positive employee experience on engagement, retention, and overall business success.</p>
-            <a href="#" class="btn-link">Read More</a>
-          </article>
-          </div>
-        <div style="text-align: center; margin-top: 3rem;">
-          <a href="#" class="cta">View All Articles</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="why" class="section light">
-      <div class="container">
-        <h2>Why Choose Smart Global Tech?</h2>
-        <p>At Smart Global Tech, we distinguish ourselves by combining deep industry knowledge with a passion for technological innovation. Our commitment to your success is unwavering:</p>
-        <ul class="bullet-list">
-          <li>
-            <div class="icon-container-inline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M5 12l5 5l10 -10"></path>
-              </svg>
-            </div>
-            <strong>Tailored Solutions:</strong> We understand that every business is unique. Our solutions are custom-built to fit your specific needs and challenges.
-          </li>
-          <li>
-            <div class="icon-container-inline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M5 12l5 5l10 -10"></path>
-              </svg>
-            </div>
-            <strong>Experienced Team:</strong> Our consultants are experts in HR technology, offering unparalleled guidance and support.
-          </li>
-          <li>
-            <div class="icon-container-inline">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M5 12l5 5l10 -10"></path>
-              </svg>
-            </div>
-            <strong>Results-Driven Approach:</strong> We focus on measurable outcomes, ensuring our solutions deliver tangible benefits and ROI.
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="team" class="section">
-      <div class="container">
-        <h2>Our Core Team</h2>
-        <p>Meet the dedicated professionals behind Smart Global Tech's success:</p>
-        <ul class="team-list">
-          <li><strong>Antonio Garcia</strong> - CEO</li>
-          <li><strong>Luis Flores</strong> - Lead Developer</li>
-          <li><strong>Carlos Mendientea</strong> - Lead Developer</li>
-          <li><strong>Eduardo Argente</strong> - Solutions Specialist</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="locations" class="section light">
-      <div class="container">
-        <h2>Our Locations</h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto 2.5rem auto; color: var(--color-text);">Find us at our offices in Canada and Mexico.</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
-          <div>
-            <h3><span style="margin-right: 0.5rem;">🇨🇦</span> Canada Office</h3>
-            <address>
-              <p>123 Innovation Drive, Suite 100, Toronto, ON M1M 1M1, Canada</p>
-              <p>Phone: <a href="tel:+14165551234">+1 (416) 555 1234</a></p>
-              <p>Email: <a href="mailto:contact@smartglobaltech.ca">contact@smartglobaltech.ca</a></p>
-            </address>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.6874490333796!2d-79.38705648464355!3d43.6532267791244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb73f2c5e533%3A0x6a1c5d0b9e8d4a6!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sca!4v1678912345678!5m2!1sen!2sca" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-          <div>
-            <h3><span style="margin-right: 0.5rem;">🇲🇽</span> Mexico Office</h3>
-            <address>
-              <p>WTC, Paseo de la República km 13020, CP. 76230, Juriquilla, Querétaro, México</p>
-              <p>Phone: <a href="tel:+524426903125">+52 (442) 690 3125</a></p>
-              <p>Email: <a href="mailto:contact@smartglobaltech.mx">contact@smartglobaltech.mx</a></p>
-            </address>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.33127814406!2d-100.4497640849925!3d20.70613278637956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d3596a2f7f9b81%3A0x1d3a51f0c2e6f4a!2sWTC%20Queretaro!5e0!3m2!1sen!2smx!4v1678912345678!5m2!1sen!2smx" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container">
-        <h2>Contact Us</h2>
-        <p style="text-align: center; max-width: 600px; margin: 0 auto 2.5rem auto; color: var(--color-text);">We are eager to discuss your human capital technology needs. Reach out to us for a consultation or any inquiries.</p>
-        <form action="#" method="POST" aria-label="Contact form">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
-
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>© 2025 Smart Global Tech. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
