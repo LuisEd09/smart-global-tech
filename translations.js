@@ -67,6 +67,8 @@ const translations = {
     "team_member4_name": { "en": "Eduardo Argente", "es": "Eduardo Argente", "fr": "Eduardo Argente" },
     "team_member4_role": { "en": "Solutions Specialist", "es": "Especialista en Soluciones", "fr": "Spécialiste des solutions" },
     "team_member4_desc": { "en": "The bridge between your needs and our solutions, ensuring a real impact on your business.", "es": "El puente entre tus necesidades y nuestras soluciones, garantizando un impacto real en tu negocio.", "fr": "Le pont entre vos besoins et nos solutions, garantissant un impact réel sur votre entreprise." },
+    "team_member5_name": { "en": "Diana S. Peter", "es": "Diana S. Peter", "fr": "Diana S. Peter" },
+    "team_member5_role": { "en": "Sales Executive", "es": "Ejecutiva de Ventas", "fr": "Responsable des ventes" },"team_member5_desc": { "en": "A dynamic connector helping clients discover how Smart Global Tech can unlock new business value through strategic partnerships.", "es": "Una conectora dinámica que ayuda a los clientes a descubrir cómo Smart Global Tech puede desbloquear nuevo valor empresarial a través de asociaciones estratégicas.", "fr": "Une connectrice dynamique aidant les clients à découvrir comment Smart Global Tech peut libérer de nouvelles valeurs commerciales grâce à des partenariats stratégiques." },
     "locations_title": { "en": "Our Locations", "es": "Nuestras Ubicaciones", "fr": "Nos emplacements" },
     "locations_p1": { "en": "Find us at our offices in Canada and Mexico.", "es": "Encuéntranos en nuestras oficinas en Canadá y México.", "fr": "Retrouvez-nous dans nos bureaux au Canada et au Mexique." },
     "locations_canada_office": { "en": "Canada Office", "es": "Oficina en Canadá", "fr": "Bureau au Canada" },
