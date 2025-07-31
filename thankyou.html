@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thank You</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You - Smart Global Tech</title>
+    <meta name="description" content="Thank you for contacting Smart Global Tech. We have received your message." />
+    <meta name="keywords" content="Smart Global Tech, thank you, contact, confirmation" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/logo-sgt-plus.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-  <main class="thank-you-page">
-    <h1>Thank you!</h1>
-    <p>Your message has been successfully sent. We’ll get back to you soon.</p>
-    <a href="index.html">← Back to home</a>
-  </main>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="Smart Global Tech Home">
+                <img src="images/logo.png" alt="Logo de Smart Global Tech">
+            </a>
+            <nav aria-label="Primary navigation">
+                <ul>
+                    <li><a href="index.html#about" data-key="nav_about">About</a></li>
+                    <li><a href="index.html#services" data-key="nav_services">Services</a></li>
+                    <li><a href="index.html#team" data-key="nav_team">Team</a></li>
+                    <li><a href="index.html#contact" data-key="nav_contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <div class="language-select-wrapper">
+                    <select id="language-selector" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+                <button id="toggle-dark" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="thankyou" class="hero hero-background">
+            <div class="container" style="text-align: center;">
+                <h1 data-key="thankyou_main_title">Thank You for Your Message!</h1>
+                <p data-key="thankyou_message">We have received your inquiry and will get back to you shortly. For immediate assistance, please use our AI assistant.</p>
+                <a href="index.html" class="cta" data-key="thankyou_back_home">Return to Homepage</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-key="footer_copyright">© 2025 Smart Global Tech. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
