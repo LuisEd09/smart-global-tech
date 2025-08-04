@@ -251,8 +251,8 @@ function initContactFormSubmission() {
         .then(response => response.json())
         .then(result => {
             if (result.success) {
-                alert('¡Gracias! El lead ha sido enviado al CRM.');
-                form.reset();
+                // REDIRIGIR A LA PÁGINA DE AGRADECIMIENTO
+                window.location.href = 'thankyou.html';
             } else {
                 console.error('❌ Error al enviar el formulario:', result.message);
                 if (result.hubspotError && result.hubspotError.category === 'CONFLICT') {
