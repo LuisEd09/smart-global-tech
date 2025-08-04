@@ -11,21 +11,20 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/submit-form', async (req, res) => {
-    // AÑADE 'phone' AQUÍ PARA QUE EL SERVIDOR PUEDA LEER EL VALOR
     const { nombre, email, servicio, mensaje, company, phone } = req.body;
 
     const hubspotData = {
         properties: {
             firstname: nombre,
             email: email,
-            phone: phone, // Usa 'phone' como nombre de propiedad interna
+            phone: phone,
             message: mensaje,
             service: servicio,
-            company: company
+            company: company,
+            hs_lead_status: 'NEW'
         }
     };
     
-    // Log para depuración, para ver qué se está enviando
     console.log('Datos enviados a HubSpot:', hubspotData);
 
     try {
@@ -57,5 +56,5 @@ app.post('/submit-form', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor local corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
