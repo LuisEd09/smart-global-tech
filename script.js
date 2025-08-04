@@ -1,4 +1,4 @@
-/* Archivo script.js - Versión con resaltado de menú */
+/* Archivo script.js - Versión final y corregida */
 
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof translations !== 'undefined') {
@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initServiceAccordion();
     initBackToTopButton();
-    initNavHighlighting(); // <-- NUEVA FUNCIÓN AÑADIDA
-    
+    initNavHighlighting();
+    initDynamicCopyrightYear();
     injectElevenLabsWidget();
+    initContactFormSubmission();
 });
-
 
 // --- LÓGICA DE INTERNACIONALIZACIÓN (i18n) ---
 function initLanguage() {
@@ -33,7 +33,7 @@ function initLanguage() {
                 element.innerHTML = translations[key][lang];
             }
         });
-        initDynamicCopyrightYear(); // Actualizar año después de cambiar idioma
+        initDynamicCopyrightYear();
     };
 
     languageSelector.addEventListener('change', (e) => setLanguage(e.target.value));
@@ -50,61 +50,7 @@ function initLanguage() {
     }
 }
 
-// --- NUEVA FUNCIÓN PARA RESALTAR EL MENÚ ---
-function initNavHighlighting() {
-    const sections = document.querySelectorAll('main > section[id]');
-    const navLinks = document.querySelectorAll('header nav a');
-
-    const observerOptions = {
-        root: null, // Relativo al viewport
-        rootMargin: '-50% 0px -50% 0px', // Se activa cuando la sección está en el centro vertical
-        threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.remove('active-link');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active-link');
-                    }
-                });
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-}
-
-
-// --- LÓGICA DE INTERACCIÓN DE LA PÁGINA (EXISTENTE) ---
-
-function initServiceAccordion() {
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    if (!accordionItems.length) return;
-
-    accordionItems.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        const content = item.querySelector('.accordion-content');
-        if (!header || !content) return;
-
-        header.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            if (!isActive) {
-                item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + 'px';
-            } else {
-                item.classList.remove('active');
-                content.style.maxHeight = null;
-            }
-        });
-    });
-}
-
+// --- LÓGICA DEL MODO OSCURO ---
 function initDarkMode() {
     const toggle = document.getElementById('toggle-dark');
     if (!toggle) return;
@@ -127,6 +73,7 @@ function initDarkMode() {
     });
 }
 
+// --- LÓGICA DE DESPLAZAMIENTO SUAVE ---
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -142,6 +89,30 @@ function initSmoothScroll() {
     });
 }
 
+// --- LÓGICA DEL ACORDEÓN DE SERVICIOS ---
+function initServiceAccordion() {
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    if (!accordionItems.length) return;
+
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        const content = item.querySelector('.accordion-content');
+        if (!header || !content) return;
+
+        header.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            } else {
+                item.classList.remove('active');
+                content.style.maxHeight = null;
+            }
+        });
+    });
+}
+
+// --- LÓGICA DEL BOTÓN VOLVER ARRIBA ---
 function initBackToTopButton() {
     const backToTopButton = document.querySelector('.back-to-top');
     if (!backToTopButton) return;
@@ -151,38 +122,76 @@ function initBackToTopButton() {
     backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
+// --- LÓGICA DE RESALTADO DEL MENÚ DE NAVEGACIÓN ---
+function initNavHighlighting() {
+    const sections = document.querySelectorAll('main > section[id]');
+    const navLinks = document.querySelectorAll('header nav a');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active-link');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+}
+
+// --- FUNCIÓN PARA ACTUALIZAR EL AÑO EN EL COPYRIGHT ---
 function initDynamicCopyrightYear() {
     const yearElement = document.querySelector('[data-key="footer_copyright"]');
     if (yearElement) {
         const currentYear = new Date().getFullYear();
-        yearElement.innerHTML = yearElement.innerHTML.replace('2025', currentYear);
+        if (!yearElement.innerHTML.includes(currentYear)) {
+             yearElement.innerHTML = yearElement.innerHTML.replace('2025', currentYear);
+        }
     }
 }
 
-// --- LÓGICA DEL CHATBOT DE ELEVENLABS (SIN MODIFICAR) ---
+// --- LÓGICA DEL WIDGET DE ELEVENLABS ---
 function injectElevenLabsWidget() {
     const ELEVENLABS_AGENT_ID = 'agent_3001k116cv39fpev8b49k14064ak';
     if (document.getElementById(`elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`)) return;
+
     const script = document.createElement('script');
     script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
     script.async = true;
     script.type = 'text/javascript';
     document.head.appendChild(script);
+
     const wrapper = document.createElement('div');
     wrapper.className = 'elevenlabs-widget-wrapper';
     wrapper.style.position = 'fixed';
     wrapper.style.bottom = '20px';
     wrapper.style.right = '20px';
     wrapper.style.zIndex = '9000';
+
     const widget = document.createElement('elevenlabs-convai');
     widget.id = `elevenlabs-convai-widget-${ELEVENLABS_AGENT_ID}`;
     widget.setAttribute('agent-id', ELEVENLABS_AGENT_ID);
+    
     updateWidgetColors(widget);
     updateWidgetVariant(widget);
+    
     const observer = new MutationObserver(() => updateWidgetColors(widget));
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     window.addEventListener('resize', () => updateWidgetVariant(widget));
+    
     function updateWidgetVariant(w) { w.setAttribute('variant', window.innerWidth <= 768 ? 'expandable' : 'full'); }
+    
     function updateWidgetColors(w) {
         const rootStyles = getComputedStyle(document.documentElement);
         const primaryColor = rootStyles.getPropertyValue('--color-primary').trim();
@@ -190,25 +199,76 @@ function injectElevenLabsWidget() {
         w.setAttribute('avatar-orb-color-1', primaryColor);
         w.setAttribute('avatar-orb-color-2', textColor);
     }
+    
     widget.addEventListener('elevenlabs-convai:call', (event) => {
         event.detail.config.clientTools = {
             redirectToServices: () => window.location.href = '#services',
-            redirectToContactForm: () => window.location.href = '#contact',
-            askN8NForSpecificInfo: async ({ query }) => {
-                try {
-                    const response = await fetch('https://n8n.systemsipe.com/webhook/97bc8e92-93b9-40ba-adb0-9b49952264a5', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ userQuery: query })
-                    });
-                    const data = await response.json();
-                    return { message: data.botResponse || "No pude obtener una respuesta específica." };
-                } catch (error) {
-                    return { message: "Lo siento, hubo un problema al obtener esa información." };
-                }
-            },
+            redirectToContactForm: () => window.location.href = '#contact'
         };
     });
+    
     wrapper.appendChild(widget);
     document.body.appendChild(wrapper);
+}
+
+// --- LÓGICA DE ENVÍO DE FORMULARIO A SERVIDOR LOCAL (CORREGIDA) ---
+let isSubmitting = false; // Variable de estado para prevenir doble envío
+
+function initContactFormSubmission() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Si ya se está enviando el formulario, ignorar el evento
+        if (isSubmitting) {
+            console.log('Formulario ya se está enviando, ignorando la solicitud.');
+            return;
+        }
+
+        isSubmitting = true; // Establecer el estado a "enviando"
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+
+        const formData = new FormData(form);
+        const data = {
+            nombre: formData.get('name'),
+            email: formData.get('email'),
+            servicio: formData.get('service'),
+            mensaje: formData.get('message'),
+            company: formData.get('company'), 
+            phone: formData.get('phone')
+        };
+
+        fetch('http://localhost:3000/submit-form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('¡Gracias! El lead ha sido enviado al CRM.');
+                form.reset();
+            } else {
+                console.error('❌ Error al enviar el formulario:', result.message);
+                if (result.hubspotError && result.hubspotError.category === 'CONFLICT') {
+                    alert('Ocurrió un problema. Probablemente el correo electrónico ya existe en nuestro sistema. Por favor, revisa tus datos o contacta con nosotros de otra manera.');
+                } else {
+                    alert('Ocurrió un problema. Intenta más tarde.');
+                }
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error de red o del servidor:', error);
+            alert('Ocurrió un problema de conexión. Intenta más tarde.');
+        })
+        .finally(() => {
+            isSubmitting = false; // Restablecer el estado
+            submitButton.disabled = false; // Habilitar el botón
+        });
+    });
 }

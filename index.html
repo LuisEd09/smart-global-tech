@@ -247,7 +247,7 @@
                             they are robust, scalable, and secure.</p>
                     </div>
                     <div class="team-card">
-                        <img src="images/team_members/CarlosM.jpeg" alt="Foto de Carlos Mendientea">
+                        <img src="images/team_members/CarlosM.jpeg" alt="Foto de Carlos Mendienta">
                         <h3 data-key="team_member3_name">Carlos Mendientea</h3>
                         <p class="team-title" data-key="team_member3_role">Lead Developer</p>
                         <p class="team-desc" data-key="team_member3_desc">Expert in creating intuitive interfaces that
@@ -261,7 +261,7 @@
                             solutions, ensuring a real impact on your business.</p>
                     </div>
                     <div class="team-card">
-                        <img src="images/team_members/JuancarlosG.jpeg" alt="Photo of Juan Carlos Godinez">
+                        <img src="images/team_members/JuancarlosG.jpeg" alt="Photo of Juan Godinez">
                         <h3 data-key="team_member7_name">Juan Godinez</h3>
                         <p class="team-title" data-key="team_member7_role">Chief Operating Officer</p>
                         <p class="team-desc" data-key="team_member7_desc">
@@ -281,7 +281,7 @@
                         <p class="team-desc" data-key="team_member5_desc">Driving financial strategy to unlock business value and fuel Smart Global Tech’s growth.</p>
                     </div>
                     <div class="team-card">
-                    <img src="images/persona.png" alt="Photo of Maria Guadalupe Garcia">
+                    <img src="images/persona.png" alt="Photo of Maria Garcia">
                     <h3 data-key="team_member8_name">Maria Garcia</h3>
                     <p class="team-title" data-key="team_member8_role">Head of Human Resources</p>
                     <p class="team-desc" data-key="team_member8_desc">
@@ -333,21 +333,32 @@
                     needs. Reach out to our AI assistant for an instant connection or send us a message.</p>
                 <div class="contact-layout">
                     <div class="contact-form-wrapper">
-                        <form action="https://formsubmit.co/contact@smartglobaltech.ca" method="POST">
-                            <input type="hidden" name="_next" value="https://smart-global-tech.vercel.app/thankyou.html">
-                            <input type="hidden" name="_subject" value="Nuevo mensaje de contacto desde Smart Global Tech">
-                            <input type="hidden" name="_captcha" value="false">
-
-                            <label for="name" data-key="contact_form_name">Name</label>
+                        <form id="contact-form">
+                            <label for="name">Name</label>
                             <input type="text" id="name" name="name" required />
 
-                            <label for="email" data-key="contact_form_email">Email</label>
+                            <label for="email">Email</label>
                             <input type="email" id="email" name="email" required />
 
-                            <label for="message" data-key="contact_form_message">Message</label>
+                            <label for="company">Company</label>
+                            <input type="company" id="company" name="company" required />
+
+                            <label for="phone" data-key="contact_form_phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+
+                            <label for="service">Service</label>
+                            <select id="service" name="service" required>
+                                <option value="Talent Boost">Talent Boost</option>
+                                <option value="Engagement Solutions">Engagement Solutions</option>
+                                <option value="Strategic Advisory">Strategic Advisory</option>
+                                <option value="Tech BPO">Tech BPO</option>
+                                <option value="Skill-Up Academy">Skill-Up Academy</option>
+                            </select>
+
+                            <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
 
-                            <button type="submit" data-key="contact_form_send">Send Message</button>
+                            <button type="submit">Send Message</button>
                         </form>
                     </div>
                     <div class="contact-ai-wrapper">
@@ -369,8 +380,6 @@
         </div>
     </footer>
 
-    <!-- <button class="back-to-top" aria-label="Volver arriba">↑</button> -->
-    
     <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
