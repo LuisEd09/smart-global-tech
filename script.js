@@ -212,18 +212,34 @@ function injectElevenLabsWidget() {
 }
 
 // --- LÓGICA DE ENVÍO DE FORMULARIO A SERVIDOR LOCAL (CORREGIDA) ---
-let isSubmitting = false; // Variable de estado para prevenir doble envío
-
 function initContactFormSubmission() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', function(e) {
+    // Inicializar intl-tel-input en el campo de teléfono
+    const phoneInput = document.getElementById('phone');
+    const iti = intlTelInput(phoneInput, {
+        initialCountry: "mx", // Establece México como país inicial
+        preferredCountries: ['ca', 'mx', 'us', 'gb', 'es'], // Países preferidos
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    let isSubmitting = false; // Variable de estado para prevenir doble envío
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Si ya se está enviando el formulario, ignorar el evento
         if (isSubmitting) {
             console.log('Formulario ya se está enviando, ignorando la solicitud.');
+            return;
+        }
+
+        // Obtiene el número de teléfono completo del campo intl-tel-input
+        const fullPhoneNumber = iti.getNumber();
+        // Verifica si el número es válido
+        if (!iti.isValidNumber()) {
+            alert('Por favor, introduce un número de teléfono válido.');
             return;
         }
 
@@ -238,18 +254,20 @@ function initContactFormSubmission() {
             servicio: formData.get('service'),
             mensaje: formData.get('message'),
             company: formData.get('company'), 
-            phone: formData.get('phone')
+            phone: fullPhoneNumber // <-- LÍNEA CORREGIDA
         };
 
-        fetch('http://localhost:3000/submit-form', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
+        try {
+            const response = await fetch('http://localhost:3000/submit-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
             if (result.success) {
                 // REDIRIGIR A LA PÁGINA DE AGRADECIMIENTO
                 window.location.href = 'thankyou.html';
@@ -261,14 +279,12 @@ function initContactFormSubmission() {
                     alert('Ocurrió un problema. Intenta más tarde.');
                 }
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('❌ Error de red o del servidor:', error);
             alert('Ocurrió un problema de conexión. Intenta más tarde.');
-        })
-        .finally(() => {
+        } finally {
             isSubmitting = false; // Restablecer el estado
             submitButton.disabled = false; // Habilitar el botón
-        });
+        }
     });
 }
