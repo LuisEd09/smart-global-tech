@@ -10,13 +10,14 @@ app.use(cors());
 app.use(express.json());
 
 // Configuración de Odoo
-const ODOO_URL = 'http://164.90.159.194:8069';
+// ➡️  Aquí está la URL corregida.
+const ODOO_URL = 'https://odoo.systemsipe.com'; 
 const ODOO_DB = 'sgt_crm';
 const ODOO_USER = 'sistemas1@clbajio.com';
-const ODOO_PASSWORD = process.env.ODOO_PASSWORD; // Asegúrate de ponerlo en tu .env
+const ODOO_PASSWORD = process.env.ODOO_PASSWORD; 
 
-const clientCommon = xmlrpc.createClient({ url: `${ODOO_URL}/xmlrpc/2/common` });
-const clientObject = xmlrpc.createClient({ url: `${ODOO_URL}/xmlrpc/2/object` });
+const clientCommon = xmlrpc.createClient({ url: `http://164.90.159.194:8069/xmlrpc/2/common` });
+const clientObject = xmlrpc.createClient({ url: `http://164.90.159.194:8069/xmlrpc/2/object` });
 
 app.post('/submit-form', (req, res) => {
     const { nombre, email, servicio, mensaje, company, phone } = req.body;
@@ -29,18 +30,17 @@ app.post('/submit-form', (req, res) => {
         }
 
         // Datos del lead
-        const data = {
-        name: `${nombre} - ${servicio}`, // Esto es lo que aparece como "nombre del lead"
-        partner_name: empresa,
-        email_from: email,
-        phone: telefono,
-        contact_name: nombre,
-        description: `
-            Servicio de interés: ${servicio}
-            Mensaje: ${mensaje}
-        `
+        const leadData = {
+            name: `${nombre} - ${servicio}`,
+            partner_name: company,
+            email_from: email,
+            phone: phone,
+            contact_name: nombre,
+            description: `
+                Servicio de interés: ${servicio}
+                Mensaje: ${mensaje}
+            `
         };
-
 
         // Crear lead
         clientObject.methodCall('execute_kw', [
