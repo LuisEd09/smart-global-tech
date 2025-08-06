@@ -1,8 +1,7 @@
 require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');
+const xmlrpc = require('xmlrpc');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,49 +9,53 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/submit-form', async (req, res) => {
+// Configuración de Odoo
+const ODOO_URL = 'http://164.90.159.194:8069';
+const ODOO_DB = 'sgt_crm';
+const ODOO_USER = 'sistemas1@clbajio.com';
+const ODOO_PASSWORD = process.env.ODOO_PASSWORD; // Asegúrate de ponerlo en tu .env
+
+const clientCommon = xmlrpc.createClient({ url: `${ODOO_URL}/xmlrpc/2/common` });
+const clientObject = xmlrpc.createClient({ url: `${ODOO_URL}/xmlrpc/2/object` });
+
+app.post('/submit-form', (req, res) => {
     const { nombre, email, servicio, mensaje, company, phone } = req.body;
 
-    const hubspotData = {
-        properties: {
-            firstname: nombre,
-            email: email,
-            phone: phone,
-            message: mensaje,
-            service: servicio,
-            company: company,
-            hs_lead_status: 'NEW'
+    // Autenticación
+    clientCommon.methodCall('authenticate', [ODOO_DB, ODOO_USER, ODOO_PASSWORD, {}], (err, uid) => {
+        if (err || !uid) {
+            console.error('Error al autenticar en Odoo:', err);
+            return res.status(500).json({ success: false, message: 'Error de autenticación con Odoo' });
         }
-    };
-    
-    console.log('Datos enviados a HubSpot:', hubspotData);
 
-    try {
-        const hubspotResponse = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.HUBSPOT_API_KEY}`
-            },
-            body: JSON.stringify(hubspotData)
+        // Datos del lead
+        const data = {
+        name: `${nombre} - ${servicio}`, // Esto es lo que aparece como "nombre del lead"
+        partner_name: empresa,
+        email_from: email,
+        phone: telefono,
+        contact_name: nombre,
+        description: `
+            Servicio de interés: ${servicio}
+            Mensaje: ${mensaje}
+        `
+        };
+
+
+        // Crear lead
+        clientObject.methodCall('execute_kw', [
+            ODOO_DB, uid, ODOO_PASSWORD,
+            'crm.lead', 'create',
+            [leadData]
+        ], (err2, leadId) => {
+            if (err2) {
+                console.error('Error al crear lead:', err2);
+                return res.status(500).json({ success: false, message: 'Error al crear lead en Odoo' });
+            }
+
+            res.status(200).json({ success: true, message: 'Lead creado correctamente', leadId });
         });
-
-        const responseData = await hubspotResponse.json();
-
-        if (!hubspotResponse.ok) {
-            console.error('Error de HubSpot:', responseData);
-            return res.status(hubspotResponse.status).json({
-                success: false,
-                message: responseData.message || 'Error en la API de HubSpot',
-                hubspotError: responseData
-            });
-        }
-
-        res.status(200).json({ success: true, message: 'Formulario enviado con éxito.', hubspotId: responseData.id });
-    } catch (error) {
-        console.error('Error al procesar el formulario:', error);
-        res.status(500).json({ success: false, message: 'Ocurrió un problema. Intenta más tarde.' });
-    }
+    });
 });
 
 app.listen(PORT, () => {
