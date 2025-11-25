@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof translations !== 'undefined') {
     initLanguage();
   } else {
-    console.error('translations.js no cargo correctamente.');
+    console.error('translations.js no cargó correctamente.');
   }
 
   initDarkMode();
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
 });
 
-// --- Internacionalizacion (ES/EN) ---
+// --- Internacionalización (ES/EN) ---
 function initLanguage() {
   const languageSelector = document.getElementById('language-selector');
   if (!languageSelector) return;
@@ -61,11 +61,11 @@ function initDarkMode() {
 
   const applyTheme = (isDark) => {
     document.body.classList.toggle('dark-mode', isDark);
-    toggle.textContent = isDark ? 'Dark' : 'Light';
+    toggle.textContent = isDark ? '🌙' : '☀';
   };
 
   const storedTheme = localStorage.getItem('theme');
-  // Default: claro; solo aplica dark si el usuario lo guardo
+  // Default: claro; solo aplica dark si el usuario lo guardó
   applyTheme(storedTheme === 'dark');
 
   toggle.addEventListener('click', () => {
@@ -91,7 +91,7 @@ function initSmoothScroll() {
   });
 }
 
-// --- Acorden de servicios ---
+// --- Acordeón de servicios ---
 function initServiceAccordion() {
   const accordionItems = document.querySelectorAll('.accordion-item');
   accordionItems.forEach((item) => {
@@ -115,7 +115,7 @@ function initServiceAccordion() {
   });
 }
 
-// --- Botn volver arriba ---
+// --- Botón volver arriba ---
 function initBackToTopButton() {
   const backToTopButton = document.querySelector('.back-to-top');
   if (!backToTopButton) return;
@@ -125,7 +125,7 @@ function initBackToTopButton() {
   backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-// --- Resaltado del men ---
+// --- Resaltado del menú ---
 function initNavHighlighting() {
   const sections = document.querySelectorAll('main > section[id]');
   const navLinks = document.querySelectorAll('header nav a');
@@ -153,7 +153,7 @@ function initNavHighlighting() {
   sections.forEach((section) => observer.observe(section));
 }
 
-// --- Ao dinmico ---
+// --- Año dinámico ---
 function initDynamicCopyrightYear() {
   const yearElement = document.querySelector('[data-key="footer_copyright"]');
   if (yearElement) {
@@ -164,7 +164,7 @@ function initDynamicCopyrightYear() {
   }
 }
 
-// --- Animaciones de aparicin ---
+// --- Animaciones de aparición ---
 function initRevealAnimations() {
   const revealElements = document.querySelectorAll('.reveal');
   if (!revealElements.length) return;
@@ -236,7 +236,7 @@ function injectElevenLabsWidget() {
   document.body.appendChild(wrapper);
 }
 
-// --- Envo de formulario ---
+// --- Envío de formulario ---
 function initContactFormSubmission() {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -257,7 +257,7 @@ function initContactFormSubmission() {
 
     const fullPhoneNumber = iti.getNumber();
     if (!iti.isValidNumber()) {
-      alert('Por favor, introduce un nmero de telfono vlido.');
+      alert('Por favor, introduce un número de teléfono válido.');
       return;
     }
 
@@ -286,15 +286,14 @@ function initContactFormSubmission() {
       if (result.success) {
         window.location.href = 'thankyou.html';
       } else {
-        alert(result.message || 'Ocurri un problema. Intenta ms tarde.');
+        alert(result.message || 'Ocurrió un problema. Intenta más tarde.');
       }
     } catch (error) {
       console.error('Error de red o del servidor:', error);
-      alert('Ocurri un problema de conexin. Intenta ms tarde.');
+      alert('Ocurrió un problema de conexión. Intenta más tarde.');
     } finally {
       isSubmitting = false;
       submitButton.disabled = false;
     }
   });
 }
-
