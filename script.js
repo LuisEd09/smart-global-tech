@@ -1,10 +1,10 @@
-// UI interactions and form submission
+ï»¿// UI interactions and form submission
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof translations !== 'undefined') {
     initLanguage();
   } else {
-    console.error('translations.js no cargó correctamente.');
+    console.error('translations.js no cargo correctamente.');
   }
 
   initDarkMode();
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
 });
 
-// --- Internacionalización (ES/EN) ---
+// --- Internacionalizacion (ES/EN) ---
 function initLanguage() {
   const languageSelector = document.getElementById('language-selector');
   if (!languageSelector) return;
@@ -61,13 +61,11 @@ function initDarkMode() {
 
   const applyTheme = (isDark) => {
     document.body.classList.toggle('dark-mode', isDark);
-    toggle.textContent = isDark ? '??' : '?';
+    toggle.textContent = isDark ? 'Dark' : 'Light';
   };
 
   const storedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initialDark = storedTheme ? storedTheme === 'dark' : false || prefersDark === true ? false : false;
-  // Default: claro; solo aplica dark si el usuario lo guardó
+  // Default: claro; solo aplica dark si el usuario lo guardo
   applyTheme(storedTheme === 'dark');
 
   toggle.addEventListener('click', () => {
@@ -93,7 +91,7 @@ function initSmoothScroll() {
   });
 }
 
-// --- Acordeón de servicios ---
+// --- Acorden de servicios ---
 function initServiceAccordion() {
   const accordionItems = document.querySelectorAll('.accordion-item');
   accordionItems.forEach((item) => {
@@ -117,7 +115,7 @@ function initServiceAccordion() {
   });
 }
 
-// --- Botón volver arriba ---
+// --- Botn volver arriba ---
 function initBackToTopButton() {
   const backToTopButton = document.querySelector('.back-to-top');
   if (!backToTopButton) return;
@@ -127,7 +125,7 @@ function initBackToTopButton() {
   backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-// --- Resaltado del menú ---
+// --- Resaltado del men ---
 function initNavHighlighting() {
   const sections = document.querySelectorAll('main > section[id]');
   const navLinks = document.querySelectorAll('header nav a');
@@ -155,7 +153,7 @@ function initNavHighlighting() {
   sections.forEach((section) => observer.observe(section));
 }
 
-// --- Año dinámico ---
+// --- Ao dinmico ---
 function initDynamicCopyrightYear() {
   const yearElement = document.querySelector('[data-key="footer_copyright"]');
   if (yearElement) {
@@ -166,7 +164,7 @@ function initDynamicCopyrightYear() {
   }
 }
 
-// --- Animaciones de aparición ---
+// --- Animaciones de aparicin ---
 function initRevealAnimations() {
   const revealElements = document.querySelectorAll('.reveal');
   if (!revealElements.length) return;
@@ -238,7 +236,7 @@ function injectElevenLabsWidget() {
   document.body.appendChild(wrapper);
 }
 
-// --- Envío de formulario ---
+// --- Envo de formulario ---
 function initContactFormSubmission() {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -259,7 +257,7 @@ function initContactFormSubmission() {
 
     const fullPhoneNumber = iti.getNumber();
     if (!iti.isValidNumber()) {
-      alert('Por favor, introduce un número de teléfono válido.');
+      alert('Por favor, introduce un nmero de telfono vlido.');
       return;
     }
 
@@ -288,14 +286,15 @@ function initContactFormSubmission() {
       if (result.success) {
         window.location.href = 'thankyou.html';
       } else {
-        alert(result.message || 'Ocurrió un problema. Intenta más tarde.');
+        alert(result.message || 'Ocurri un problema. Intenta ms tarde.');
       }
     } catch (error) {
       console.error('Error de red o del servidor:', error);
-      alert('Ocurrió un problema de conexión. Intenta más tarde.');
+      alert('Ocurri un problema de conexin. Intenta ms tarde.');
     } finally {
       isSubmitting = false;
       submitButton.disabled = false;
     }
   });
 }
+
