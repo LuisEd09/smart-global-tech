@@ -1,233 +1,258 @@
 ﻿<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Global Technologies</title>
-  <meta name="description" content="Smart Global Technologies: Soluciones tecnológicas para talento y operaciones." />
-  <meta name="keywords" content="Smart Global Technologies, tecnología, talento, operaciones, consultoría" />
+  <title>Smart Global Tech</title>
+  <meta name="description" content="Smart Global Tech: Innovative solutions designed to help your company manage and empower its human capital through advanced technology." />
+  <meta name="keywords" content="Smart Global Tech, tech consulting, human resources, talent management, Canada, Mexico, HR tech solutions" />
+
+  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="images/logo-sgt-plus.png" type="image/png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
-  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-bar">
-      <a href="#hero" class="logo" aria-label="Smart Global Technologies">
-        <img src="images/logo.png" alt="Smart Global Technologies" />
-        <span class="wordmark">Smart Global Technologies</span>
+  <header>
+    <div class="container">
+      <a href="#" class="logo" aria-label="Smart Global Tech Home">
+        <img src="images/logo.png" alt="Logo de Smart Global Tech">
       </a>
       <nav aria-label="Primary navigation">
         <ul>
-          <li><a href="#about" data-key="nav_about">Nosotros</a></li>
-          <li><a href="#services" data-key="nav_services">Servicios</a></li>
-          <li><a href="#team" data-key="nav_team">Equipo</a></li>
-          <li><a href="#contact" data-key="nav_contact">Contacto</a></li>
+          <li><a href="#about" data-key="nav_about">About</a></li>
+          <li><a href="#services" data-key="nav_services">Services</a></li>
+          <li><a href="#team" data-key="nav_team">Team</a></li>
+          <li><a href="#contact" data-key="nav_contact">Contact</a></li>
         </ul>
       </nav>
       <div class="header-controls">
         <div class="language-select-wrapper">
-          <select id="language-selector" aria-label="Selecciona idioma">
-            <option value="es">Español</option>
+          <select id="language-selector" aria-label="Select language">
             <option value="en">English</option>
+            <option value="es">Español</option>
           </select>
         </div>
-        <button id="toggle-dark" class="icon-button" aria-label="Alternar tema">☀</button>
-        <a class="btn ghost" href="#contact" data-key="nav_cta">Hablemos</a>
+        <button id="toggle-dark" aria-label="Toggle dark mode">🌙</button>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="hero" class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow" data-key="hero_eyebrow">Human-first tech</p>
-          <h1 data-key="hero_title">Tecnología inteligente para escalar talento y operaciones.</h1>
-          <p class="lede" data-key="hero_subtitle">Aceleramos cómo contratas, involucras y operas con soluciones digitales claras, rápidas y hechas para equipos en Latinoamérica.</p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn primary" data-key="hero_cta_primary">Quiero hablar con el equipo</a>
-            <a href="#services" class="btn ghost" data-key="hero_cta_secondary">Ver servicios</a>
-          </div>
-          <ul class="hero-badges">
-            <li data-key="hero_badge_1">Implementación sin fricción</li>
-            <li data-key="hero_badge_2">Procesos medibles</li>
-            <li data-key="hero_badge_3">Equipo bilingüe</li>
-          </ul>
-        </div>
-        <div class="hero-card reveal">
-          <div class="glass-card">
-            <p data-key="hero_card_title">Diseñamos operaciones inteligentes que liberan a tu equipo para crear.</p>
-            <div class="mini-stats">
-              <div>
-                <span class="stat-number">48%</span>
-                <span class="stat-label" data-key="hero_stat_1">Menos tiempo de contratación</span>
-              </div>
-              <div>
-                <span class="stat-number">24/7</span>
-                <span class="stat-label" data-key="hero_stat_2">Soporte y monitoreo continuo</span>
-              </div>
-            </div>
-            <div class="pill" data-key="hero_card_footer">Consultoría, entrega y acompañamiento en un solo equipo.</div>
-          </div>
-        </div>
+    <section id="hero" class="hero hero-background">
+      <div class="container">
+        <h1 data-key="hero_title">Empowering Your Workforce with Smart, Tech-Driven Solutions.</h1>
+        <p data-key="hero_subtitle">We optimize your talent processes and operations with innovative technological solutions, crafted to take your company to the next level.</p>
+        <a href="#contact" class="cta" data-key="hero_cta">Get in Touch</a>
       </div>
     </section>
 
     <section id="about" class="section">
-      <div class="container about-grid">
-        <div class="about-copy reveal">
-          <h2 data-key="about_title">Somos Smart Global Technologies</h2>
-          <p data-key="about_p1">Conectamos estrategia, personas y tecnología para que tus decisiones se apoyen en datos y tu operación fluya sin fricciones.</p>
-          <ul class="checklist">
-            <li data-key="about_bullet_1">Implementación clara, con entregables y métricas desde el día uno.</li>
-            <li data-key="about_bullet_2">Automatizamos tareas repetitivas para que tu equipo se enfoque en lo importante.</li>
-            <li data-key="about_bullet_3">Diseñamos experiencias que elevan la confianza y la adopción de tecnología.</li>
-          </ul>
+      <div class="container about-layout">
+        <div class="about-content">
+          <h2 data-key="about_title">About Smart Global Tech</h2>
+          <p data-key="about_p1">At Smart Global Tech, we are a strategic partner in technology consulting with headquarters in Ontario, Canada, and a presence in Mexico. We don't just implement technology; we design operational ecosystems that empower your most valuable resource: your people. Our mission is to help you make smarter decisions, build high-performing teams, and free your company from operational burdens so you can focus on what truly matters: innovation and growth.</p>
         </div>
-        <div class="about-pillars reveal">
-          <div class="pillar-card">
-            <h3 data-key="pillar_1_title">Estrategia accionable</h3>
-            <p data-key="pillar_1_body">Roadmaps claros, ciclos cortos y resultados visibles.</p>
-          </div>
-          <div class="pillar-card">
-            <h3 data-key="pillar_2_title">Tecnología con rostro humano</h3>
-            <p data-key="pillar_2_body">Automatización + touchpoints humanos donde más importan.</p>
-          </div>
-          <div class="pillar-card">
-            <h3 data-key="pillar_3_title">Operación siempre encendida</h3>
-            <p data-key="pillar_3_body">Monitoreo, soporte y mejora continua para escalar sin freno.</p>
-          </div>
+        <div class="about-gif">
+          <img src="images/global_giff.gif" alt="Global Technology Animation">
         </div>
       </div>
     </section>
 
-    <section id="services" class="section section-surface">
+    <section id="mission" class="section section-light">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow" data-key="services_eyebrow">Servicios clave</p>
-          <h2 data-key="services_title">Lo que hacemos</h2>
-          <p class="section-subtitle" data-key="services_subtitle">Soluciones diseñadas para acelerar talento, retención y operaciones con datos en tiempo real.</p>
-        </div>
+        <h2 data-key="mission_title">Mission, Vision & Values</h2>
+        <ul class="bullet-list">
+          <li data-key="mission_list_mission"><strong>Mission:</strong> To facilitate organizations in optimizing their human capital, applying cutting-edge technology to drive efficiency, innovation, and sustainable growth in an ever-evolving world.</li>
+          <li data-key="mission_list_vision"><strong>Vision:</strong> To be a global benchmark in workforce innovation, transforming industries with ethical, scalable, and people-centric technology to create lasting impact.</li>
+          <li data-key="mission_list_values"><strong>Values:</strong> Innovation, Integrity, Excellence, Collaboration, and Responsibility.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2 data-key="services_title">Our Core Services</h2>
         <div class="service-accordion">
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <header class="accordion-header">
-              <div>
-                <p class="accordion-eyebrow" data-key="service_1_eyebrow">Recruiting as a Service</p>
-                <h3 data-key="service_1_title">Talent Boost</h3>
-                <p class="accordion-summary" data-key="service_1_summary">Contrataciones rápidas, con calidad y trazabilidad completa.</p>
-              </div>
+              <h3 data-key="service_1_title">Talent Boost</h3>
               <span class="accordion-icon">+</span>
             </header>
             <div class="accordion-content">
-              <ul>
-                <li data-key="service_1_li1">Automatizamos búsquedas, filtros y agendado.</li>
-                <li data-key="service_1_li2">Scorecards claros para elegir con evidencia.</li>
-                <li data-key="service_1_li3">Experiencia de candidato moderna y humana.</li>
-              </ul>
+              <div class="accordion-content-inner">
+                <div class="service-image-container">
+                  <img src="images/talentBoost.png" alt="Talent Boost">
+                </div>
+                <div class="service-text-container">
+                  <p><strong data-key="service_1_detail_title">Hire Better, Faster, and with Greater Certainty.</strong></p>
+                  <p data-key="service_1_detail_p1">Traditional recruitment is slow, costly, and often a gamble...</p>
+                  <ul>
+                    <li data-key="service_1_detail_li1">Reduce hiring time by up to 50%.</li>
+                    <li data-key="service_1_detail_li2">Increase candidate quality...</li>
+                    <li data-key="service_1_detail_li3">Improve the candidate experience...</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <header class="accordion-header">
-              <div>
-                <p class="accordion-eyebrow" data-key="service_2_eyebrow">Engagement continuo</p>
-                <h3 data-key="service_2_title">Employee Engagement & Retention</h3>
-                <p class="accordion-summary" data-key="service_2_summary">Escucha activa, alertas tempranas y planes de acción claros.</p>
-              </div>
+              <h3 data-key="service_2_title">Employee Engagement & Retention Solutions</h3>
               <span class="accordion-icon">+</span>
             </header>
             <div class="accordion-content">
-              <ul>
-                <li data-key="service_2_li1">Pulso constante con analítica predictiva.</li>
-                <li data-key="service_2_li2">Playbooks listos para reducir rotación.</li>
-                <li data-key="service_2_li3">Dashboards ejecutivos en tiempo real.</li>
-              </ul>
+              <div class="accordion-content-inner">
+                <div class="service-image-container">
+                  <img src="images/retencion.png" alt="Employee Engagement & Retention">
+                </div>
+                <div class="service-text-container">
+                  <p><strong data-key="service_2_detail_title">Convert Turnover into Loyalty and Productivity.</strong></p>
+                  <p data-key="service_2_detail_p1">High turnover is one of a company's biggest "silent costs."...</p>
+                  <ul>
+                    <li data-key="service_2_detail_li1">Decrease voluntary turnover...</li>
+                    <li data-key="service_2_detail_li2">Improve workplace climate...</li>
+                    <li data-key="service_2_detail_li3">Enable proactive decision-making...</li>
+                    <li data-key="service_2_detail_li4">Increase productivity...</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <header class="accordion-header">
-              <div>
-                <p class="accordion-eyebrow" data-key="service_3_eyebrow">Consultoría operativa</p>
-                <h3 data-key="service_3_title">Strategic Vision & Ops</h3>
-                <p class="accordion-summary" data-key="service_3_summary">Mapeamos procesos, eliminamos fricción y aseguramos continuidad.</p>
-              </div>
+              <h3 data-key="service_3_title">Strategic Vision & Operations Advisory</h3>
               <span class="accordion-icon">+</span>
             </header>
             <div class="accordion-content">
-              <ul>
-                <li data-key="service_3_li1">Diagnóstico completo con KPIs accionables.</li>
-                <li data-key="service_3_li2">Workflows optimizados y automatizados.</li>
-                <li data-key="service_3_li3">Planes de capacitación y continuidad.</li>
-              </ul>
+              <div class="accordion-content-inner">
+                <div class="service-image-container">
+                  <img src="images/strategic_vision.jpeg" alt="Strategic Vision & Operations">
+                </div>
+                <div class="service-text-container">
+                  <p><strong data-key="service_3_detail_title">Clarity and Control for Impeccable Operation.</strong></p>
+                  <p data-key="service_3_detail_p1">Many companies operate with legacy processes...</p>
+                  <ul>
+                    <li data-key="service_3_detail_li1">Data-driven decision making...</li>
+                    <li data-key="service_3_detail_li2">Workflow optimization...</li>
+                    <li data-key="service_3_detail_li3">Design of future personnel strategies...</li>
+                    <li data-key="service_3_detail_li4">Complete visibility of your key performance indicators...</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <header class="accordion-header">
-              <div>
-                <p class="accordion-eyebrow" data-key="service_4_eyebrow">Operación delegada</p>
-                <h3 data-key="service_4_title">Tech-Enabled BPO</h3>
-                <p class="accordion-summary" data-key="service_4_summary">Tomamos la operación de soporte con tecnología y métricas claras.</p>
-              </div>
+              <h3 data-key="service_4_title">Tech-Enabled BPO</h3>
               <span class="accordion-icon">+</span>
             </header>
             <div class="accordion-content">
-              <ul>
-                <li data-key="service_4_li1">Enfoque en tu core, nosotros gestionamos el resto.</li>
-                <li data-key="service_4_li2">Costos controlados y visibilidad total.</li>
-                <li data-key="service_4_li3">Reportes y SLA transparentes.</li>
-              </ul>
+              <div class="accordion-content-inner">
+                <div class="service-image-container">
+                  <img src="images/BPO.png" alt="Tech-Enabled BPO">
+                </div>
+                <div class="service-text-container">
+                  <p><strong data-key="service_4_detail_title">Focus on Your Core Business. We'll Handle the Rest.</strong></p>
+                  <p data-key="service_4_detail_p1">Every minute your management team spends on managing support operations...</p>
+                  <ul>
+                    <li data-key="service_4_detail_li1">Total focus on your "Core Business,"...</li>
+                    <li data-key="service_4_detail_li2">Reduction of operating and administrative costs...</li>
+                    <li data-key="service_4_detail_li3">Transparency and total control...</li>
+                    <li data-key="service_4_detail_li4">Guarantee of quality...</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="accordion-item reveal">
+          <div class="accordion-item">
             <header class="accordion-header">
-              <div>
-                <p class="accordion-eyebrow" data-key="service_5_eyebrow">Upskilling</p>
-                <h3 data-key="service_5_title">Skill-Up Academy</h3>
-                <p class="accordion-summary" data-key="service_5_summary">Formación práctica para que tu equipo aproveche la tecnología.</p>
-              </div>
+              <h3 data-key="service_5_title">Skill-Up Academy</h3>
               <span class="accordion-icon">+</span>
             </header>
             <div class="accordion-content">
-              <ul>
-                <li data-key="service_5_li1">Capacitación a medida en herramientas clave.</li>
-                <li data-key="service_5_li2">Automatizaciones listas para usar.</li>
-                <li data-key="service_5_li3">Soporte continuo para asegurar adopción.</li>
-              </ul>
+              <div class="accordion-content-inner">
+                <div class="service-image-container">
+                  <img src="images/academy.png" alt="Skill-Up Academy">
+                </div>
+                <div class="service-text-container">
+                  <p><strong data-key="service_5_detail_title">Empower Your Team's Skills with the Right Technology.</strong></p>
+                  <p data-key="service_5_detail_p1">True digital transformation doesn't come from buying software...</p>
+                  <ul>
+                    <li data-key="service_5_detail_li1">Measurable increase in productivity...</li>
+                    <li data-key="service_5_detail_li2">Maximize the ROI...</li>
+                    <li data-key="service_5_detail_li3">Foster a culture of continuous improvement...</li>
+                    <li data-key="service_5_detail_li4">Develop your staff's autonomy...</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="recruitment" class="section">
+    <section id="recruitment" class="section section-light">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow" data-key="recruit_eyebrow">International Recruitment</p>
-          <h2 data-key="recruit_title">Talento clave, listo para integrarse</h2>
-          <p class="section-subtitle" data-key="recruit_subtitle">Localizamos y filtramos a los mejores perfiles para industrias críticas.</p>
+        <h2 data-key="recruitment_title">International Recruitment</h2>
+        <p class="section-subtitle" data-key="recruitment_p1">We specialize in finding the best talent for key industries:</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="images/transport.svg" alt="Transport" onerror="this.src='https://via.placeholder.com/150?text=Transport'">
+            <h3 data-key="job_transport_title">Transport</h3>
+            <p class="team-desc" data-key="job_transport_desc">Qualified drivers and logistics personnel.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/construction.svg" alt="Construction" onerror="this.src='https://via.placeholder.com/150?text=Construction'">
+            <h3 data-key="job_construction_title">Construction</h3>
+            <p class="team-desc" data-key="job_construction_desc">Skilled workers for all types of construction projects.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/production.svg" alt="Production" onerror="this.src='https://via.placeholder.com/150?text=Production'">
+            <h3 data-key="job_production_title">Production Operators</h3>
+            <p class="team-desc" data-key="job_production_desc">Efficient staff for manufacturing and production lines.</p>
+          </div>
         </div>
-        <div class="recruit-grid">
-          <div class="recruit-card reveal">
-            <div class="recruit-icon">🚚</div>
-            <h3 data-key="recruit_card_1_title">Transporte</h3>
-            <p data-key="recruit_card_1_body">Conductores y personal logístico calificado.</p>
+      </div>
+    </section>
+
+    <section id="plans" class="section">
+      <div class="container">
+        <h2 data-key="plans_title">Our Plans</h2>
+        <p class="section-subtitle" data-key="plans_p1">Choose the plan that best fits your needs.</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <h3 data-key="plan_basic_title">Basic Plan</h3>
+            <p class="team-desc" data-key="plan_basic_desc">Essential services to get you started.</p>
+            <br>
+            <a href="#contact" class="cta" data-key="plan_contact_btn">Contact Company</a>
           </div>
-          <div class="recruit-card reveal">
-            <div class="recruit-icon">🏗️</div>
-            <h3 data-key="recruit_card_2_title">Construcción</h3>
-            <p data-key="recruit_card_2_body">Especialistas para proyectos de construcción y obra.</p>
+          <div class="team-card">
+            <h3 data-key="plan_standard_title">Standard Plan</h3>
+            <p class="team-desc" data-key="plan_standard_desc">Advanced solutions for growing businesses.</p>
+            <br>
+            <a href="#contact" class="cta" data-key="plan_contact_btn">Contact Company</a>
           </div>
-          <div class="recruit-card reveal">
-            <div class="recruit-icon">🏭</div>
-            <h3 data-key="recruit_card_3_title">Operadores de producción</h3>
-            <p data-key="recruit_card_3_body">Talento para líneas de manufactura y producción.</p>
+          <div class="team-card">
+            <h3 data-key="plan_premium_title">Premium Plan</h3>
+            <p class="team-desc" data-key="plan_premium_desc">Comprehensive support for maximum impact.</p>
+            <br>
+            <a href="#contact" class="cta" data-key="plan_contact_btn">Contact Company</a>
+          </div>
+          <div class="team-card">
+            <h3 data-key="plan_custom_title">Customize</h3>
+            <p class="team-desc" data-key="plan_custom_desc">Tailored solutions for your specific requirements.</p>
+            <br>
+            <a href="#contact" class="cta" data-key="plan_contact_btn">Contact Company</a>
           </div>
         </div>
       </div>
@@ -235,155 +260,156 @@
 
     <section id="team" class="section">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow" data-key="team_eyebrow">Equipo</p>
-          <h2 data-key="team_title">Personas detrás de la tecnología</h2>
-          <p class="section-subtitle" data-key="team_p1">Somos un equipo bilingüe de estrategia, producto y delivery que acompaña de principio a fin.</p>
-        </div>
-        <div class="team-grid expanded">
-          <div class="team-card reveal"><div class="avatar">AG</div><div class="team-info"><p class="team-role" data-key="team_member1_role">CEO</p><h3 data-key="team_member1_name">Antonio Garcia</h3><p class="team-desc" data-key="team_member1_desc">Visión y estrategia para alinear negocio, personas y tecnología.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">LF</div><div class="team-info"><p class="team-role" data-key="team_member2_role">Lead Developer</p><h3 data-key="team_member2_name">Luis Flores</h3><p class="team-desc" data-key="team_member2_desc">Arquitectura y delivery con foco en seguridad y escalabilidad.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">CM</div><div class="team-info"><p class="team-role" data-key="team_member3_role">Lead Developer</p><h3 data-key="team_member3_name">Carlos Mendientea</h3><p class="team-desc" data-key="team_member3_desc">Experiencias intuitivas que hacen la tecnología fácil de usar.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">EA</div><div class="team-info"><p class="team-role" data-key="team_member4_role">Solutions Specialist</p><h3 data-key="team_member4_name">Eduardo Argente</h3><p class="team-desc" data-key="team_member4_desc">Puente entre tus objetivos y soluciones con impacto medible.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">JG</div><div class="team-info"><p class="team-role" data-key="team_member6_role">Chief Operating Officer</p><h3 data-key="team_member6_name">Juan Carlos Godinez</h3><p class="team-desc" data-key="team_member6_desc">Ejecución estratégica para escalar impacto e innovación.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">DP</div><div class="team-info"><p class="team-role" data-key="team_member5_role">Delivery Manager</p><h3 data-key="team_member5_name">Diana S. Peter</h3><p class="team-desc" data-key="team_member5_desc">Ejecución impecable, comunicación constante y soporte continuo.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">SR</div><div class="team-info"><p class="team-role" data-key="team_member7_role">Sales Executive</p><h3 data-key="team_member7_name">Stephany Rodriguez</h3><p class="team-desc" data-key="team_member7_desc">Conecta oportunidades y alianzas que generan valor sostenible.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">MG</div><div class="team-info"><p class="team-role" data-key="team_member8_role">Head of Human Resources</p><h3 data-key="team_member8_name">Maria Guadalupe Garcia</h3><p class="team-desc" data-key="team_member8_desc">Cultura centrada en las personas para que el talento crezca.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">AA</div><div class="team-info"><p class="team-role" data-key="team_member9_role">Software Developer</p><h3 data-key="team_member9_name">Alan Alvarez</h3><p class="team-desc" data-key="team_member9_desc">Construye productos estables y escalables con foco en calidad.</p></div></div>
-          <div class="team-card reveal"><div class="avatar">NC</div><div class="team-info"><p class="team-role" data-key="team_member10_role">Software Developer</p><h3 data-key="team_member10_name">Noe Castillo</h3><p class="team-desc" data-key="team_member10_desc">Entrega software seguro y mantenible con mejora continua.</p></div></div>
+        <h2 data-key="team_title">Our Team</h2>
+        <p class="section-subtitle" data-key="team_p1">Meet the dedicated professionals behind Smart Global Tech's success:</p>
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="images/team_members/AntonioG.jpeg" alt="Antonio Garcia">
+            <h3 data-key="team_member1_name">Antonio Garcia</h3>
+            <span class="team-title" data-key="team_member1_role">CEO</span>
+            <p class="team-desc" data-key="team_member1_desc">Visionary leader with a passion for transforming the world of work through technology.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/LuisF.jpeg" alt="Luis Flores">
+            <h3 data-key="team_member2_name">Luis Flores</h3>
+            <span class="team-title" data-key="team_member2_role">Lead Developer</span>
+            <p class="team-desc" data-key="team_member2_desc">The architect behind our solutions, ensuring they are robust, scalable, and secure.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/CarlosM.jpeg" alt="Carlos Mendieta">
+            <h3 data-key="team_member3_name">Carlos Mendieta</h3>
+            <span class="team-title" data-key="team_member3_role">Lead Developer</span>
+            <p class="team-desc" data-key="team_member3_desc">Expert in creating intuitive interfaces that make complex technology easy to use.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/EduardoA.jpeg" alt="Eduardo Argente">
+            <h3 data-key="team_member4_name">Eduardo Argente</h3>
+            <span class="team-title" data-key="team_member4_role">Solutions Specialist</span>
+            <p class="team-desc" data-key="team_member4_desc">The bridge between your needs and our solutions, ensuring a real impact on your business.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/JuancarlosG.jpeg" alt="Juan Carlos Godinez">
+            <h3 data-key="team_member7_name">Juan Carlos Godinez</h3>
+            <span class="team-title" data-key="team_member7_role">Chief Operating Officer</span>
+            <p class="team-desc" data-key="team_member7_desc">Driving operational excellence and strategic execution to scale impact and innovation.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/DianaP.jpeg" alt="Diana S. Peter">
+            <h3 data-key="team_member5_name">Diana S. Peter</h3>
+            <span class="team-title" data-key="team_member5_role">Sales Executive</span>
+            <p class="team-desc" data-key="team_member5_desc">A dynamic connector helping clients discover new business value through strategic partnerships.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/StephanyR.jpeg" alt="Stephany Rodriguez">
+            <h3 data-key="team_member6_name">Stephany Rodriguez</h3>
+            <span class="team-title" data-key="team_member6_role">Sales Executive</span>
+            <p class="team-desc" data-key="team_member6_desc">Building relationships that unlock sustainable value for our clients.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/team_members/MariaG.jpg" alt="Maria Guadalupe Garcia">
+            <h3 data-key="team_member8_name">Maria Guadalupe Garcia</h3>
+            <span class="team-title" data-key="team_member8_role">Head of Human Resources</span>
+            <p class="team-desc" data-key="team_member8_desc">Cultivating a people-first culture and empowering talent to thrive at Smart Global Tech.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/persona.png" alt="Alan Alvarez">
+            <h3 data-key="team_member9_name">Alan Alvarez</h3>
+            <span class="team-title" data-key="team_member9_role">Software Developer</span>
+            <p class="team-desc" data-key="team_member9_desc">Builds stable, scalable products with a focus on quality.</p>
+          </div>
+          <div class="team-card">
+            <img src="images/persona.png" alt="Noe Castillo">
+            <h3 data-key="team_member10_name">Noe Castillo</h3>
+            <span class="team-title" data-key="team_member10_role">Software Developer</span>
+            <p class="team-desc" data-key="team_member10_desc">Delivers secure, maintainable software with continuous improvement.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="network" class="section section-dark">
+    <section id="other-companies" class="section section-light">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow" data-key="network_eyebrow">Business Network</p>
-          <h2 data-key="network_title">Aliados que amplifican resultados</h2>
-          <p class="section-subtitle" data-key="network_subtitle">Conectamos talento con oportunidades a través de socios estratégicos.</p>
-        </div>
-        <div class="network-card reveal">
-          <div class="network-logo" aria-hidden="true">CLB</div>
-          <h3 data-key="network_partner_title">Conexión Laboral del Bajío</h3>
-          <p data-key="network_partner_body">Conectamos talento con oportunidades. Tu socio estratégico en reclutamiento y selección.</p>
-          <a class="btn primary" href="#contact" data-key="network_cta">Visitar sitio</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="plans" class="section section-surface">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow" data-key="plans_eyebrow">Nuestros planes</p>
-          <h2 data-key="plans_title">Elige el acompañamiento ideal</h2>
-          <p class="section-subtitle" data-key="plans_subtitle">Selecciona el plan que mejor se adapta a tus objetivos.</p>
-        </div>
-        <div class="plans-grid">
-          <div class="plan-card reveal">
-            <h3 data-key="plan_basic_title">Plan Básico</h3>
-            <p data-key="plan_basic_body">Servicios esenciales para iniciar con seguridad.</p>
-            <a class="btn primary" href="#contact" data-key="plan_cta">Contactar</a>
-          </div>
-          <div class="plan-card reveal">
-            <h3 data-key="plan_standard_title">Plan Standard</h3>
-            <p data-key="plan_standard_body">Soluciones avanzadas para negocios en crecimiento.</p>
-            <a class="btn primary" href="#contact" data-key="plan_cta">Contactar</a>
-          </div>
-          <div class="plan-card reveal">
-            <h3 data-key="plan_premium_title">Plan Premium</h3>
-            <p data-key="plan_premium_body">Soporte integral para lograr máximo impacto.</p>
-            <a class="btn primary" href="#contact" data-key="plan_cta">Contactar</a>
-          </div>
-          <div class="plan-card reveal">
-            <h3 data-key="plan_custom_title">Personalizado</h3>
-            <p data-key="plan_custom_body">Soluciones a medida para tus requisitos específicos.</p>
-            <a class="btn primary" href="#contact" data-key="plan_cta">Contactar</a>
+        <h2 data-key="other_companies_title">Business Network</h2>
+        <div class="team-grid" style="justify-content: center;">
+          <div class="team-card">
+            <img src="images/clb.png" alt="Conexión Laboral del Bajío" onerror="this.src='images/hero-empresa.png'">
+            <h3 data-key="company_clb_title">Conexión Laboral del Bajío (CLB)</h3>
+            <p class="team-desc" data-key="company_clb_desc">Connecting talent with opportunities. Your strategic partner in recruitment and personnel selection in Mexico.</p>
+            <br>
+            <a href="https://clbajio.com/" target="_blank" class="cta" data-key="company_clb_btn">Visit Website</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="locations" class="section section-surface">
+    <section id="locations" class="section">
       <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow" data-key="locations_eyebrow">Presencia</p>
-          <h2 data-key="locations_title">Cerca de tu operación</h2>
-          <p class="section-subtitle" data-key="locations_p1">Equipos distribuidos con soporte remoto y presencial según lo necesites.</p>
+        <h2 data-key="locations_title">Our Locations</h2>
+        <p class="section-subtitle" data-key="locations_p1">Find us at our offices.</p>
+        <div class="location-grid">
+          <div class="location-card">
+            <h3 data-key="locations_mexico_office">Mexico Office</h3>
+            <address>
+              Paseo de la República #13020, 76127<br>
+              Querétaro, Qro., México<br>
+              <span data-key="locations_phone">Phone</span>: <a href="tel:+524426903125">+52 (442) 690 3125</a><br>
+              <span data-key="locations_email">Email</span>: <a href="mailto:contactmx@smartglobaltech.ca">contactmx@smartglobaltech.ca</a>
+            </address>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3734.204684534038!2d-100.44358598507315!3d20.62121698622144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d35a5d3f277777%3A0x1d3d0f3d3d3d3d3d!2sPaseo%20de%20la%20Rep%C3%BAblica%2013020%2C%20Juriquilla%2C%2076226%20Santiago%20de%20Quer%C3%A9taro%2C%20Qro.!5e0!3m2!1sen!2smx!4v1669833719124!5m2!1sen!2smx" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
-        <div class="location-grid map-layout">
-          <div class="location-card reveal">
-            <div class="location-head">
-              <p class="location-label" data-key="locations_canada_label">Oficina Canadá</p>
-              <h3 data-key="locations_canada_office">Oakville, Ontario</h3>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-light">
+      <div class="container">
+        <h2 data-key="contact_title">Contact Us</h2>
+        <p class="section-subtitle" data-key="contact_p1">We are eager to discuss your human capital technology needs. Reach out to our team or send us a message.</p>
+        <div class="contact-layout">
+          <div class="contact-form-wrapper">
+            <form id="contact-form">
+              <label for="name" data-key="contact_form_name">Name</label>
+              <input type="text" id="name" name="name" required />
+
+              <label for="email" data-key="contact_form_email">Email</label>
+              <input type="email" id="email" name="email" required />
+
+              <label for="company" data-key="contact_form_company">Company</label>
+              <input type="company" id="company" name="company" required />
+
+              <label for="phone" data-key="contact_form_phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required>
+
+              <label for="service" data-key="contact_form_service">Service</label>
+              <select id="service" name="service" required>
+                <option value="Talent Boost" data-key="contact_form_service_talent_boost">Talent Boost</option>
+                <option value="Engagement Solutions" data-key="contact_form_service_engagement_solutions">Engagement Solutions</option>
+                <option value="Strategic Advisory" data-key="contact_form_service_strategic_advisory">Strategic Advisory</option>
+                <option value="Tech BPO" data-key="contact_form_service_tech_bpo">Tech BPO</option>
+                <option value="Skill-Up Academy" data-key="contact_form_service_skill_up_academy">Skill-Up Academy</option>
+              </select>
+
+              <label for="message" data-key="contact_form_message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+
+              <button type="submit" data-key="contact_form_send">Send Message</button>
+            </form>
+          </div>
+          <div class="contact-ai-wrapper">
+            <div class="ai-prompt-box">
+              <h3 data-key="contact_ai_prompt">Talk to our AI Assistant now!</h3>
+              <p data-key="contact_ai_desc">Our AI is available 24/7 to answer your questions. Look for the chat icon in the corner!</p>
+              <div class="ai-icon">🤖</div>
             </div>
-            <p class="location-text" data-key="locations_canada_address">146-700 Third Line, Oakville, ON L6L 4B1</p>
-            <p class="location-text"><span data-key="locations_phone">Teléfono</span>: <a href="tel:+12899180089">+1 (289) 918-0089</a></p>
-            <p class="location-text"><span data-key="locations_email">Email</span>: <a href="mailto:contact@smartglobaltech.ca">contact@smartglobaltech.ca</a></p>
           </div>
-          <div class="location-card reveal">
-            <div class="location-head">
-              <p class="location-label" data-key="locations_latam_label">Oficina Querétaro</p>
-              <h3 data-key="locations_latam_office">Querétaro</h3>
-            </div>
-            <p class="location-text" data-key="locations_latam_address">Paseo de la República #13020, 76127, Querétaro, Qro.</p>
-            <p class="location-text"><span data-key="locations_phone">Teléfono</span>: <a href="tel:+524426903125">+52 (442) 690 3125</a></p>
-            <p class="location-text"><span data-key="locations_email">Email</span>: <a href="mailto:contactmx@smartglobaltech.ca">contactmx@smartglobaltech.ca</a></p>
-          </div>
-          <div class="map-card reveal">
-            <iframe title="Mapa Querétaro" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3734.204684534038!2d-100.44358598507315!3d20.62121698622144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d35a5d3f277777%3A0x1d3d0f3d3d3d3d3d!2sPaseo%20de%20la%20Rep%C3%BAblica%2013020%2C%20Juriquilla%2C%2076226%20Santiago%20de%20Quer%C3%A9taro%2C%20Qro.!5e0!3m2!1ses-419!2sus!4v1669833719124!5m2!1ses-419!2sus" width="100%" height="320" style="border:0; border-radius: 14px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container contact-grid">
-        <div class="contact-copy reveal">
-          <p class="eyebrow" data-key="contact_eyebrow">Conversemos</p>
-          <h2 data-key="contact_title">Cuéntanos qué necesitas</h2>
-          <p class="section-subtitle" data-key="contact_p1">Comparte tu reto. Te respondemos con un plan claro y tiempos realistas.</p>
-          <div class="contact-highlights">
-            <div class="chip" data-key="contact_highlight_1">Respuesta en menos de 24h</div>
-            <div class="chip" data-key="contact_highlight_2">Equipo bilingüe</div>
-            <div class="chip" data-key="contact_highlight_3">Demo y roadmap sin costo</div>
-          </div>
-        </div>
-        <div class="contact-form-wrapper reveal">
-          <form id="contact-form">
-            <label for="name" data-key="contact_form_name">Nombre</label>
-            <input type="text" id="name" name="name" required />
-
-            <label for="email" data-key="contact_form_email">Email</label>
-            <input type="email" id="email" name="email" required />
-
-            <label for="company" data-key="contact_form_company">Empresa</label>
-            <input type="text" id="company" name="company" required />
-
-            <label for="phone" data-key="contact_form_phone">Teléfono</label>
-            <input type="tel" id="phone" name="phone" required />
-
-            <label for="service" data-key="contact_form_service">Servicio</label>
-            <select id="service" name="service" required>
-              <option value="Talent Boost" data-key="contact_form_service_talent_boost">Talent Boost</option>
-              <option value="Engagement" data-key="contact_form_service_engagement_solutions">Engagement & Retención</option>
-              <option value="Strategic Advisory" data-key="contact_form_service_strategic_advisory">Strategic Vision & Ops</option>
-              <option value="Tech BPO" data-key="contact_form_service_tech_bpo">Tech-Enabled BPO</option>
-              <option value="Skill-Up" data-key="contact_form_service_skill_up_academy">Skill-Up Academy</option>
-            </select>
-
-            <label for="message" data-key="contact_form_message">Mensaje</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit" class="btn primary" data-key="contact_form_send">Enviar</button>
-          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer>
     <div class="container">
-      <p data-key="footer_copyright">© 2025 Smart Global Technologies. Todos los derechos reservados.</p>
+      <p data-key="footer_copyright">© 2025 Smart Global Tech. All rights reserved.</p>
     </div>
   </footer>
 
@@ -393,4 +419,5 @@
   <script src="translations.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
