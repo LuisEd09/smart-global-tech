@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const xmlrpc = require('xmlrpc');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,55 +9,56 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Configuración de Odoo
-// ➡️  Aquí está la URL corregida.
-const ODOO_URL = 'https://odoo.systemsipe.com'; 
-const ODOO_DB = 'sgt_crm';
-const ODOO_USER = 'sistemas1@clbajio.com';
-const ODOO_PASSWORD = process.env.ODOO_PASSWORD; 
+// Simple mail transport using SMTP credentials from .env
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: process.env.SMTP_SECURE === 'true' || Number(process.env.SMTP_PORT) === 465,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
-const clientCommon = xmlrpc.createClient({ url: `http://164.90.159.194:8069/xmlrpc/2/common` });
-const clientObject = xmlrpc.createClient({ url: `http://164.90.159.194:8069/xmlrpc/2/object` });
+// Health check
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok' });
+});
 
-app.post('/submit-form', (req, res) => {
-    const { nombre, email, servicio, mensaje, company, phone } = req.body;
+app.post('/submit-form', async (req, res) => {
+  const { nombre, email, servicio, mensaje, company, phone } = req.body;
 
-    // Autenticación
-    clientCommon.methodCall('authenticate', [ODOO_DB, ODOO_USER, ODOO_PASSWORD, {}], (err, uid) => {
-        if (err || !uid) {
-            console.error('Error al autenticar en Odoo:', err);
-            return res.status(500).json({ success: false, message: 'Error de autenticación con Odoo' });
-        }
+  if (!nombre || !email || !mensaje) {
+    return res.status(400).json({ success: false, message: 'Faltan campos requeridos.' });
+  }
 
-        // Datos del lead
-        const leadData = {
-            name: `${nombre} - ${servicio}`,
-            partner_name: company,
-            email_from: email,
-            phone: phone,
-            contact_name: nombre,
-            description: `
-                Servicio de interés: ${servicio}
-                Mensaje: ${mensaje}
-            `
-        };
+  const subject = `Nuevo contacto: ${nombre} - ${servicio || 'Inter�s'}`;
+  const textBody = [
+    `Nombre: ${nombre}`,
+    `Email: ${email}`,
+    `Empresa: ${company || '-'}`,
+    `Tel�fono: ${phone || '-'}`,
+    `Servicio: ${servicio || '-'}`,
+    '',
+    'Mensaje:',
+    mensaje,
+  ].join('\n');
 
-        // Crear lead
-        clientObject.methodCall('execute_kw', [
-            ODOO_DB, uid, ODOO_PASSWORD,
-            'crm.lead', 'create',
-            [leadData]
-        ], (err2, leadId) => {
-            if (err2) {
-                console.error('Error al crear lead:', err2);
-                return res.status(500).json({ success: false, message: 'Error al crear lead en Odoo' });
-            }
-
-            res.status(200).json({ success: true, message: 'Lead creado correctamente', leadId });
-        });
+  try {
+    await transporter.sendMail({
+      from: `Smart Global Technologies <${process.env.MAIL_FROM || process.env.SMTP_USER}>`,
+      to: 'sistemas1@clbajio.com',
+      subject,
+      text: textBody,
     });
+
+    return res.status(200).json({ success: true, message: 'Mensaje enviado correctamente.' });
+  } catch (error) {
+    console.error('Error al enviar correo:', error);
+    return res.status(500).json({ success: false, message: 'No se pudo enviar el mensaje. Intenta m�s tarde.' });
+  }
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
