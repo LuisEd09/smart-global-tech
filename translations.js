@@ -157,4 +157,7 @@
   contact_ai_desc: { en: 'Our AI is available 24/7 to answer your questions. Look for the chat icon in the corner!', es: 'Nuestra IA está disponible 24/7 para responder tus preguntas. Busca el ícono de chat.' },
 
   footer_copyright: { en: '© 2025 Smart Global Tech. All rights reserved.', es: '© 2025 Smart Global Tech. Todos los derechos reservados.' },
+  locations_dallas_office: { en: 'Dallas Office', es: 'Oficina en Dallas' },
+  locations_dallas_status: { en: 'Opening January 2026', es: 'Abriendo en enero 2026' },
+  locations_dallas_desc: { en: 'Stay tuned for our new location in Texas!', es: '¡Siguenos para nuestra nueva ubicación en Texas!' },
 };
