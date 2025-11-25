@@ -133,9 +133,9 @@
   network_eyebrow: { es: 'Business Network', en: 'Business Network' },
   network_title: { es: 'Aliados que amplifican resultados', en: 'Partners that amplify outcomes' },
   network_subtitle: { es: 'Conectamos talento con oportunidades a través de socios estratégicos.', en: 'We connect talent with opportunities through strategic partners.' },
-  network_partner_title: { es: 'Bajío Labor Connection', en: 'Bajío Labor Connection' },
-  network_partner_body: { es: 'Conectamos talento con oportunidades. Tu socio estratégico en reclutamiento y selección.', en: 'Connecting talent with opportunities. Your strategic partner in recruitment and selection.' },
-  network_cta: { es: 'Contactar', en: 'Contact' },
+  network_partner_title: { es: 'Conexión Laboral del Bajío', en: 'CLB' },
+  network_partner_body: { es: 'Conectamos talento con oportunidades. Tu socio estratégico en reclutamiento y selección.', en: 'Connecting talent with opportunities. Your strategic partner for recruitment and selection.' },
+  network_cta: { es: 'Visitar sitio', en: 'Visit website' },
 
   // Plans
   plans_eyebrow: { es: 'Nuestros planes', en: 'Our plans' },
