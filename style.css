@@ -218,6 +218,41 @@ body.dark-mode #language-selector {
   pointer-events: none;
 }
 
+.country-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.country-link {
+  text-decoration: none;
+  color: var(--color-text-dark);
+  transition: color var(--transition);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.country-link:hover {
+  color: var(--color-primary);
+  background-color: rgba(0, 120, 185, 0.1);
+}
+
+.separator {
+  color: var(--color-accent);
+  opacity: 0.5;
+}
+
+body.dark-mode .country-link {
+  color: var(--color-text-dark);
+}
+
+body.dark-mode .country-link:hover {
+  color: var(--color-primary);
+  background-color: rgba(21, 143, 207, 0.1);
+}
+
 #toggle-dark {
   background: none;
   border: none;
@@ -504,18 +539,14 @@ body.dark-mode .team-card img {
 }
 
 .location-card iframe {
-  border-radius: 8px;
-  margin-top: 1rem;
-  width: 100%;
+  margin-top: 3rem;
 }
 
-/* CONTACTO */
 .contact-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  margin-top: 3rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
 }
 
 .contact-form-wrapper form {
@@ -571,6 +602,622 @@ body.dark-mode .contact-form-wrapper textarea {
 .contact-form-wrapper button:hover {
   background-color: var(--color-primary);
   transform: scale(1.02);
+}
+
+.ai-icon {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+/* FOOTER Y UTILIDADES */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+body.dark-mode footer {
+  border-top-color: #2a2a2a;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: var(--transition);
+  z-index: 1999;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 992px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content {
+    order: 2;
+  }
+
+  .about-content h2 {
+    text-align: center;
+  }
+
+  .about-gif {
+    order: 1;
+  }
+
+  .location-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  header .container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-controls {
+    order: 2;
+  }
+
+  .accordion-content-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .service-image-container img {
+    border-radius: 8px 8px 0 0;
+    max-height: 200px;
+  }
+
+  .service-text-container {
+    padding: 1.5rem;
+  }
+}
+
+/* --- CAMBIO: ESTILO PARA EL ENLACE ACTIVO DEL MENÚ --- */
+nav a.active-link {
+  color: var(--color-primary);
+}
+
+nav a.active-link::after {
+  width: 100%;
+}
+
+/* Other Companies Section Specifics */
+@media (min-width: 1024px) {
+  #other-companies .team-card {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.location-card.coming-soon-card {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed var(--color-primary);
+  background-color: var(--color-bg-soft);
+}
+
+.coming-soon-card h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* MEJORAR SELECT DEL FORMULARIO */
+.contact-form-wrapper select {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  /* Espacio para la flecha */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+
+  /* Eliminar la flecha por defecto del navegador */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Agregar flecha personalizada */
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230078b9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+}
+
+body.dark-mode .contact-form-wrapper select {
+  background-color: #2c2c2c;
+  border-color: #444;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23158fcf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+}
+
+.contact-form-wrapper select:hover {
+  border-color: var(--color-primary);
+}
+
+.contact-form-wrapper select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 120, 185, 0.2);
+}
+
+/* Estilo para las opciones */
+.contact-form-wrapper select option {
+  padding: 0.5rem;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-dark);
+  background-color: var(--color-secondary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.contact-form-wrapper button:hover {
+  background-color: var(--color-primary);
+  transform: scale(1.02);
+}
+
+.ai-icon {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+/* FOOTER Y UTILIDADES */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+body.dark-mode footer {
+  border-top-color: #2a2a2a;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: var(--transition);
+  z-index: 1999;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 992px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content {
+    order: 2;
+  }
+
+  .about-content h2 {
+    text-align: center;
+  }
+
+  .about-gif {
+    order: 1;
+  }
+
+  .location-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  header .container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-controls {
+    order: 2;
+  }
+
+  .accordion-content-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .service-image-container img {
+    border-radius: 8px 8px 0 0;
+    max-height: 200px;
+  }
+
+  .service-text-container {
+    padding: 1.5rem;
+  }
+}
+
+/* --- CAMBIO: ESTILO PARA EL ENLACE ACTIVO DEL MENÚ --- */
+nav a.active-link {
+  color: var(--color-primary);
+}
+
+nav a.active-link::after {
+  width: 100%;
+}
+
+/* Other Companies Section Specifics */
+@media (min-width: 1024px) {
+  #other-companies .team-card {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.location-card.coming-soon-card {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed var(--color-primary);
+  background-color: var(--color-bg-soft);
+}
+
+.coming-soon-card h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* MEJORAR SELECT DEL FORMULARIO */
+.contact-form-wrapper select {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  /* Espacio para la flecha */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+
+  /* Eliminar la flecha por defecto del navegador */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Agregar flecha personalizada */
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230078b9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+}
+
+body.dark-mode .contact-form-wrapper select {
+  background-color: #2c2c2c;
+  border-color: #444;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23158fcf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+}
+
+.contact-form-wrapper select:hover {
+  border-color: var(--color-primary);
+}
+
+.contact-form-wrapper select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 120, 185, 0.2);
+}
+
+/* Estilo para las opciones */
+.contact-form-wrapper select option {
+  padding: 0.5rem;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-dark);
+}
+
+body.dark-mode .contact-form-wrapper select option {
+  background-color: #2c2c2c;
+  color: var(--color-text-dark);
+}
+
+.contact-form-wrapper button {
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-secondary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.contact-form-wrapper button:hover {
+  background-color: var(--color-primary);
+  transform: scale(1.02);
+}
+
+.contact-direct {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.contact-direct p {
+  font-size: 1.1rem;
+  color: var(--color-text-dark);
+}
+
+.contact-direct a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-direct a:hover {
+  text-decoration: underline;
+}
+
+.ai-icon {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+/* FOOTER Y UTILIDADES */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+body.dark-mode footer {
+  border-top-color: #2a2a2a;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: var(--transition);
+  z-index: 1999;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 992px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content {
+    order: 2;
+  }
+
+  .about-content h2 {
+    text-align: center;
+  }
+
+  .about-gif {
+    order: 1;
+  }
+
+  .location-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  header .container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  nav {
+    order: 3;
+    width: 100%;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-controls {
+    order: 2;
+  }
+
+  .accordion-content-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .service-image-container img {
+    border-radius: 8px 8px 0 0;
+    max-height: 200px;
+  }
+
+  .service-text-container {
+    padding: 1.5rem;
+  }
+}
+
+/* --- CAMBIO: ESTILO PARA EL ENLACE ACTIVO DEL MENÚ --- */
+nav a.active-link {
+  color: var(--color-primary);
+}
+
+nav a.active-link::after {
+  width: 100%;
+}
+
+/* Other Companies Section Specifics */
+@media (min-width: 1024px) {
+  #other-companies .team-card {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.location-card.coming-soon-card {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed var(--color-primary);
+  background-color: var(--color-bg-soft);
+}
+
+.coming-soon-card h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* MEJORAR SELECT DEL FORMULARIO */
+.contact-form-wrapper select {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  /* Espacio para la flecha */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+
+  /* Eliminar la flecha por defecto del navegador */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Agregar flecha personalizada */
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230078b9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+}
+
+body.dark-mode .contact-form-wrapper select {
+  background-color: #2c2c2c;
+  border-color: #444;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23158fcf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+}
+
+.contact-form-wrapper select:hover {
+  border-color: var(--color-primary);
+}
+
+.contact-form-wrapper select:focus {
+  outline: none;
+}
+
+.contact-direct {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.contact-direct p {
+  font-size: 1.1rem;
+  color: var(--color-text-dark);
+}
+
+.contact-direct a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-direct a:hover {
+  text-decoration: underline;
 }
 
 .ai-prompt-box {
@@ -762,14 +1409,12 @@ body.dark-mode .contact-form-wrapper select {
   box-shadow: 0 0 0 3px rgba(0, 120, 185, 0.2);
 }
 
-/* Estilo para las opciones */
-.contact-form-wrapper select option {
-  padding: 0.5rem;
-  background-color: var(--color-bg-soft);
-  color: var(--color-text-dark);
+body.dark-mode .white-underline a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #ffffff;
 }
 
-body.dark-mode .contact-form-wrapper select option {
-  background-color: #2c2c2c;
-  color: var(--color-text-dark);
+.location-section {
+  padding: 4rem 1rem;
 }

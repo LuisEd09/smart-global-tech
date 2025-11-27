@@ -155,9 +155,11 @@
   contact_form_service_skill_up_academy: { en: 'Skill-Up Academy', es: 'Skill-Up Academy' },
   contact_ai_prompt: { en: 'Talk to our AI Assistant now!', es: 'Habla con nuestro asistente de IA ahora' },
   contact_ai_desc: { en: 'Our AI is available 24/7 to answer your questions. Look for the chat icon in the corner!', es: 'Nuestra IA está disponible 24/7 para responder tus preguntas. Busca el ícono de chat.' },
+  contact_direct_label: { en: 'Contact', es: 'Contacto' },
 
   footer_copyright: { en: '© 2025 Smart Global Tech. All rights reserved.', es: '© 2025 Smart Global Tech. Todos los derechos reservados.' },
   locations_dallas_office: { en: 'Dallas Office', es: 'Oficina en Dallas' },
   locations_dallas_status: { en: 'Opening January 2026', es: 'Abriendo en enero 2026' },
   locations_dallas_desc: { en: 'Stay tuned for our new location in Texas!', es: '¡Siguenos para nuestra nueva ubicación en Texas!' },
+  contact_p2: { en: 'For more information, please contact us at: <a href="mailto:info@smartglobaltech.us">info@smartglobaltech.us</a>', es: 'Para más información, por favor contáctanos en: <a href="mailto:info@smartglobaltech.us">info@smartglobaltech.us</a>' },
 };
