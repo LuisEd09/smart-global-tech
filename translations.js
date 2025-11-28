@@ -76,12 +76,15 @@
 
   recruitment_title: { en: 'International Recruitment', es: 'Reclutamiento Internacional' },
   recruitment_p1: { en: 'We specialize in finding the best talent for key industries:', es: 'Especialistas en encontrar el mejor talento para industrias clave:' },
+  recruitment_disclaimer: { en: 'This recruitment is for everyone except for Mexico and Canada.', es: 'Este reclutamiento es para todo mundo excepto para México y Canadá.' },
   job_transport_title: { en: 'Transport', es: 'Transporte' },
   job_transport_desc: { en: 'Qualified drivers and logistics personnel.', es: 'Conductores y personal logístico calificado.' },
   job_construction_title: { en: 'Construction', es: 'Construcción' },
   job_construction_desc: { en: 'Skilled workers for all types of construction projects.', es: 'Especialistas para proyectos de construcción.' },
   job_production_title: { en: 'Production Operators', es: 'Operadores de producción' },
   job_production_desc: { en: 'Efficient staff for manufacturing and production lines.', es: 'Personal eficiente para líneas de producción.' },
+  job_farmers_title: { en: 'Farmers', es: 'Agricultores' },
+  job_farmers_desc: { en: 'Dedicated agricultural professionals with expertise in crop management, livestock care, and sustainable farming practices.', es: 'Profesionales agrícolas dedicados con experiencia en gestión de cultivos, cuidado de ganado y prácticas agrícolas sostenibles.' },
 
   plans_title: { en: 'Our Plans', es: 'Nuestros Planes' },
   plans_p1: { en: 'Choose the plan that best fits your needs.', es: 'Elige el plan que mejor se adapte a tus necesidades.' },
@@ -109,9 +112,9 @@
   team_member4_name: { en: 'Eduardo Argente', es: 'Eduardo Argente' },
   team_member4_role: { en: 'Solutions Specialist', es: 'Especialista de Soluciones' },
   team_member4_desc: { en: 'The bridge between your needs and our solutions, ensuring a real impact on your business.', es: 'Puente entre tus necesidades y nuestras soluciones con impacto real.' },
-  team_member5_name: { en: 'Diana S. Peter', es: 'Diana S. Peter' },
-  team_member5_role: { en: 'Sales Executive', es: 'Ejecutiva de Ventas' },
-  team_member5_desc: { en: 'Dynamic connector helping clients discover new business value.', es: 'Conectora que ayuda a descubrir nuevo valor de negocio.' },
+  team_member5_name: { en: "Diana Peter", es: "Diana S. Peter" },
+  team_member5_role: { en: "Sales Executive", es: "Ejecutiva de Ventas" },
+  team_member5_desc: { en: "A dynamic connector helping clients discover how Smart Global Tech can unlock new business value through strategic partnerships.", es: "Una conectora dinámica que ayuda a los clientes a descubrir cómo Smart Global Tech puede desbloquear nuevo valor empresarial a través de asociaciones estratégicas." },
   team_member6_name: { en: 'Stephany Rodriguez', es: 'Stephany Rodriguez' },
   team_member6_role: { en: 'Sales Executive', es: 'Ejecutiva de Ventas' },
   team_member6_desc: { en: 'Builds relationships that unlock sustainable value.', es: 'Construye relaciones que generan valor sostenible.' },
@@ -132,6 +135,8 @@
   company_clb_title: { en: 'Conexión Laboral del Bajío (CLB)', es: 'Conexión Laboral del Bajío (CLB)' },
   company_clb_desc: { en: 'Connecting talent with opportunities. Your strategic partner in recruitment and personnel selection in Mexico.', es: 'Conectamos talento con oportunidades. Tu socio estratégico en reclutamiento y selección en México.' },
   company_clb_btn: { en: 'Visit Website', es: 'Visitar sitio' },
+
+  location_canada_office: { en: 'Canada Office', es: 'Oficina Canadá' },
 
   locations_title: { en: 'Our Locations', es: 'Nuestras ubicaciones' },
   locations_p1: { en: 'Find us at our offices.', es: 'Encuéntranos en nuestras oficinas.' },
